@@ -1,0 +1,1 @@
+Aplikacja wspierająca organizację turniejów.
