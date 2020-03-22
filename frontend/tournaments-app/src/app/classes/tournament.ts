@@ -1,4 +1,5 @@
 import { User } from './user';
+import { Match } from './match';
 
 export class Tournament {
     constructor(public id:number, public organizers:User[], public participants:User[],
