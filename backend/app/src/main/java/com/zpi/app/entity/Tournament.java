@@ -1,27 +1,54 @@
 package com.zpi.app.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "tournaments")
 public class Tournament {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer tournamentId;
+    private Integer id;
+
+    @ManyToMany
+    @JoinTable(name="tournaments_organizers",
+            joinColumns = {@JoinColumn(name = "tournament_id")},
+            inverseJoinColumns = {@JoinColumn(name = "organizer_id")})
+    private List<User> organizers;
+
+    @ManyToMany
+    @JoinTable(name = "tournaments_participants",
+            joinColumns = {@JoinColumn(name = "tournament_id")},
+            inverseJoinColumns = {@JoinColumn(name = "participant_id")})
+    private List<User>participants;
+
+    @OneToMany(mappedBy = "tournament")
+    private  List<Match> matches;
+
     private String name;
     private Boolean isPrivate;
     private Integer numberOfPlayers;
     private String description;
     private Boolean randomBracket;
 
-    public Integer getTournamentId() {
-        return tournamentId;
+    @Enumerated(EnumType.STRING)
+    private TournamentType tournamentType;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setTournamentId(Integer tournamentId) {
-        this.tournamentId = tournamentId;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public TournamentType getTournamentType() {
+        return tournamentType;
+    }
+
+    public void setTournamentType(TournamentType tournamentType) {
+        this.tournamentType = tournamentType;
     }
 
     public String getName() {

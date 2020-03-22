@@ -2,12 +2,25 @@ package com.zpi.app.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer id;
+
+    @ManyToMany(mappedBy = "organizers")
+    private List<Tournament> organizedTournaments;
+
+    @ManyToMany(mappedBy = "participants")
+    private List<Tournament> participatedTournaments;
+
+    @ManyToMany(mappedBy = "matchParticipants")
+    private List<Match> matches;
+
     private String login;
     private String password;
     private String firstName;
@@ -16,12 +29,36 @@ public class User {
     private Date birthday;
     private Character gender;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public List<Tournament> getOrganizedTournaments() {
+        return organizedTournaments;
+    }
+
+    public void setOrganizedTournaments(List<Tournament> organizedTournaments) {
+        this.organizedTournaments = organizedTournaments;
+    }
+
+    public List<Tournament> getParticipatedTournaments() {
+        return participatedTournaments;
+    }
+
+    public void setParticipatedTournaments(List<Tournament> participatedTournaments) {
+        this.participatedTournaments = participatedTournaments;
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLogin() {
