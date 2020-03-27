@@ -1,4 +1,6 @@
-package com.zpi.app.entity;
+package com.zpi.app.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,12 +14,15 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "organizers")
     private List<Tournament> organizedTournaments;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "participants")
     private List<Tournament> participatedTournaments;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "matchParticipants")
     private List<Match> matches;
 

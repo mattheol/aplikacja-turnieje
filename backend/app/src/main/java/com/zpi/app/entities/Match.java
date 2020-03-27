@@ -1,4 +1,4 @@
-package com.zpi.app.entity;
+package com.zpi.app.entities;
 
 import javax.persistence.*;
 import java.util.List;

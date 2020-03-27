@@ -1,4 +1,4 @@
-package com.zpi.app.entity;
+package com.zpi.app.entities;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,7 +12,7 @@ public class Invitation {
     private Integer id;
 
     @OneToOne
-    private User organiser;
+    private User organizer;
 
     @OneToOne
     private User participant;
@@ -32,12 +32,12 @@ public class Invitation {
         this.id = id;
     }
 
-    public User getOrganiser() {
-        return organiser;
+    public User getOrganizer() {
+        return organizer;
     }
 
-    public void setOrganiser(User organiser) {
-        this.organiser = organiser;
+    public void setOrganizer(User organizer) {
+        this.organizer = organizer;
     }
 
     public User getParticipant() {
