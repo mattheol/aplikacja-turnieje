@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TournamentService {
@@ -18,6 +19,11 @@ public class TournamentService {
 
     public List<Tournament> getAllTournaments(){
         return tournamentRepository.findAll();
+    }
+
+    public Tournament getTournament(Integer id){
+        Optional<Tournament> tournamentOpt = tournamentRepository.findById(id);
+        return tournamentOpt.get();
     }
 
 
