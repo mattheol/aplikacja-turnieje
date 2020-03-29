@@ -1,0 +1,25 @@
+.gridWrapper {
+  padding: 30px 25px 10px 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.gridItem {
+  min-width: 250px;
+  max-width: 500px;
+  height: 200px;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tourHeader {
+  background-color: #73a9c2;
+  padding: 2px 0 8px 0;
+}
+
+.tourContent {
+  padding: 10px 5px 5px 5px;
+}
