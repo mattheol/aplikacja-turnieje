@@ -18,7 +18,7 @@ export class TournamentsListComponent implements OnInit {
   getTournaments(): void {
     this,
       this.tournamentService
-        .getUsers()
+        .getTournaments()
         .subscribe(tournaments => (this.tournaments = tournaments));
   }
 }

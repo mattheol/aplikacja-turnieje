@@ -12,8 +12,11 @@ export class TournamentService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<Tournament[]> {
-    console.log("adasd");
+  getTournaments(): Observable<Tournament[]> {
     return this.http.get<Tournament[]>(this.url);
+  }
+
+  getTournament(id: Number): Observable<Tournament> {
+    return this.http.get<Tournament>(this.url + `/${id}`);
   }
 }
