@@ -1,0 +1,12 @@
+<ul class="gridWrapper">
+  <div *ngFor="let tournament of tournaments">
+    <div class="gridItem" [routerLink]="['/turnieje', tournament.id]">
+      <h4 class="tourHeader" style="text-align: center;">
+        {{ tournament.name }}
+      </h4>
+      <p class="tourContent">
+        {{ tournament.description }}
+      </p>
+    </div>
+  </div>
+</ul>
