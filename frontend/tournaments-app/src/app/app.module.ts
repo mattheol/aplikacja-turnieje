@@ -46,11 +46,7 @@ import { MatOptionModule } from '@angular/material';
     MatNativeDateModule,
     MatSelectModule,
     MatOptionModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot([
-      {path: '', component: MenuComponent},
-      {path: 'create-tournament', component: TournamentFormComponent}
-    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
