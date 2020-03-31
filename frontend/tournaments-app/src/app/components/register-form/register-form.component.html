@@ -1,77 +1,120 @@
-<div style="text-align: center;">
-    <legend>Rejestracja</legend>
-    <form #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit(form)">
+<div class="modalContainer">
+  <div class="regModal">
+    <span class="close" (click)="setHide()"></span>
+    <legend>Załóż konto</legend>
+    <form
+      class="regForm"
+      #regForm="ngForm"
+      [formGroup]="myForm"
+      (ngSubmit)="submit(form)"
+    >
+      <!-- Value: {{myForm.value | json}} -->
 
-        <!-- Value: {{myForm.value | json}} -->
+      <mat-form-field>
+        <input matInput placeholder="email" formControlName="email" required />
+        <mat-error *ngIf="emailInput.errors?.required && emailInput.touched">
+          Adres email jest wymagany
+        </mat-error>
+        <mat-error *ngIf="emailInput.errors?.email && emailInput.touched">
+          Niepoprawny format adresu email
+        </mat-error>
+      </mat-form-field>
 
-        <mat-form-field>
-            <input matInput placeholder="email" formControlName="email" required>
-            <mat-error *ngIf="emailInput.errors?.required && emailInput.touched">
-                Adres email jest wymagany
-            </mat-error>
-            <mat-error *ngIf="emailInput.errors?.email && emailInput.touched">
-                Niepoprawny format adresu email
-            </mat-error>
-        </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="login" formControlName="login" required />
+        <mat-error *ngIf="loginInput.errors?.required && loginInput.touched">
+          Login jest wymagany
+        </mat-error>
+        <mat-error *ngIf="loginInput.errors?.minlength && loginInput.touched">
+          Wybrany login jest za krótki
+        </mat-error>
+      </mat-form-field>
 
-        <mat-form-field>
-            <input matInput placeholder="login" formControlName="login" required>
-            <mat-error *ngIf="loginInput.errors?.required && loginInput.touched">
-                Login jest wymagany
-            </mat-error>
-            <mat-error *ngIf="loginInput.errors?.minlength && loginInput.touched">
-                Wybrany login jest za krótki
-            </mat-error>
-            
-        </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="hasło"
+          [type]="hide ? 'password' : 'text'"
+          formControlName="password"
+          required
+        />
+        <mat-icon style="cursor:pointer" matSuffix (click)="hide = !hide">{{
+          hide ? "visibility_off" : "visibility"
+        }}</mat-icon>
+        <mat-hint align="end">min. 6 znaków</mat-hint>
+        <mat-error
+          *ngIf="passwordInput.errors?.minlength && passwordInput.touched"
+        >
+          Hasło za krótkie! min. 6 znaków
+        </mat-error>
+        <mat-error
+          *ngIf="passwordInput.errors?.required && passwordInput.touched"
+        >
+          Hasło jest wymagane
+        </mat-error>
+      </mat-form-field>
 
-        <mat-form-field>
-            <input matInput placeholder="hasło" [type]="hide ? 'password' : 'text'" formControlName="password" required>
-            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            <mat-hint align="end">min. 6 znaków</mat-hint>
-            <mat-error *ngIf="passwordInput.errors?.minlength && passwordInput.touched">
-                Hasło za krótkie! min. 6 znaków
-            </mat-error>
-            <mat-error *ngIf="passwordInput.errors?.required && passwordInput.touched">
-                Hasło jest wymagane
-            </mat-error>
-        </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Imię"
+          formControlName="firstname"
+          required
+        />
+        <mat-error
+          *ngIf="firstnameInput.errors?.required && firstnameInput.touched"
+        >
+          Imię jest wymagane
+        </mat-error>
+        <mat-error
+          *ngIf="firstnameInput.errors?.minlength && firstnameInput.touched"
+        >
+          min. 2 znaki
+        </mat-error>
+      </mat-form-field>
 
-        <mat-form-field>
-            <input matInput placeholder="Imię" formControlName="firstname" required>
-            <mat-error *ngIf="firstnameInput.errors?.required && firstnameInput.touched">
-                Imię jest wymagane
-            </mat-error>
-            <mat-error *ngIf="firstnameInput.errors?.minlength && firstnameInput.touched">
-                min. 2 znaki
-            </mat-error>           
-        </mat-form-field>
+      <mat-form-field style="margin-bottom: 10px;">
+        <input
+          matInput
+          placeholder="Nazwisko"
+          formControlName="lastname"
+          required
+        />
+        <mat-error
+          *ngIf="lastnameInput.errors?.required && lastnameInput.touched"
+        >
+          Nazwisko jest wymagane
+        </mat-error>
+        <mat-error
+          *ngIf="lastnameInput.errors?.minlength && lastnameInput.touched"
+        >
+          min. 2 znaki
+        </mat-error>
+      </mat-form-field>
 
-        <mat-form-field style="margin-bottom: 10px;">
-            <input matInput placeholder="Nazwisko" formControlName="lastname" required>
-            <mat-error *ngIf="lastnameInput.errors?.required && lastnameInput.touched">
-                Nazwisko jest wymagane
-            </mat-error>
-            <mat-error *ngIf="lastnameInput.errors?.minlength && lastnameInput.touched">
-                min. 2 znaki
-            </mat-error>
-        </mat-form-field>
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button value="M" style="margin-right: 10px;"
+          >Mężczyna</mat-radio-button
+        >
+        <mat-radio-button value="F">Kobieta</mat-radio-button>
+      </mat-radio-group>
 
-        <mat-radio-group formControlName="gender">
-            <mat-radio-button value="M" style="margin-right: 10px;">Mężczyna</mat-radio-button>
-            <mat-radio-button value="F">Kobieta</mat-radio-button>
-        </mat-radio-group>
+      <mat-form-field style="margin-top: 10px;">
+        <mat-label>Data urodzenia: MM/DD/YYYY</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthday" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field style="margin-top: 10px;">
-            <mat-label>Data urodzenia: MM/DD/YYYY</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="birthday">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-          
-        <button mat-raised-button [disabled]="myForm.invalid" color="primary" type="submit">Zarejestruj</button>
-
+      <button
+        mat-raised-button
+        [disabled]="myForm.invalid"
+        color="primary"
+        type="submit"
+        style="margin-top:10px; text-transform: uppercase;"
+      >
+        Zarejestruj
+      </button>
     </form>
+  </div>
 </div>
-
-

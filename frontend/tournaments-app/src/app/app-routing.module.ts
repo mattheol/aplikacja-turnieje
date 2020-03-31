@@ -8,7 +8,6 @@ import { RegisterFormComponent } from "./components/register-form/register-form.
 const routes: Routes = [
   { path: "turnieje", component: TournamentsListComponent },
   { path: "turnieje/:id", component: TournamentComponent },
-  { path: "rejestracja", component: RegisterFormComponent },
   { path: "stworz-turniej", component: TournamentFormComponent }
 ];
 
