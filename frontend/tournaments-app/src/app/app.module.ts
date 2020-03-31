@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { TestowyComponent } from "./components/testowy/testowy.component";
 import { HttpClientModule } from "@angular/common/http";
@@ -11,22 +11,26 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TournamentComponent } from "./components/tournament/tournament.component";
 
-import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { RegisterFormComponent } from "./components/register-form/register-form.component";
 
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatRadioModule, MatDatepickerModule, MatNativeDateModule,  MAT_DATE_LOCALE, MatButtonModule } from '@angular/material'
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MAT_DATE_LOCALE,
+  MatButtonModule
+} from "@angular/material";
 
-import { TournamentFormComponent } from './components/tournament-form/tournament-form.component';
-import { RouterModule } from '@angular/router';
-import { MatCardModule, MatNativeDateModule } from '@angular/material';
-import { MatFormFieldModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatRadioModule } from '@angular/material';
-import { MatCheckboxModule } from '@angular/material';
-import { MatDatepickerModule } from '@angular/material';
-import { MatSelectModule } from '@angular/material';
-import { MatOptionModule } from '@angular/material';
-
+import { TournamentFormComponent } from "./components/tournament-form/tournament-form.component";
+import { RouterModule } from "@angular/router";
+import { MatCardModule } from "@angular/material";
+import { MatCheckboxModule } from "@angular/material";
+import { MatSelectModule } from "@angular/material";
+import { MatOptionModule } from "@angular/material";
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -35,18 +39,15 @@ import { MatOptionModule } from '@angular/material';
     TournamentsListComponent,
     MenuComponent,
     TournamentComponent,
-
-    RegisterFormComponent
-=======
+    RegisterFormComponent,
     TournamentFormComponent,
-
+    MainComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     MatTabsModule,
-
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -55,8 +56,7 @@ import { MatOptionModule } from '@angular/material';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatButtonModule
-
+    MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -68,9 +68,8 @@ import { MatOptionModule } from '@angular/material';
     MatSelectModule,
     MatOptionModule,
     BrowserAnimationsModule
-
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'pl-pl'}],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: "pl-pl" }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
