@@ -10,9 +10,23 @@ import { MenuComponent } from "./components/menu/menu.component";
 import { MatTabsModule } from "@angular/material/tabs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TournamentComponent } from "./components/tournament/tournament.component";
+
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 import { MatFormFieldModule, MatInputModule, MatIconModule, MatRadioModule, MatDatepickerModule, MatNativeDateModule,  MAT_DATE_LOCALE, MatButtonModule } from '@angular/material'
+
+import { TournamentFormComponent } from './components/tournament-form/tournament-form.component';
+import { RouterModule } from '@angular/router';
+import { MatCardModule, MatNativeDateModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
+import { MatOptionModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -21,13 +35,18 @@ import { MatFormFieldModule, MatInputModule, MatIconModule, MatRadioModule, MatD
     TournamentsListComponent,
     MenuComponent,
     TournamentComponent,
+
     RegisterFormComponent
+=======
+    TournamentFormComponent,
+
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     MatTabsModule,
+
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -37,6 +56,19 @@ import { MatFormFieldModule, MatInputModule, MatIconModule, MatRadioModule, MatD
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule
+
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatOptionModule,
+    BrowserAnimationsModule
+
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'pl-pl'}],
   bootstrap: [AppComponent]
