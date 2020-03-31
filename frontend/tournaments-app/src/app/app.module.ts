@@ -9,6 +9,18 @@ import { MenuComponent } from "./components/menu/menu.component";
 import { MatTabsModule } from "@angular/material/tabs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TournamentComponent } from "./components/tournament/tournament.component";
+import { TournamentFormComponent } from './components/tournament-form/tournament-form.component';
+import { RouterModule } from '@angular/router';
+import { MatCardModule, MatNativeDateModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
+import { MatOptionModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -16,14 +28,29 @@ import { TournamentComponent } from "./components/tournament/tournament.componen
     TestowyComponent,
     TournamentsListComponent,
     MenuComponent,
-    TournamentComponent
+    TournamentComponent,
+    TournamentFormComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     MatTabsModule,
-    BrowserAnimationsModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatOptionModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot([
+      {path: '', component: MenuComponent},
+      {path: 'create-tournament', component: TournamentFormComponent}
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
