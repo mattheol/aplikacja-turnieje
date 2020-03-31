@@ -1,0 +1,7 @@
+mat-form-field{
+    display: block;
+    width: 20em;
+}
+form {
+    display: inline-block;
+}
