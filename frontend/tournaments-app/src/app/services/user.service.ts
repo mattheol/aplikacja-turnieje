@@ -22,4 +22,12 @@ export class UserService {
             )  
   };
 
+  postUser(user: User): Observable<User> {
+    console.log(user)
+    return this.http.post<User>(this.url, user)
+            .pipe(
+              tap(_ => console.log("post Succes" + user),
+               err => console.log("nie udało się" + user)));
+  }
+
 }
