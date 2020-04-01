@@ -65,10 +65,12 @@ export class RegisterFormComponent implements OnInit {
         )
       )
       .subscribe(
-        res => console.log("sukces"),
-        err => console.log("kiepawo")
+        res => {
+          alert("Zarejestrowano poprawnie");
+          this.setHide();
+        },
+        err => alert(err.error)
       );
-    this.formDirective.resetForm();
   }
 
   get emailInput() {
