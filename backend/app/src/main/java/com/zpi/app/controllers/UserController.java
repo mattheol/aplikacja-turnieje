@@ -37,9 +37,10 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
+    //Ta metoda będzie do usunięcia
     @PostMapping("/authenticate")
-    public ResponseEntity<?> authenticate(String login, String password){
-        if(userService.authenticate(login, password)){
+    public ResponseEntity<?> authenticate(@RequestBody User user){
+        if(userService.authenticate(user.getLogin(), user.getPassword())){
             return new ResponseEntity<>("Zalogowano poprawnie", HttpStatus.OK);
         }else{
             return new ResponseEntity<>("Zły login lub/i hasło", HttpStatus.BAD_REQUEST);
