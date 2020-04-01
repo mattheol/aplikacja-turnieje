@@ -42,8 +42,8 @@ mat-form-field {
   transform: rotate(-45deg);
 }
 
-.regForm {
-  max-height: calc(100vh - 100px);
+.formBody {
+  max-height: calc(100vh - 200px);
   overflow-y: auto;
   padding: 0px 10px;
 }
@@ -54,5 +54,5 @@ mat-form-field {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.87);
-  z-index: 99999;
+  z-index: 9;
 }
