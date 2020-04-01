@@ -41,4 +41,12 @@ public class UserService {
             return false;
         }
     }
+
+    public boolean authenticate(String login, String password){
+        if(userRepository.loginPasswordMatches(login,password) !=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -21,12 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/users")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
 
-    @PostMapping
+    @PostMapping("/users")
     public ResponseEntity<?> addUser(@RequestBody User user) {
         if(userService.checkIfAlreadyLoginExist(user.getLogin())){
             return new ResponseEntity<>("Login already used", HttpStatus.BAD_REQUEST);
@@ -36,6 +35,15 @@ public class UserController {
         }
         User newUser = userService.addUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.OK);
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> authenticate(String login, String password){
+        if(userService.authenticate(login, password)){
+            return new ResponseEntity<>("Zalogowano poprawnie", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Zły login lub/i hasło", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
