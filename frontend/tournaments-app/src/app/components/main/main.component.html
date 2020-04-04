@@ -1,0 +1,16 @@
+<button
+  (click)="showRegisterForm()"
+  mat-raised-button
+  color="primary"
+  class="registerBtn"
+>
+  Zarejestruj się
+</button>
+<app-register-form
+  (onHide)="changeHide($event)"
+  *ngIf="isActive"
+></app-register-form>
+
+<app-menu>
+  <router-outlet></router-outlet>
+</app-menu>

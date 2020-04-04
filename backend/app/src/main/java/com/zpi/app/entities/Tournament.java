@@ -1,6 +1,8 @@
 package com.zpi.app.entities;
 
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -30,7 +32,28 @@ public class Tournament {
     private Integer numberOfPlayers;
     private String description;
     private Boolean randomBracket;
+
     private Boolean isForTeams;
+
+    private Boolean isActive;
+    private Date enrollmentEnd;
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public Date getEnrollmentEnd() {
+        return enrollmentEnd;
+    }
+
+    public void setEnrollmentEnd(Date enrollmentEnd) {
+        this.enrollmentEnd = enrollmentEnd;
+    }
+
 
     @Enumerated(EnumType.STRING)
     private TournamentType tournamentType;

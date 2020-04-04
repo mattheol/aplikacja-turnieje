@@ -1,5 +1,9 @@
 package com.zpi.app.entities;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -12,14 +16,13 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToMany(mappedBy = "organizers")
-    private List<Tournament> organizedTournaments;
-
     @OneToMany(mappedBy = "participant",
                cascade = CascadeType.ALL,
                 orphanRemoval = true)
     private List<ParticipantTournament> participatedTournaments;
 
+
+    @JsonIgnore
     @ManyToMany(mappedBy = "matchParticipants")
     private List<Match> matches;
 
@@ -35,13 +38,6 @@ public class User {
         return id;
     }
 
-    public List<Tournament> getOrganizedTournaments() {
-        return organizedTournaments;
-    }
-
-    public void setOrganizedTournaments(List<Tournament> organizedTournaments) {
-        this.organizedTournaments = organizedTournaments;
-    }
 
     public List<ParticipantTournament> getParticipatedTournaments() {
         return participatedTournaments;

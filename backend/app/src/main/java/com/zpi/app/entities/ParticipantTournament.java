@@ -36,4 +36,20 @@ public class ParticipantTournament {
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
+
+    public User getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(User participant) {
+        this.participant = participant;
+    }
+
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
 }

@@ -1,6 +1,7 @@
 package com.zpi.app.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,16 @@ public class Match {
     private String comment;
 
     private String stage;
+
+    private Date startTime;
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 
     public Integer getId() {
         return id;
