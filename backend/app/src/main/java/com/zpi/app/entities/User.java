@@ -1,6 +1,8 @@
 package com.zpi.app.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,12 +17,15 @@ public class User {
     private Integer id;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "organizers")
-    private List<Tournament> organizedTournaments;
+    @OneToMany(mappedBy = "participant",
+               cascade = CascadeType.ALL,
+                orphanRemoval = true)
+    private List<ParticipantTournament> participatedTournaments;
+
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "participants")
-    private List<Tournament> participatedTournaments;
+    @ManyToMany(mappedBy = "organizers")
+    private List<Tournament> tournaments;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "matchParticipants")
@@ -38,20 +43,21 @@ public class User {
         return id;
     }
 
-    public List<Tournament> getOrganizedTournaments() {
-        return organizedTournaments;
-    }
 
-    public void setOrganizedTournaments(List<Tournament> organizedTournaments) {
-        this.organizedTournaments = organizedTournaments;
-    }
-
-    public List<Tournament> getParticipatedTournaments() {
+    public List<ParticipantTournament> getParticipatedTournaments() {
         return participatedTournaments;
     }
 
-    public void setParticipatedTournaments(List<Tournament> participatedTournaments) {
+    public void setParticipatedTournaments(List<ParticipantTournament> participatedTournaments) {
         this.participatedTournaments = participatedTournaments;
+    }
+
+    public List<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
     }
 
     public List<Match> getMatches() {
