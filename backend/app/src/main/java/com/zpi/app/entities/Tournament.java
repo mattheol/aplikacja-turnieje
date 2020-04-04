@@ -1,4 +1,4 @@
-package com.zpi.app.entity;
+package com.zpi.app.entities;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,11 +17,10 @@ public class Tournament {
             inverseJoinColumns = {@JoinColumn(name = "organizer_id")})
     private List<User> organizers;
 
-    @ManyToMany
-    @JoinTable(name = "tournaments_participants",
-            joinColumns = {@JoinColumn(name = "tournament_id")},
-            inverseJoinColumns = {@JoinColumn(name = "participant_id")})
-    private List<User>participants;
+    @OneToMany(mappedBy = "tournament",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<ParticipantTournament> participants;
 
     @OneToMany(mappedBy = "tournament")
     private  List<Match> matches;
@@ -31,6 +30,7 @@ public class Tournament {
     private Integer numberOfPlayers;
     private String description;
     private Boolean randomBracket;
+    private Boolean isForTeams;
 
     @Enumerated(EnumType.STRING)
     private TournamentType tournamentType;
@@ -89,5 +89,37 @@ public class Tournament {
 
     public void setRandomBracket(Boolean randomBracket) {
         this.randomBracket = randomBracket;
+    }
+
+    public List<User> getOrganizers() {
+        return organizers;
+    }
+
+    public void setOrganizers(List<User> organizers) {
+        this.organizers = organizers;
+    }
+
+    public List<ParticipantTournament> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<ParticipantTournament> participants) {
+        this.participants = participants;
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
+    public Boolean getForTeams() {
+        return isForTeams;
+    }
+
+    public void setForTeams(Boolean forTeams) {
+        isForTeams = forTeams;
     }
 }

@@ -1,4 +1,4 @@
-package com.zpi.app.entity;
+package com.zpi.app.entities;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,8 +15,10 @@ public class User {
     @ManyToMany(mappedBy = "organizers")
     private List<Tournament> organizedTournaments;
 
-    @ManyToMany(mappedBy = "participants")
-    private List<Tournament> participatedTournaments;
+    @OneToMany(mappedBy = "participant",
+               cascade = CascadeType.ALL,
+                orphanRemoval = true)
+    private List<ParticipantTournament> participatedTournaments;
 
     @ManyToMany(mappedBy = "matchParticipants")
     private List<Match> matches;
@@ -41,11 +43,11 @@ public class User {
         this.organizedTournaments = organizedTournaments;
     }
 
-    public List<Tournament> getParticipatedTournaments() {
+    public List<ParticipantTournament> getParticipatedTournaments() {
         return participatedTournaments;
     }
 
-    public void setParticipatedTournaments(List<Tournament> participatedTournaments) {
+    public void setParticipatedTournaments(List<ParticipantTournament> participatedTournaments) {
         this.participatedTournaments = participatedTournaments;
     }
 
