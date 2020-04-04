@@ -22,31 +22,31 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User addUser(User user) {
-        return userRepository.save(user);
-    }
+//    public User addUser(User user) {
+//        return userRepository.save(user);
+//    }
 
-    public boolean checkIfAlreadyLoginExist(String login){
-        if(userRepository.findByLogin(login) !=null ){
-            return true;
-        }else {
-            return false;
-        }
-    }
+//    public boolean checkIfAlreadyLoginExist(String login){
+//        if(userRepository.findByLogin(login) !=null ){
+//            return true;
+//        }else {
+//            return false;
+//        }
+//    }
+//
+//    public boolean checkIfEmailAlreadyExist(String email) {
+//        if(userRepository.findByEmail(email) !=null ){
+//            return true;
+//        }else {
+//            return false;
+//        }
+//    }
 
-    public boolean checkIfEmailAlreadyExist(String email) {
-        if(userRepository.findByEmail(email) !=null ){
-            return true;
-        }else {
-            return false;
-        }
-    }
-
-    public boolean authenticate(String login, String password){
-        if(userRepository.loginPasswordMatches(login,password) !=null){
-            return true;
-        }else{
-            return false;
-        }
-    }
+//    public boolean authenticate(String login, String password){
+//        if(userRepository.loginPasswordMatches(login,password) !=null){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
 }

@@ -9,7 +9,8 @@
 INSERT INTO users (id, first_name,last_name,gender,birthday,email,login,password)
        VALUES (1,'Jan','Kowalski','M','2000-01-21','jk@wp.pl',null,null),
               (2,'Monika','Nowak','F','2001-03-01','mk@wp.pl',null,null),
-              (3,'Kamil','Głuś','M','2001-03-01','kg@wp.pl',null,null);
+              (3,'Kamil','Głuś','M','2001-03-01','kg@wp.pl',null,null),
+              (4,'Kamil','Slimak','M','2001-03-01','user@user.pl','user','$2a$10$pBJu/WLMmrnVm7hxK2imAeLoZ0H43oL26G9jY3yc0Dm0ksRGHr4/q');
 
 INSERT INTO tournaments (id,name,tournament_type,is_private,is_for_teams,number_of_players,random_bracket, enrollment_end,description)
        VALUES (1,'Turniej 1','LEAGUE',false,false,10,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.'),
