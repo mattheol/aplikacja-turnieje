@@ -1,6 +1,8 @@
 package com.zpi.app.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +26,7 @@ public class Tournament {
             orphanRemoval = true)
     private List<ParticipantTournament> participants;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tournament")
     private  List<Match> matches;
 

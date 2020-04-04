@@ -1,5 +1,7 @@
 package com.zpi.app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,11 +14,13 @@ public class ParticipantTournament {
     private String teamName;
 
     @ManyToOne
+    @JsonIgnore
     @MapsId("participantId")
     private User participant;
 
 
     @ManyToOne
+    @JsonIgnore
     @MapsId("tournamentId")
     private Tournament tournament;
 

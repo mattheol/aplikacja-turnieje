@@ -16,11 +16,16 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "participant",
                cascade = CascadeType.ALL,
                 orphanRemoval = true)
     private List<ParticipantTournament> participatedTournaments;
 
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "organizers")
+    private List<Tournament> tournaments;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "matchParticipants")
@@ -45,6 +50,14 @@ public class User {
 
     public void setParticipatedTournaments(List<ParticipantTournament> participatedTournaments) {
         this.participatedTournaments = participatedTournaments;
+    }
+
+    public List<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
     }
 
     public List<Match> getMatches() {
