@@ -13,6 +13,7 @@ import {
 } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-register-form",
@@ -30,7 +31,8 @@ export class RegisterFormComponent implements OnInit {
 
   hide = true;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(private fb: FormBuilder, private userService: UserService,
+    private toastr: ToastrService) {}
 
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -66,10 +68,10 @@ export class RegisterFormComponent implements OnInit {
       )
       .subscribe(
         res => {
-          alert("Zarejestrowano poprawnie");
+          this.toastr.success("Zarejestrowano poprawnie","", { positionClass:'toast-top-center'})
           this.setHide();
         },
-        err => alert(err.error)
+        err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
       );
   }
 
