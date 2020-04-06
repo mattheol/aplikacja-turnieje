@@ -22,6 +22,7 @@ export class Tournament {
 
 export class TournamentDTO {
   constructor(
+    public id: Number,
     public name: String,
     public isForTeam: boolean,
     public teamName: String

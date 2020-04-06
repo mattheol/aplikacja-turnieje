@@ -1,1 +1,23 @@
-<div *ngIf=""></div>
+<div
+  *ngIf="tournaments"
+  style="display: flex; align-items: center; flex-direction: column;"
+>
+  <div *ngFor="let tournament of tournaments" class="itemWrapper">
+    <mat-card class="tourItem">
+      <h5 style="display: inline;">{{ tournament.name }}</h5>
+      <mat-card-subtitle class="tourType">
+        {{ tournament.forTeams ? "Zespołowy" : "Dla pojedynczych osób" }}
+        <b>{{ tournament.forTeams ? "(" + tournament.teamName + ")" : "" }}</b>
+      </mat-card-subtitle>
+      <button
+        (click)="redirectToTournament(tournament.id)"
+        mat-flat-button
+        class="btnToTournament"
+      >
+        <span class="material-icons">
+          arrow_forward_ios
+        </span>
+      </button>
+    </mat-card>
+  </div>
+</div>

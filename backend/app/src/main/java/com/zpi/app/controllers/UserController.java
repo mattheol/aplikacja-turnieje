@@ -31,10 +31,10 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<?> addUser(@RequestBody User user) {
         if(userService.checkIfAlreadyLoginExist(user.getLogin())){
-            return new ResponseEntity<>("Login already used", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Login jest zajęty", HttpStatus.BAD_REQUEST);
         }
         if(userService.checkIfEmailAlreadyExist(user.getEmail())){
-            return new ResponseEntity<>("Email already used",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Email jest zajęty",HttpStatus.BAD_REQUEST);
         }
         User newUser = userService.addUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.OK);
