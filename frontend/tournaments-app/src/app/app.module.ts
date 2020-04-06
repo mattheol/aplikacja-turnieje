@@ -10,8 +10,8 @@ import { MenuComponent } from "./components/menu/menu.component";
 import { MatTabsModule } from "@angular/material/tabs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TournamentComponent } from "./components/tournament/tournament.component";
-
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker'
 
 import {
   MatFormFieldModule,
@@ -31,6 +31,8 @@ import { MatCheckboxModule } from "@angular/material";
 import { MatSelectModule } from "@angular/material";
 import { MatOptionModule } from "@angular/material";
 import { MainComponent } from './components/main/main.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { MainComponent } from './components/main/main.component';
     TournamentComponent,
     RegisterFormComponent,
     TournamentFormComponent,
-    MainComponent
+    MainComponent,
+    LoginFormComponent
   ],
   imports: [
     HttpClientModule,
@@ -67,7 +70,11 @@ import { MainComponent } from './components/main/main.component';
     MatNativeDateModule,
     MatSelectModule,
     MatOptionModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    ToastrModule.forRoot()
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: "pl-pl" }],
   bootstrap: [AppComponent]

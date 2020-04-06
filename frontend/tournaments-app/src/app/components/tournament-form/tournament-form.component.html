@@ -23,9 +23,9 @@
   </mat-form-field>
   <mat-form-field style="width: 80%;">
     <mat-label>Wybierz datę końca zapisów</mat-label>
-    <input matInput [matDatepicker]="picker" required />
+    <input matInput [ngxMatDatetimePicker]="picker" required />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <ngx-mat-datetime-picker #picker type="datetime"></ngx-mat-datetime-picker>
   </mat-form-field>
   <br />
 
@@ -50,7 +50,7 @@
   <mat-checkbox>Losowowe spotkania</mat-checkbox>
   <br /><br />
 
-  <button mat-raised-button color="primary" style="font-size: x-large;">
+  <button mat-raised-button class="button" style="font-size: x-large;">
     Stwórz turniej
   </button>
 </mat-card>
