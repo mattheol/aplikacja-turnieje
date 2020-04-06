@@ -31,7 +31,8 @@ INSERT INTO tournaments_organizers (tournament_id,organizer_id)
 INSERT INTO tournaments_participants (tournament_id,participant_id, team_name)
 VALUES (1,2,null),
        (1,3,null),
-       (2,1,"borsuki");
+       (2,1,"borsuki"),
+       (2,2,"niedźwiedzie");
               
 
 
