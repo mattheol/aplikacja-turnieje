@@ -5,7 +5,7 @@ import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class TournamentService {
   private url = environment.basicUrl + "/tournaments";
