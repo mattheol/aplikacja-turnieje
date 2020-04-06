@@ -1,5 +1,8 @@
 package com.zpi.app.controllers;
 
+import com.zpi.app.dtos.UserTournament;
+import com.zpi.app.entities.ParticipantTournament;
+import com.zpi.app.entities.Tournament;
 import com.zpi.app.entities.User;
 import com.zpi.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +48,12 @@ public class UserController {
         }else{
             return new ResponseEntity<>("Zły login lub/i hasło", HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+    @GetMapping("/users/{id}/tournaments")
+    public List<UserTournament> getAllUserTournaments(@PathVariable Integer id){
+        return userService.getAllUserTournaments(id);
     }
 
 }
