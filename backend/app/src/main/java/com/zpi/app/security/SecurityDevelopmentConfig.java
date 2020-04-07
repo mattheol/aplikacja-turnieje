@@ -49,7 +49,7 @@ public class SecurityDevelopmentConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        httpSecurity.csrf().disable();
+        httpSecurity.cors().and().csrf().disable();
         httpSecurity.headers().frameOptions().disable();
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

@@ -2,6 +2,7 @@ package com.zpi.app.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class Tournament {
     @OneToMany(mappedBy = "tournament",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
+    @JsonIgnoreProperties("tournament")
     private List<ParticipantTournament> participants;
 
     @JsonIgnore
@@ -85,12 +87,12 @@ public class Tournament {
         this.name = name;
     }
 
-    public Boolean getPrivate() {
+    public Boolean getIsPrivate() {
         return isPrivate;
     }
 
-    public void setPrivate(Boolean aPrivate) {
-        isPrivate = aPrivate;
+    public void setIsPrivate(Boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 
     public Integer getNumberOfPlayers() {
@@ -141,11 +143,11 @@ public class Tournament {
         this.matches = matches;
     }
 
-    public Boolean getForTeams() {
+    public Boolean getIsForTeams() {
         return isForTeams;
     }
 
-    public void setForTeams(Boolean forTeams) {
-        isForTeams = forTeams;
+    public void setIsForTeams(Boolean isForTeams) {
+        this.isForTeams = isForTeams;
     }
 }

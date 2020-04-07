@@ -36,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { StartPageComponent } from './components/start-page/start-page.component';
 import { authInterceptorProviders } from './services/auth/auth-interceptor.service';
 
+import { MyTournamentsComponent } from './components/my-tournaments/my-tournaments.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +49,8 @@ import { authInterceptorProviders } from './services/auth/auth-interceptor.servi
     TournamentFormComponent,
     MainComponent,
     LoginFormComponent,
-    StartPageComponent
-
+    StartPageComponent,
+    MyTournamentsComponent
   ],
   imports: [
     HttpClientModule,
@@ -59,23 +60,16 @@ import { authInterceptorProviders } from './services/auth/auth-interceptor.servi
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule,
     MatIconModule,
-    MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatButtonModule,
     MatCardModule,
-    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     MatSelectModule,
     MatOptionModule,
-    BrowserAnimationsModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,

@@ -6,12 +6,14 @@ import { TournamentComponent } from "./components/tournament/tournament.componen
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { StartPageComponent } from './components/start-page/start-page.component';
+import { MyTournamentsComponent } from "./components/my-tournaments/my-tournaments.component";
 
 const routes: Routes = [
   { path: "", redirectTo:'home',pathMatch:'full'},
   { path: "home", component: StartPageComponent },
   { path: "turnieje", component: TournamentsListComponent },
   { path: "turnieje/:id", component: TournamentComponent },
+  { path: "moje-turnieje", component: MyTournamentsComponent },
   { path: "stworz-turniej", component: TournamentFormComponent },
 ];
 

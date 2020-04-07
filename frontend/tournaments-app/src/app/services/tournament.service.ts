@@ -1,6 +1,6 @@
+import { Tournament } from "./../models/tournament";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Tournament } from "../models/tournament";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
@@ -9,7 +9,7 @@ const httpOptions = {
 };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class TournamentService {
   private url = environment.basicUrl + "/tournaments";
@@ -22,5 +22,8 @@ export class TournamentService {
 
   getTournament(id: Number): Observable<Tournament> {
     return this.http.get<Tournament>(this.url + `/${id}`,httpOptions);
+  }
+  postTournament(tournament: Tournament): Observable<Tournament> {
+    return this.http.post<Tournament>(this.url, tournament);
   }
 }
