@@ -87,12 +87,12 @@ public class Tournament {
         this.name = name;
     }
 
-    public Boolean getPrivate() {
+    public Boolean getIsPrivate() {
         return isPrivate;
     }
 
-    public void setPrivate(Boolean aPrivate) {
-        isPrivate = aPrivate;
+    public void setIsPrivate(Boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 
     public Integer getNumberOfPlayers() {
@@ -143,11 +143,11 @@ public class Tournament {
         this.matches = matches;
     }
 
-    public Boolean getForTeams() {
+    public Boolean getIsForTeams() {
         return isForTeams;
     }
 
-    public void setForTeams(Boolean forTeams) {
-        isForTeams = forTeams;
+    public void setIsForTeams(Boolean isForTeams) {
+        this.isForTeams = isForTeams;
     }
 }
