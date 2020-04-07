@@ -31,10 +31,12 @@ public class User {
     @ManyToMany(mappedBy = "matchParticipants")
     private List<Match> matches;
 
+    @Column(unique = true)
     private String login;
     private String password;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private Date birthday;
     private Character gender;

@@ -1,4 +1,4 @@
-package com.zpi.app.dto;
+package com.zpi.app.dtos;
 
 import java.io.Serializable;
 

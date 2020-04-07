@@ -36,21 +36,18 @@ public class JwtUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 
         User userDB = userRepository.findByLogin(login)
-                .orElseThrow(() -> new UsernameNotFoundException("User with given login not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Nie znaleziono użytkownika o takim loginie"));
         return new org.springframework.security.core.userdetails.User(userDB.getLogin(), userDB.getPassword(),
                 new ArrayList<>());
     }
 
     public User registerNewUser(User user) throws UserAlreadyExistsException {
-        if (!userRepository.existsByEmail(user.getEmail()) || !userRepository.existsByLogin(user.getLogin())) {
-//            User user = new User();
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-//            user.setEmail(userDto.getEmail());
-            return userRepository.save(user);
-        } else {
-            throw new UserAlreadyExistsException("User having this email address or login  already exists");
-        }
-
+        if (userRepository.existsByEmail(user.getEmail()))
+            throw new UserAlreadyExistsException("Użytkownik o takim mailu już istnieje");
+        if (userRepository.existsByLogin(user.getLogin()))
+            throw new UserAlreadyExistsException("Użytkownik o takim loginie już istnieje");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
 
@@ -58,9 +55,9 @@ public class JwtUserDetailsService implements UserDetailsService {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new MyAuthenticationException("USER_DISABLED", e);
+            throw new MyAuthenticationException("Użytkownik nieczynny", e);
         } catch (BadCredentialsException e) {
-            throw new MyAuthenticationException("INVALID_CREDENTIALS", e);
+            throw new MyAuthenticationException("Niepoprawne dane logowania", e);
         }
     }
 

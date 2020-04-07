@@ -1,7 +1,7 @@
 package com.zpi.app.controllers;
 
-import com.zpi.app.dto.JwtRequest;
-import com.zpi.app.dto.JwtResponse;
+import com.zpi.app.dtos.JwtRequest;
+import com.zpi.app.dtos.JwtResponse;
 import com.zpi.app.entities.User;
 import com.zpi.app.exceptions.MyAuthenticationException;
 import com.zpi.app.exceptions.UserAlreadyExistsException;
@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -50,7 +49,7 @@ public class UserController {
                                                   User user) throws UserAlreadyExistsException {
 
         userDetailsService.registerNewUser(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
@@ -62,7 +61,7 @@ public class UserController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getLogin());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
+        return new ResponseEntity<>(new JwtResponse(token,authenticationRequest.getLogin()), HttpStatus.OK);
 
     }
 
