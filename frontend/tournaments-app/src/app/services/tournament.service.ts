@@ -20,6 +20,7 @@ export class TournamentService {
     return this.http.get<Tournament>(this.url + `/${id}`);
   }
   postTournament(tournament: Tournament): Observable<Tournament> {
+    console.log(tournament);
     return this.http.post<Tournament>(this.url, tournament);
   }
 }
