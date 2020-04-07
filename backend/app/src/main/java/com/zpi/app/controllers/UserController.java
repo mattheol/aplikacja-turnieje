@@ -38,18 +38,10 @@ public class UserController {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
-//    @Autowired
-//    public UserController(UserService userService) {
-//        this.userService = userService;
-//    }
-
     @GetMapping("/users")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
-
-//<<<<<<< HEAD
-
 
     @PostMapping("/registration")
     public ResponseEntity<?> register(@RequestBody
@@ -76,44 +68,5 @@ public class UserController {
     public List<UserTournament> getAllUserTournaments(@PathVariable Integer id){
         return userService.getAllUserTournaments(id);
     }
-
-//<<<<<<< HEAD
-//    @PostMapping("/users")
-//    public ResponseEntity<?> addUser(@RequestBody User user) {
-//        if(userService.checkIfAlreadyLoginExist(user.getLogin())){
-//            return new ResponseEntity<>("Login already used", HttpStatus.BAD_REQUEST);
-//        }
-//        if(userService.checkIfEmailAlreadyExist(user.getEmail())){
-//            return new ResponseEntity<>("Email already used",HttpStatus.BAD_REQUEST);
-//        }
-//        User newUser = userService.addUser(user);
-//        return new ResponseEntity<>(newUser, HttpStatus.OK);
-//    }
-//
-//    //Ta metoda będzie do usunięcia
-//    @PostMapping("/authenticate")
-//    public ResponseEntity<?> authenticate(@RequestBody User user){
-//        if(userService.authenticate(user.getLogin(), user.getPassword())){
-//            return new ResponseEntity<>("Zalogowano poprawnie", HttpStatus.OK);
-//        }else{
-//            return new ResponseEntity<>("Zły login lub/i hasło", HttpStatus.BAD_REQUEST);
-//        }
-//    }
-
-//=======
-//    @PostMapping("/users")
-//    public ResponseEntity<?> addUser(@RequestBody User user) {
-//        if(userService.checkIfAlreadyLoginExist(user.getLogin())){
-//            return new ResponseEntity<>("Login jest zajęty", HttpStatus.BAD_REQUEST);
-//        }
-//        if(userService.checkIfEmailAlreadyExist(user.getEmail())){
-//            return new ResponseEntity<>("Email jest zajęty",HttpStatus.BAD_REQUEST);
-//        }
-//        User newUser = userService.addUser(user);
-//        return new ResponseEntity<>(newUser, HttpStatus.OK);
-//>>>>>>> master
-//    }
-
-
 
 }
