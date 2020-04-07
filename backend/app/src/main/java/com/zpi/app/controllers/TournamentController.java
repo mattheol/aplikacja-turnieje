@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class TournamentController {
     private final TournamentService tournamentService;
 
@@ -20,6 +20,7 @@ public class TournamentController {
     @GetMapping("/tournaments")
     public List<Tournament> getAllTournaments(){
         return tournamentService.getAllTournaments();
+
     }
 
     @GetMapping("/tournaments/{id}")

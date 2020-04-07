@@ -8,6 +8,9 @@ import {
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
 import { ToastrService } from "ngx-toastr";
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { TokenStorageService } from 'src/app/services/auth/token-storage.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-login-form",
@@ -24,11 +27,15 @@ export class LoginFormComponent implements OnInit {
   myForm: FormGroup;
 
   hide = true;
+  isLoggedIn = false;
 
   constructor(
+    private authService : AuthenticationService,
+    private tokenService : TokenStorageService, 
     private fb: FormBuilder,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -47,28 +54,27 @@ export class LoginFormComponent implements OnInit {
   }
 
   submit(form: FormGroupDirective) {
-    this.userService
-      .authenticate(
-        new User(
-          -1,
-          null,
-          null,
-          null,
-          this.loginInput.value,
-          this.passwordInput.value,
-          null,
-          null,
-          null,
-          null,
-          null
-        )
+    this.authService
+      .login(
+       {
+          login:  this.loginInput.value,
+          password: this.passwordInput.value,
+       }
       )
       .subscribe(
         (res) => {
           this.toastr.success("Udane logowanie", "", {
             positionClass: "toast-top-center",
           });
+        
           this.setHideLogin();
+          this.tokenService.saveToken(res.token);
+          this.tokenService.saveUser(res.login);
+          this.router.navigate(['/turnieje']);
+          // this.isLoginFailed = false;
+     
+          // this.roles = this.tokenStorage.getUser().roles;
+          // location.reload();
         },
         (err) =>
           this.toastr.error(err.error, "", {

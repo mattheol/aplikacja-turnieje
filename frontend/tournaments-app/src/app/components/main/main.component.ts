@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { TokenStorageService } from 'src/app/services/auth/token-storage.service';
+import {Router} from "@angular/router"
 
 @Component({
   selector: "app-main",
@@ -9,11 +11,20 @@ export class MainComponent implements OnInit {
   isActive: boolean;
   isLoginActive: boolean;
 
-  constructor() {}
+  constructor(public tokenService:TokenStorageService,private router: Router) {}
 
   ngOnInit() {
     this.isActive = false;
     this.isLoginActive = false;
+  }
+
+  logout(){
+    this.tokenService.signOut();
+    this.router.navigate(['/home'])
+  }
+
+  isLoggedIn(){
+    return sessionStorage.getItem("token")!= null;
   }
 
   showRegisterForm() {

@@ -11,5 +11,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  isLoggedIn(){
+    return sessionStorage.getItem("token")!= null;
+  }
 }

@@ -3,9 +3,11 @@ package com.zpi.app.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.Length;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Date;
 import java.util.List;
 
@@ -33,10 +35,21 @@ public class User {
     @ManyToMany(mappedBy = "matchParticipants")
     private List<Match> matches;
 
+    @Length(min = 5)
+    @Column(unique = true)
     private String login;
+
+    @Length(min = 6)
     private String password;
+
+    @Length(min =2)
     private String firstName;
+
+    @Length(min = 2)
     private String lastName;
+
+    @Email
+    @Column(unique = true)
     private String email;
     private Date birthday;
     private Character gender;
