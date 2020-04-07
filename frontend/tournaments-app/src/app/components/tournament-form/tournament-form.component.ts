@@ -1,47 +1,49 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { TournamentService } from 'src/app/services/tournament.service';
-import { Tournament } from 'src/app/models/tournament';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormGroupDirective,
+} from "@angular/forms";
+import { TournamentService } from "src/app/services/tournament.service";
+import { Tournament } from "src/app/models/tournament";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'tournament-form',
-  templateUrl: './tournament-form.component.html',
-  styleUrls: ['./tournament-form.component.css']
+  selector: "tournament-form",
+  templateUrl: "./tournament-form.component.html",
+  styleUrls: ["./tournament-form.component.css"],
 })
 export class TournamentFormComponent implements OnInit {
-  @Output() onHide = new EventEmitter<boolean>();
-
-  setHide() {
-    this.onHide.emit(true);
-  }
-  
   RandomBracketchecked: boolean = false;
   Teamschecked: boolean = false;
   minDate = new Date();
-  
-
 
   myForm: FormGroup;
-  constructor(private fb: FormBuilder, private tournamentService: TournamentService,
-    private toastr: ToastrService) { }
+  constructor(
+    private fb: FormBuilder,
+    private tournamentService: TournamentService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.myForm = this.fb.group({
       name: ["", [Validators.required, Validators.minLength(5)]],
       description: ["", [Validators.required, Validators.minLength(5)]],
-      numberOfPlayers :["", [Validators.required]],
-      enrollmentEnd: [ [Validators.required]],
+      numberOfPlayers: ["", [Validators.required]],
+      enrollmentEnd: [[Validators.required]],
       isPrivate: ["", [Validators.required]],
       type: ["", [Validators.required]],
       randomBracket: "",
-      isForTeams:""
+      isForTeams: "",
     });
   }
 
   @ViewChild(FormGroupDirective, { static: false })
   formDirective: FormGroupDirective;
-  
+
   submit(form: FormGroupDirective) {
     this.tournamentService
       .postTournament(
@@ -58,19 +60,27 @@ export class TournamentFormComponent implements OnInit {
           this.isForTeamsInput,
           this.typeInput.value,
           null,
-          new Date(this.enrollmentEndInput.value),
+          new Date(this.enrollmentEndInput.value)
         )
       )
       .subscribe(
-        res => {
-          this.toastr.success("Dodano turniej","", { positionClass:'toast-top-center'})
-          this.setHide();
+        (res) => {
+          this.toastr.success("Dodano turniej", "", {
+            positionClass: "toast-top-center",
+          });
+          this.redirectToTournament(res.id);
         },
-        err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+        (err) =>
+          this.toastr.error(err.error, "", {
+            positionClass: "toast-top-center",
+          })
       );
-
   }
-  
+
+  redirectToTournament(id: Number): void {
+    this.router.navigate(["/turnieje", id]);
+  }
+
   get nameInput() {
     return this.myForm.get("name");
   }
@@ -99,13 +109,11 @@ export class TournamentFormComponent implements OnInit {
     return this.myForm.get("numberOfPlayers");
   }
 
-  
   changeValueRandom(value) {
     this.RandomBracketchecked = !value;
-}
+  }
 
-changeValueTeams(value) {
-  this.Teamschecked = !value;
-}
-
+  changeValueTeams(value) {
+    this.Teamschecked = !value;
+  }
 }

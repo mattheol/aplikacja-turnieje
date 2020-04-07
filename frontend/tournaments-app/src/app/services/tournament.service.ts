@@ -1,4 +1,4 @@
-import { Tournament } from './../models/tournament';
+import { Tournament } from "./../models/tournament";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -20,7 +20,6 @@ export class TournamentService {
     return this.http.get<Tournament>(this.url + `/${id}`);
   }
   postTournament(tournament: Tournament): Observable<Tournament> {
-    console.log(tournament);
     return this.http.post<Tournament>(this.url, tournament);
   }
 }

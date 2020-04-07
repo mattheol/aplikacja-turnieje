@@ -4,10 +4,8 @@
   text-align: center;
 }
 
-.button {
-  background-color: #9999;
+.tourButton {
+  background-color: #ffd740;
   font-size: 19px;
-  color: #000;
   text-transform: uppercase;
-  padding: 5px 5px 5px 5px;
 }

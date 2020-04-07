@@ -28,7 +28,7 @@ public class TournamentController {
     }
 
     @PostMapping("/tournaments")
-    public ResponseEntity<?> addUser(@RequestBody Tournament tournament) {
+    public ResponseEntity<?> addTournament(@RequestBody Tournament tournament) {
         Tournament tournament1 = tournamentService.addTournament(tournament);
         return new ResponseEntity<>(tournament1, HttpStatus.OK);
     }

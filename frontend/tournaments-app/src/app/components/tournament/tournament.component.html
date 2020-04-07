@@ -7,7 +7,7 @@
 
     <div *ngFor="let participantT of tournament.participants">
       {{
-        tournament.forTeams
+        tournament.isForTeams
           ? participantT.teamName
           : participantT.participant.firstName +
             " " +

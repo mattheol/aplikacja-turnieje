@@ -16,7 +16,7 @@ public class UserTournament {
         Tournament tour = pt.getTournament();
         this.id = tour.getId();
         this.name = tour.getName();
-        this.isForTeams = tour.getForTeams();
+        this.isForTeams = tour.getIsForTeams();
         this.teamName = pt.getTeamName();
     }
 
