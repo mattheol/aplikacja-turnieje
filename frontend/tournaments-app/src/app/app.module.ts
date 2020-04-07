@@ -33,6 +33,9 @@ import { MatOptionModule } from "@angular/material";
 import { MainComponent } from './components/main/main.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ToastrModule } from 'ngx-toastr';
+import { StartPageComponent } from './components/start-page/start-page.component';
+import { authInterceptorProviders } from './services/auth/auth-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import { ToastrModule } from 'ngx-toastr';
     RegisterFormComponent,
     TournamentFormComponent,
     MainComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    StartPageComponent
+
   ],
   imports: [
     HttpClientModule,
@@ -76,7 +81,7 @@ import { ToastrModule } from 'ngx-toastr';
     NgxMatNativeDateModule,
     ToastrModule.forRoot()
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: "pl-pl" }],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: "pl-pl" },authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

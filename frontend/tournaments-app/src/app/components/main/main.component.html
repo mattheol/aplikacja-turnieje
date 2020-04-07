@@ -1,12 +1,17 @@
-<button (click)="showLoginForm()" mat-raised-button color="primary" class="loginBtn">
+<button (click)="showLoginForm()" *ngIf="!isLoggedIn()" mat-raised-button color="primary" class="loginBtn">
   Zaloguj sie
 </button>
-<button (click)="showRegisterForm()" mat-raised-button color="primary" class="registerBtn">
+<button (click)="showRegisterForm()" *ngIf="!isLoggedIn()" mat-raised-button color="primary" class="registerBtn">
   Zarejestruj się
+</button>
+<button  *ngIf="isLoggedIn()" mat-raised-button color="primary" class="loginBtn">
+  {{tokenService.getUser()}}
+</button>
+<button (click)="logout()" *ngIf="isLoggedIn()" mat-raised-button color="primary" class="registerBtn">
+  Wyloguj się 
 </button>
 <app-register-form (onHide)="changeHide($event)" *ngIf="isActive"></app-register-form>
 <app-login-form (onHideLogin)="changeHideLogin($event)" *ngIf="isLoginActive"></app-login-form>
-
 <app-menu>
   <router-outlet></router-outlet>
 </app-menu>

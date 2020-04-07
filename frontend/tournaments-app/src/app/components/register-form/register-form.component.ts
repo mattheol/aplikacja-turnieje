@@ -14,6 +14,7 @@ import {
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: "app-register-form",
@@ -31,7 +32,7 @@ export class RegisterFormComponent implements OnInit {
 
   hide = true;
 
-  constructor(private fb: FormBuilder, private userService: UserService,
+  constructor(private authService: AuthenticationService,private fb: FormBuilder, private userService: UserService,
     private toastr: ToastrService) {}
 
   ngOnInit() {
@@ -50,8 +51,9 @@ export class RegisterFormComponent implements OnInit {
   formDirective: FormGroupDirective;
 
   submit(form: FormGroupDirective) {
-    this.userService
-      .postUser(
+    // this.userService
+    //   .postUser(
+      this.authService.register(
         new User(
           -1,
           null,
