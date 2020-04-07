@@ -12,8 +12,9 @@ export class Tournament {
     public numberOfPlayers: number,
     public description: string,
     public randomBracket: boolean,
+    public isForTeams:boolean,
     public tournamentType: string,
-    public enrollmentEnd: Date,
-    public isActive: boolean
+    public isActive: boolean,
+    public enrollmentEnd: Date
   ) {}
 }

@@ -1,6 +1,7 @@
 package com.zpi.app.services;
 
 import com.zpi.app.entities.Tournament;
+import com.zpi.app.entities.User;
 import com.zpi.app.repositories.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,7 @@ public class TournamentService {
         return tournamentOpt.get();
     }
 
-
+    public Tournament addTournament(Tournament tournament) {
+        return tournamentRepository.save(tournament);
+    }
 }
