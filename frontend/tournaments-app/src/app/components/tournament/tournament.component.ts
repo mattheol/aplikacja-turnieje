@@ -6,7 +6,7 @@ import { TournamentService } from "src/app/services/tournament.service";
 @Component({
   selector: "app-tournament",
   templateUrl: "./tournament.component.html",
-  styleUrls: ["./tournament.component.css"]
+  styleUrls: ["./tournament.component.css"],
 })
 export class TournamentComponent implements OnInit {
   tournament: Tournament;
@@ -23,8 +23,8 @@ export class TournamentComponent implements OnInit {
   }
 
   getTournament() {
-    this.tournamentService
-      .getTournament(this.id)
-      .subscribe(tournament => (this.tournament = tournament));
+    this.tournamentService.getTournament(this.id).subscribe((tournament) => {
+      this.tournament = tournament;
+    });
   }
 }

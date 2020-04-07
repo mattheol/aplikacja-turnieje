@@ -1,4 +1,18 @@
-<div class="tournamentStyle">
-  <h5>{{ tournament ? tournament.name : "" }}</h5>
-  <p>{{ tournament ? tournament.description : "" }}</p>
+<div *ngIf="tournament">
+  <div class="tournamentStyle">
+    <h5>{{ tournament.name }}</h5>
+    <p>{{ tournament.description }}</p>
+
+    <h6>Uczestnicy:</h6>
+
+    <div *ngFor="let participantT of tournament.participants">
+      {{
+        tournament.forTeams
+          ? participantT.teamName
+          : participantT.participant.firstName +
+            " " +
+            participantT.participant.lastName
+      }}
+    </div>
+  </div>
 </div>

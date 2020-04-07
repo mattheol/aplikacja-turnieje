@@ -14,13 +14,11 @@ public class ParticipantTournament {
     private String teamName;
 
     @ManyToOne
-    @JsonIgnore
     @MapsId("participantId")
     private User participant;
 
 
     @ManyToOne
-    @JsonIgnore
     @MapsId("tournamentId")
     private Tournament tournament;
 
