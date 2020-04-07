@@ -1,5 +1,28 @@
-<div *ngIf="tournament">
+<div *ngIf="tournament" style="min-height: 100%;">
   <div class="tournamentStyle">
+    <div *ngIf="!isUserEnrolled" class="enrollContainer">
+      <div *ngIf="isForTeams" style="display: inline;">
+        <mat-form-field class="teamInput">
+          <input
+            matInput
+            [(ngModel)]="teamName"
+            name="teamName"
+            color="accent"
+            required
+            autocomplete="off"
+          />
+          <mat-placeholder class="placeholder">Nazwa drużyny</mat-placeholder>
+        </mat-form-field>
+      </div>
+      <button
+        (click)="enrollUser()"
+        class="enrollBtn"
+        mat-raised-button
+        color="primary"
+      >
+        Dołącz
+      </button>
+    </div>
     <h5>{{ tournament.name }}</h5>
     <p>{{ tournament.description }}</p>
 

@@ -24,11 +24,9 @@ export class MyTournamentsComponent implements OnInit {
 
   getUser() {
     let login = this.tokenStorageService.getUser();
-    this.userService.getUsers().subscribe((users) => {
-      this.userService
-        .getUserTournaments(login)
-        .subscribe((tournaments) => (this.tournaments = tournaments));
-    });
+    this.userService
+      .getUserTournaments(login)
+      .subscribe((tournaments) => (this.tournaments = tournaments));
   }
 
   redirectToTournament(id: Number) {

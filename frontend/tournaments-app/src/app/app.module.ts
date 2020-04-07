@@ -11,7 +11,11 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TournamentComponent } from "./components/tournament/tournament.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
-import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker'
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatTimepickerModule,
+  NgxMatNativeDateModule,
+} from "@angular-material-components/datetime-picker";
 
 import {
   MatFormFieldModule,
@@ -21,7 +25,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MAT_DATE_LOCALE,
-  MatButtonModule
+  MatButtonModule,
 } from "@angular/material";
 
 import { TournamentFormComponent } from "./components/tournament-form/tournament-form.component";
@@ -30,13 +34,14 @@ import { MatCardModule } from "@angular/material";
 import { MatCheckboxModule } from "@angular/material";
 import { MatSelectModule } from "@angular/material";
 import { MatOptionModule } from "@angular/material";
-import { MainComponent } from './components/main/main.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { ToastrModule } from 'ngx-toastr';
-import { StartPageComponent } from './components/start-page/start-page.component';
-import { authInterceptorProviders } from './services/auth/auth-interceptor.service';
+import { MainComponent } from "./components/main/main.component";
+import { LoginFormComponent } from "./components/login-form/login-form.component";
+import { ToastrModule } from "ngx-toastr";
+import { StartPageComponent } from "./components/start-page/start-page.component";
+import { authInterceptorProviders } from "./services/auth/auth-interceptor.service";
+import { FormsModule } from "@angular/forms";
 
-import { MyTournamentsComponent } from './components/my-tournaments/my-tournaments.component';
+import { MyTournamentsComponent } from "./components/my-tournaments/my-tournaments.component";
 
 @NgModule({
   declarations: [
@@ -50,12 +55,13 @@ import { MyTournamentsComponent } from './components/my-tournaments/my-tournamen
     MainComponent,
     LoginFormComponent,
     StartPageComponent,
-    MyTournamentsComponent
+    MyTournamentsComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     MatTabsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -73,9 +79,12 @@ import { MyTournamentsComponent } from './components/my-tournaments/my-tournamen
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: "pl-pl" },authInterceptorProviders],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: "pl-pl" },
+    authInterceptorProviders,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
