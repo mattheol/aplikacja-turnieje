@@ -19,17 +19,11 @@ export class UserService {
     // .pipe(tap((_) => console.log("fetched users")));
   }
 
-  getUserTournaments(id: Number): Observable<TournamentDTO[]> {
-    return this.http.get<TournamentDTO[]>(`${this.url}/${id}/tournaments`);
+  getUserTournaments(login: String): Observable<TournamentDTO[]> {
+    return this.http.get<TournamentDTO[]>(`${this.url}/${login}/tournaments`);
   }
 
   postUser(user: User): Observable<User> {
     return this.http.post<User>(this.url, user);
-  }
-
-  authenticate(user: User): Observable<any> {
-    return this.http.post(environment.basicUrl + "/authenticate", user, {
-      responseType: "text",
-    });
   }
 }

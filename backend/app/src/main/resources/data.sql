@@ -1,16 +1,16 @@
-# drop table invitations;
-# drop table tournaments_organizers;
-# drop table matches_participants;
-# drop table tournaments_participants;
-# drop table users;
-# drop table matches;
-# drop table tournaments;
+drop table invitations;
+drop table tournaments_organizers;
+drop table matches_participants;
+drop table tournaments_participants;
+drop table users;
+drop table matches;
+drop table tournaments;
 
+SELECT * FROM tournaments_participants;
 INSERT INTO users (id, first_name,last_name,gender,birthday,email,login,password)
        VALUES (1,'Jan','Kowalski','M','2000-01-21','jk@wp.pl',null,null),
               (2,'Monika','Nowak','F','2001-03-01','mk@wp.pl',null,null),
-              (3,'Kamil','Głuś','M','2001-03-01','kg@wp.pl',null,null),
-              (4,'Kamil','Slimak','M','2001-03-01','user@user.pl','user','$2a$10$pBJu/WLMmrnVm7hxK2imAeLoZ0H43oL26G9jY3yc0Dm0ksRGHr4/q');
+              (3,'Kamil','Głuś','M','2001-03-01','kg@wp.pl',null,null);
 
 INSERT INTO tournaments (id,name,tournament_type,is_private,is_for_teams,number_of_players,random_bracket, enrollment_end,description)
        VALUES (1,'Turniej 1','LEAGUE',false,false,10,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.'),
@@ -32,9 +32,9 @@ INSERT INTO tournaments_organizers (tournament_id,organizer_id)
 INSERT INTO tournaments_participants (tournament_id,participant_id, team_name)
 VALUES (1,2,null),
        (1,3,null),
-       (2,1,"borsuki"),
-       (2,2,"niedźwiedzie");
-              
-
-
+       (2,1,"borsuki");
+       
+SELECT * from tournaments_participants;
+select * from users;
+delete  from tournaments where id>4;
 

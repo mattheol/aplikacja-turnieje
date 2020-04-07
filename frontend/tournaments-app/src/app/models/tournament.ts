@@ -13,7 +13,7 @@ export class Tournament {
     public numberOfPlayers: number,
     public description: string,
     public randomBracket: boolean,
-    public isForTeams:boolean,
+    public isForTeams: boolean,
     public tournamentType: string,
     public isActive: boolean,
     public enrollmentEnd: Date
@@ -25,6 +25,7 @@ export class TournamentDTO {
     public id: Number,
     public name: String,
     public isForTeam: boolean,
-    public teamName: String
+    public teamName: String,
+    public description: String
   ) {}
 }
