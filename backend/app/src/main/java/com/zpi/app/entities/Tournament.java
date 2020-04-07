@@ -2,6 +2,7 @@ package com.zpi.app.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class Tournament {
     @OneToMany(mappedBy = "tournament",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
+    @JsonIgnoreProperties("tournament")
     private List<ParticipantTournament> participants;
 
     @JsonIgnore

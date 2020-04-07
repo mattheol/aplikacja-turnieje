@@ -1,11 +1,27 @@
-<button (click)="showLoginForm()" mat-raised-button color="primary" class="loginBtn">
-  Zaloguj sie
+<button
+  (click)="showLoginForm()"
+  mat-raised-button
+  color="primary"
+  class="loginBtn"
+>
+  Zaloguj się
 </button>
-<button (click)="showRegisterForm()" mat-raised-button color="primary" class="registerBtn">
+<button
+  (click)="showRegisterForm()"
+  mat-raised-button
+  color="primary"
+  class="registerBtn"
+>
   Zarejestruj się
 </button>
-<app-register-form (onHide)="changeHide($event)" *ngIf="isActive"></app-register-form>
-<app-login-form (onHideLogin)="changeHideLogin($event)" *ngIf="isLoginActive"></app-login-form>
+<app-register-form
+  (onHide)="changeHide($event)"
+  *ngIf="isActive"
+></app-register-form>
+<app-login-form
+  (onHideLogin)="changeHideLogin($event)"
+  *ngIf="isLoginActive"
+></app-login-form>
 
 <app-menu>
   <router-outlet></router-outlet>

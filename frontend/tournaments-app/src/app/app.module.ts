@@ -33,6 +33,7 @@ import { MatOptionModule } from "@angular/material";
 import { MainComponent } from './components/main/main.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ToastrModule } from 'ngx-toastr';
+import { MyTournamentsComponent } from './components/my-tournaments/my-tournaments.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ToastrModule } from 'ngx-toastr';
     RegisterFormComponent,
     TournamentFormComponent,
     MainComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    MyTournamentsComponent
   ],
   imports: [
     HttpClientModule,
