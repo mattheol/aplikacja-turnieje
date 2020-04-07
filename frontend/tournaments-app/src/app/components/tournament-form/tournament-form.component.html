@@ -57,7 +57,7 @@
 
       <mat-form-field style="width: 80%;">
         <mat-label>Wybierz datę końca zapisów</mat-label>
-        <input matInput [ngxMatDatetimePicker]="picker" required formControlName="enrollmentEnd" />
+        <input [min]="minDate" matInput [ngxMatDatetimePicker]="picker" required formControlName="enrollmentEnd"/>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <ngx-mat-datetime-picker #picker type="datetime"></ngx-mat-datetime-picker>
         <mat-error *ngIf="enrollmentEndInput.errors?.required && enrollmentEndInput.touched">
@@ -82,8 +82,10 @@
       </mat-form-field>
       <br />
 
-      <mat-checkbox id="random" formControlName="randomBracket" style="padding-right: 15px;">Losowowe spotkania</mat-checkbox>
-      <mat-checkbox id="teams" formControlName="isForTeams">Rozgrywki drużynowe</mat-checkbox>
+      <mat-checkbox id="random" formControlName="randomBracket" style="padding-right: 15px;"
+          value="checked" (click)="changeValueRandom(checked)"
+          >Losowowe spotkania</mat-checkbox>
+      <mat-checkbox id="teams" formControlName="isForTeams" value="checked" (click)="changeValueTeams(checked)">Rozgrywki drużynowe</mat-checkbox>
       <br /><br />
       <button mat-raised-button class="button" [disabled]="myForm.invalid" style="font-size: x-large;">
         Stwórz turniej

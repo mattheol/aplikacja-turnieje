@@ -16,6 +16,12 @@ export class TournamentFormComponent implements OnInit {
     this.onHide.emit(true);
   }
   
+  RandomBracketchecked: boolean = false;
+  Teamschecked: boolean = false;
+  minDate = new Date();
+  
+
+
   myForm: FormGroup;
   constructor(private fb: FormBuilder, private tournamentService: TournamentService,
     private toastr: ToastrService) { }
@@ -28,8 +34,8 @@ export class TournamentFormComponent implements OnInit {
       enrollmentEnd: [ [Validators.required]],
       isPrivate: ["", [Validators.required]],
       type: ["", [Validators.required]],
-      randomBracket: Boolean,
-      isForTeams:Boolean
+      randomBracket: "",
+      isForTeams:""
     });
   }
 
@@ -48,8 +54,8 @@ export class TournamentFormComponent implements OnInit {
           this.isPrivateInput.value,
           this.numberOfPlayersInput.value,
           this.descriptionInput.value,
-          this.randomBracketInput.value,
-          this.isForTeamsInput.value,
+          this.randomBracketInput,
+          this.isForTeamsInput,
           this.typeInput.value,
           null,
           new Date(this.enrollmentEndInput.value),
@@ -72,6 +78,9 @@ export class TournamentFormComponent implements OnInit {
     return this.myForm.get("description");
   }
   get enrollmentEndInput() {
+    var date = new Date(this.myForm.get("enrollmentEnd").value);
+    date.setSeconds(0);
+    this.myForm.get("enrollmentEnd").setValue(date);
     return this.myForm.get("enrollmentEnd");
   }
   get typeInput() {
@@ -81,12 +90,22 @@ export class TournamentFormComponent implements OnInit {
     return this.myForm.get("isPrivate");
   }
   get randomBracketInput() {
-    return this.myForm.get("randomBracket");
+    return this.RandomBracketchecked;
   }
   get isForTeamsInput() {
-    return this.myForm.get("isForTeams");
+    return this.Teamschecked;
   }
   get numberOfPlayersInput() {
     return this.myForm.get("numberOfPlayers");
   }
+
+  
+  changeValueRandom(value) {
+    this.RandomBracketchecked = !value;
+}
+
+changeValueTeams(value) {
+  this.Teamschecked = !value;
+}
+
 }
