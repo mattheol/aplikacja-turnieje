@@ -3,6 +3,7 @@ import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
 import { TournamentDTO } from "src/app/models/tournament";
 import { Router } from "@angular/router";
+import { TokenStorageService } from "src/app/services/auth/token-storage.service";
 
 @Component({
   selector: "app-my-tournaments",
@@ -10,21 +11,22 @@ import { Router } from "@angular/router";
   styleUrls: ["./my-tournaments.component.css"],
 })
 export class MyTournamentsComponent implements OnInit {
-  private userId: Number;
   private tournaments: TournamentDTO[];
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private tokenStorageService: TokenStorageService
+  ) {}
 
   ngOnInit() {
     this.getUser();
   }
 
   getUser() {
-    this.userService.getUsers().subscribe((users) => {
-      this.userId = users[1].id;
-      this.userService
-        .getUserTournaments(this.userId)
-        .subscribe((tournaments) => (this.tournaments = tournaments));
-    });
+    let login = this.tokenStorageService.getUser();
+    this.userService
+      .getUserTournaments(login)
+      .subscribe((tournaments) => (this.tournaments = tournaments));
   }
 
   redirectToTournament(id: Number) {

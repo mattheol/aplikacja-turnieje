@@ -64,9 +64,9 @@ public class UserController {
 
     }
 
-    @GetMapping("/users/{id}/tournaments")
-    public List<UserTournament> getAllUserTournaments(@PathVariable Integer id){
-        return userService.getAllUserTournaments(id);
+    @GetMapping("/users/{login}/tournaments")
+    public List<UserTournament> getAllUserTournaments(@PathVariable String login){
+        return userService.getAllUserTournaments(login);
     }
 
 }

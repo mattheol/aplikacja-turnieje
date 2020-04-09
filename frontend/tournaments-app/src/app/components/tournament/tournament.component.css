@@ -1,5 +1,28 @@
 .tournamentStyle {
-  display: grid;
-  color: white;
   padding-left: 10px;
+  position: relative;
+  color: white;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.enrollBtn {
+  background-color: #ff5722;
+  text-transform: uppercase;
+}
+
+.enrollContainer {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+
+.placeholder {
+  color: rgb(233, 227, 227);
+}
+
+.teamInput {
+  margin-right: 10px;
 }

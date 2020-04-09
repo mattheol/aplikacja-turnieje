@@ -9,6 +9,7 @@ public class UserTournament {
     private String name;
     private Boolean isForTeams;
     private String teamName;
+    private String description;
 
 
 
@@ -18,8 +19,16 @@ public class UserTournament {
         this.name = tour.getName();
         this.isForTeams = tour.getIsForTeams();
         this.teamName = pt.getTeamName();
+        this.description = tour.getDescription();
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
     public Integer getId() {
         return id;
     }

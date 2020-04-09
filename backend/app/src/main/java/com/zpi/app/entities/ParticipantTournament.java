@@ -17,7 +17,7 @@ public class ParticipantTournament {
     @MapsId("participantId")
     private User participant;
 
-
+    @JsonIgnore
     @ManyToOne
     @MapsId("tournamentId")
     private Tournament tournament;

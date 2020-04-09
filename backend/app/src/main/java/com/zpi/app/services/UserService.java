@@ -26,8 +26,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public List<UserTournament> getAllUserTournaments(Integer id){
-        User user = getById(id);
+    public List<UserTournament> getAllUserTournaments(String login){
+        User user = findByLogin(login);
         List<ParticipantTournament> pt = user.getParticipatedTournaments() ;
         List<UserTournament> list = new ArrayList<>();
         for(ParticipantTournament p: pt){
@@ -36,8 +36,8 @@ public class UserService {
         return list;
     }
 
-    public User getById(Integer userId){
-        return userRepository.findById(userId).get();
+    public User findByLogin(String login){
+        return userRepository.findByLogin(login).get();
     }
 
 }
