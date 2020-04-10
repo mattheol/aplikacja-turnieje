@@ -1,10 +1,25 @@
 <ul class="gridWrapper">
   <div *ngFor="let tournament of tournaments">
-    <div class="gridItem" [routerLink]="['/turnieje', tournament.id]">
+    <div
+      class="gridItem"
+      [routerLink]="['/turnieje', tournament.id]"
+      [ngStyle]="{
+        'background-image': 'url(../../../assets/_61616161616.png)',
+        'background-repeat': 'no-repeat',
+        'background-size': '100% 100%'
+      }"
+    >
       <h4 class="tourHeader" style="text-align: center;">
         {{ tournament.name }}
       </h4>
-      <p class="tourContent">
+      <p
+        class="tourContent"
+        [ngStyle]="{
+          'background-image': 'url(../../../assets/_8181818181818.png)',
+          'background-repeat': 'no-repeat',
+          'background-size': '100% 100%'
+        }"
+      >
         {{ tournament.description }}
       </p>
     </div>

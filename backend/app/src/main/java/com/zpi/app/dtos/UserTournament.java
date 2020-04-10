@@ -22,6 +22,13 @@ public class UserTournament {
         this.description = tour.getDescription();
     }
 
+    public UserTournament(Tournament tournament){
+        this.id = tournament.getId();
+        this.name = tournament.getName();
+        this.isForTeams = tournament.getIsForTeams();
+        this.description = tournament.getDescription();
+    }
+
     public String getDescription() {
         return description;
     }

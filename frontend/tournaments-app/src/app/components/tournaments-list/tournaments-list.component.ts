@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Tournament } from "src/app/models/tournament";
+import { TournamentDTO } from "src/app/models/tournament";
 import { TournamentService } from "src/app/services/tournament.service";
 
 @Component({
@@ -8,7 +8,7 @@ import { TournamentService } from "src/app/services/tournament.service";
   styleUrls: ["./tournaments-list.component.css"],
 })
 export class TournamentsListComponent implements OnInit {
-  tournaments: Tournament[];
+  tournaments: TournamentDTO[];
   constructor(private tournamentService: TournamentService) {}
 
   ngOnInit() {

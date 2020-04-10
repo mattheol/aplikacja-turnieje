@@ -23,6 +23,8 @@ INSERT INTO matches (id,comment,score,stage,start_time,tournament_id)
               (2,'Mecz o wszystko',null,null ,'2020-05-05 20:00' ,1),
               (3,'Mecz o honor',null,null ,'2020-04-07 9:30' ,1);
 
+INSERT INTO matches_participants VALUES (1,2), (1,3);
+
 INSERT INTO invitations (id,invitation_message, invitation_time,organizer_id,participant_id,tournament_id)
        VALUES (1,'Zapraszam cię na turniej.',null,1,2,1 );
 
@@ -32,9 +34,10 @@ INSERT INTO tournaments_organizers (tournament_id,organizer_id)
 INSERT INTO tournaments_participants (tournament_id,participant_id, team_name)
 VALUES (1,2,null),
        (1,3,null),
-       (2,1,"borsuki");
+       (2,1,"Borsuki"),
+       (2,2,"Wilki");
        
 SELECT * from tournaments_participants;
 select * from users;
-delete  from tournaments where id>4;
+delete  from tournaments where id=5;
 

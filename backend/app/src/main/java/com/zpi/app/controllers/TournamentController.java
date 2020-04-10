@@ -1,15 +1,14 @@
 package com.zpi.app.controllers;
 
-import com.zpi.app.entities.ParticipantTournament;
-import com.zpi.app.entities.ParticipantTournamentID;
-import com.zpi.app.entities.Tournament;
-import com.zpi.app.entities.User;
+import com.zpi.app.dtos.UserTournament;
+import com.zpi.app.entities.*;
 import com.zpi.app.services.TournamentService;
 import com.zpi.app.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,8 +24,13 @@ public class TournamentController {
 
 
     @GetMapping("/tournaments")
-    public List<Tournament> getAllTournaments(){
-        return tournamentService.getAllTournaments();
+    public List<UserTournament> getAllTournaments(){
+        List<Tournament> tournaments = tournamentService.getAllTournaments();
+        List<UserTournament> list = new ArrayList<>();
+        for(Tournament tour : tournaments){
+            list.add(new UserTournament(tour));
+        }
+        return list;
 
     }
 
@@ -35,11 +39,19 @@ public class TournamentController {
         return tournamentService.getTournament(id);
     }
 
+
+    @GetMapping("tournaments/{id}/matches")
+    public ResponseEntity<?> getMatchesByTournamentId(@PathVariable Integer id){
+        Tournament tournament = tournamentService.getTournament(id);
+        return new ResponseEntity<>(tournament.getMatches(),HttpStatus.OK);
+    }
+
     @PostMapping("/tournaments")
     public ResponseEntity<?> addTournament(@RequestBody Tournament tournament) {
         Tournament tournament1 = tournamentService.addTournament(tournament);
         return new ResponseEntity<>(tournament1, HttpStatus.OK);
     }
+
 
     @PostMapping("/enroll")
     public ResponseEntity<?> enrollUserToTournament(@RequestParam("login") String login, @RequestParam("idTour") Integer idTour,

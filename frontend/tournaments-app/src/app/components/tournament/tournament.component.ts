@@ -19,7 +19,7 @@ export class TournamentComponent implements OnInit {
   isForTeams: boolean;
 
   constructor(
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
     private tournamentService: TournamentService,
     private tokenStorageService: TokenStorageService,
     private toastr: ToastrService
@@ -27,7 +27,7 @@ export class TournamentComponent implements OnInit {
 
   ngOnInit() {
     this.isUserEnrolled = true;
-    this.id = this.router.snapshot.params["id"];
+    this.id = this.route.snapshot.params["id"];
     this.userLogin = this.tokenStorageService.getUser();
     this.getTournament();
   }

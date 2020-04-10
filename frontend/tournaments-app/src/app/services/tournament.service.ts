@@ -1,8 +1,9 @@
-import { Tournament } from "./../models/tournament";
+import { Tournament, TournamentDTO } from "./../models/tournament";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Match } from "../models/match";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" }),
@@ -16,8 +17,8 @@ export class TournamentService {
 
   constructor(private http: HttpClient) {}
 
-  getTournaments(): Observable<Tournament[]> {
-    return this.http.get<Tournament[]>(this.url, httpOptions);
+  getTournaments(): Observable<TournamentDTO[]> {
+    return this.http.get<TournamentDTO[]>(this.url, httpOptions);
   }
 
   getTournament(id: Number): Observable<Tournament> {
@@ -25,6 +26,10 @@ export class TournamentService {
   }
   postTournament(tournament: Tournament): Observable<Tournament> {
     return this.http.post<Tournament>(this.url, tournament);
+  }
+
+  getTournamentMatches(id: Number): Observable<Match[]> {
+    return this.http.get<Match[]>(`${this.url}/${id}/matches`, httpOptions);
   }
 
   enrollUserToTournament(
