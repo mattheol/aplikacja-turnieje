@@ -1,5 +1,6 @@
 package com.zpi.app.services;
 
+import com.zpi.app.entities.Match;
 import com.zpi.app.entities.ParticipantTournament;
 import com.zpi.app.entities.Tournament;
 
@@ -21,8 +22,10 @@ public class TournamentService {
     }
 
     public List<Tournament> getAllTournaments(){
-        return tournamentRepository.findAll();
+        List<Tournament> tournaments= tournamentRepository.findAll();
+        return tournaments;
     }
+
 
     public Tournament getTournament(Integer id){
         Optional<Tournament> tournamentOpt = tournamentRepository.findById(id);

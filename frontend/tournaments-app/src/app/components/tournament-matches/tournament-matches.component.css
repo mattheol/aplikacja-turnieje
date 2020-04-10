@@ -1,0 +1,15 @@
+.match {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  background-color: rgba(0, 0, 0, 0.623);
+  justify-content: space-between;
+  margin: 5px;
+  padding: 5px 10px;
+}
+
+.leftParticipant {
+}
+
+.rightParticipant {
+}

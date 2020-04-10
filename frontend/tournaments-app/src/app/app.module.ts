@@ -42,6 +42,7 @@ import { authInterceptorProviders } from "./services/auth/auth-interceptor.servi
 import { FormsModule } from "@angular/forms";
 
 import { MyTournamentsComponent } from "./components/my-tournaments/my-tournaments.component";
+import { TournamentMatchesComponent } from './components/tournament-matches/tournament-matches.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { MyTournamentsComponent } from "./components/my-tournaments/my-tournamen
     LoginFormComponent,
     StartPageComponent,
     MyTournamentsComponent,
+    TournamentMatchesComponent,
   ],
   imports: [
     HttpClientModule,
