@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -29,11 +30,11 @@ public class UserService {
     public List<UserTournament> getAllUserTournaments(String login){
         User user = findByLogin(login);
         List<ParticipantTournament> pt = user.getParticipatedTournaments() ;
-        List<UserTournament> list = new ArrayList<>();
-        for(ParticipantTournament p: pt){
-            list.add(new UserTournament(p));
-        }
-        return list;
+//        List<UserTournament> list = new ArrayList<>();
+//        for(ParticipantTournament p: pt){
+//            list.add(new UserTournament(p));
+//        }
+        return pt.stream().map(UserTournament::new).collect(Collectors.toList());
     }
 
     public User findByLogin(String login){

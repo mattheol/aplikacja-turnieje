@@ -10,27 +10,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class TournamentController {
     private final TournamentService tournamentService;
-    private final UserService userService;
 
-    public TournamentController(TournamentService tournamentService, UserService userService) {
+
+    public TournamentController(TournamentService tournamentService) {
         this.tournamentService = tournamentService;
-        this.userService = userService;
+
     }
 
 
     @GetMapping("/tournaments")
     public List<UserTournament> getAllTournaments(){
         List<Tournament> tournaments = tournamentService.getAllTournaments();
-        List<UserTournament> list = new ArrayList<>();
-        for(Tournament tour : tournaments){
-            list.add(new UserTournament(tour));
-        }
-        return list;
+//        List<UserTournament> list = new ArrayList<>();
+//        for(Tournament tour : tournaments){
+//            list.add(new UserTournament(tour));
+//        }
+        return tournaments.stream().map(UserTournament::new).collect(Collectors.toList());
 
     }
 
@@ -56,17 +57,7 @@ public class TournamentController {
     @PostMapping("/enroll")
     public ResponseEntity<?> enrollUserToTournament(@RequestParam("login") String login, @RequestParam("idTour") Integer idTour,
                                                     @RequestParam("teamName") String teamName){
-        User user= this.userService.findByLogin(login);
-
-        ParticipantTournamentID participantTournamentID = new ParticipantTournamentID();
-        participantTournamentID.setParticipantId(user.getId());
-        participantTournamentID.setTournamentId(idTour);
-        ParticipantTournament participantTournament = new ParticipantTournament();
-        participantTournament.setParticipantTournamentID(participantTournamentID);
-        participantTournament.setParticipant(user);
-        participantTournament.setTournament(tournamentService.getTournament(idTour));
-        participantTournament.setTeamName(teamName);
-        this.tournamentService.saveUserToTournament(participantTournament);
+        tournamentService.enrollUserToTournament(login, idTour, teamName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
