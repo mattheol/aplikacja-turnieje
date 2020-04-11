@@ -2,6 +2,7 @@ package com.zpi.app.controllers;
 
 import com.zpi.app.dtos.UserTournament;
 import com.zpi.app.entities.*;
+import com.zpi.app.security.JwtTokenUtil;
 import com.zpi.app.services.TournamentService;
 import com.zpi.app.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -16,23 +17,19 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 public class TournamentController {
     private final TournamentService tournamentService;
+    private final JwtTokenUtil jwtTokenUtil;
 
-
-    public TournamentController(TournamentService tournamentService) {
+    public TournamentController(TournamentService tournamentService, JwtTokenUtil jwtTokenUtil) {
         this.tournamentService = tournamentService;
-
+        this.jwtTokenUtil = jwtTokenUtil;
     }
-
 
     @GetMapping("/tournaments")
     public List<UserTournament> getAllTournaments(){
         List<Tournament> tournaments = tournamentService.getAllTournaments();
-//        List<UserTournament> list = new ArrayList<>();
-//        for(Tournament tour : tournaments){
-//            list.add(new UserTournament(tour));
-//        }
-        return tournaments.stream().map(UserTournament::new).collect(Collectors.toList());
-
+        return tournaments.stream()
+                .map(UserTournament::new)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/tournaments/{id}")
@@ -55,9 +52,9 @@ public class TournamentController {
 
 
     @PostMapping("/enroll")
-    public ResponseEntity<?> enrollUserToTournament(@RequestParam("login") String login, @RequestParam("idTour") Integer idTour,
+    public ResponseEntity<?> enrollUserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestParam("idTour") Integer idTour,
                                                     @RequestParam("teamName") String teamName){
-        tournamentService.enrollUserToTournament(login, idTour, teamName);
+        tournamentService.enrollUserToTournament(jwtTokenUtil.getLoginFromHeader(authorizationHeader), idTour, teamName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

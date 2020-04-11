@@ -20,7 +20,7 @@ export class UserService {
   }
 
   getUserTournaments(login: String): Observable<TournamentDTO[]> {
-    return this.http.get<TournamentDTO[]>(`${this.url}/${login}/tournaments`);
+    return this.http.get<TournamentDTO[]>(`${environment.basicUrl}/my-tournaments`);
   }
 
   postUser(user: User): Observable<User> {

@@ -30,11 +30,9 @@ public class UserService {
     public List<UserTournament> getAllUserTournaments(String login){
         User user = findByLogin(login);
         List<ParticipantTournament> pt = user.getParticipatedTournaments() ;
-//        List<UserTournament> list = new ArrayList<>();
-//        for(ParticipantTournament p: pt){
-//            list.add(new UserTournament(p));
-//        }
-        return pt.stream().map(UserTournament::new).collect(Collectors.toList());
+        return pt.stream()
+                .map(UserTournament::new)
+                .collect(Collectors.toList());
     }
 
     public User findByLogin(String login){

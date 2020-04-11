@@ -64,9 +64,9 @@ public class UserController {
 
     }
 
-    @GetMapping("/users/{login}/tournaments")
-    public List<UserTournament> getAllUserTournaments(@PathVariable String login){
-        return userService.getAllUserTournaments(login);
+    @GetMapping("/my-tournaments")
+    public List<UserTournament> getAllUserTournaments(@RequestHeader("Authorization") String authorizationHeader){
+        return userService.getAllUserTournaments(jwtTokenUtil.getLoginFromHeader(authorizationHeader));
     }
 
 }
