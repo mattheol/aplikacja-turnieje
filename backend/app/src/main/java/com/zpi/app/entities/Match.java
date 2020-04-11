@@ -24,6 +24,8 @@ public class Match {
     @JsonIgnore
     private Tournament tournament;
 
+    private Integer winnerId;
+
     private String score;
 
     private String comment;
@@ -86,5 +88,13 @@ public class Match {
 
     public void setStage(String stage) {
         this.stage = stage;
+    }
+
+    public Integer getWinnerId() {
+        return winnerId;
+    }
+
+    public void setWinnerId(Integer winnerId) {
+        this.winnerId = winnerId;
     }
 }

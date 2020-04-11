@@ -2,6 +2,7 @@
   <ul class="nav">
     <li *ngIf="isLoggedIn()" class="navItem"><a routerLink="/turnieje">Przeglądaj turnieje</a></li>
     <li *ngIf="isLoggedIn()" class="navItem"><a routerLink="/moje-turnieje">Moje turnieje</a></li>
+    <li *ngIf="isLoggedIn()" class="navItem"><a routerLink="/moje-mecze">Moje Mecze</a></li>
   </ul>
   <div class="contentContainer">
     <ng-content></ng-content>

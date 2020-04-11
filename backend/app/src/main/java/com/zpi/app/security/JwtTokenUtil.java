@@ -29,7 +29,6 @@ public class JwtTokenUtil implements Serializable {
     public String getLoginFromHeader(String authorizationHeader){
         String jwtToken = authorizationHeader.substring(7);
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(jwtToken).getBody();
-        System.out.println(claims.getSubject());
         return claims.getSubject();
     }
     //retrieve expiration date from jwt token

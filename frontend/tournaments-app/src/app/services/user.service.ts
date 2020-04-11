@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { User } from "../models/user";
 import { tap } from "rxjs/operators";
 import { TournamentDTO } from "../models/tournament";
+import { Match } from '../models/match';
 
 @Injectable({
   providedIn: "root",
@@ -19,8 +20,12 @@ export class UserService {
     // .pipe(tap((_) => console.log("fetched users")));
   }
 
-  getUserTournaments(login: String): Observable<TournamentDTO[]> {
+  getUserTournaments(): Observable<TournamentDTO[]> {
     return this.http.get<TournamentDTO[]>(`${environment.basicUrl}/my-tournaments`);
+  }
+
+  getUserMatches(): Observable<Match[]> {
+    return this.http.get<Match[]>(`${environment.basicUrl}/my-matches`);
   }
 
   postUser(user: User): Observable<User> {

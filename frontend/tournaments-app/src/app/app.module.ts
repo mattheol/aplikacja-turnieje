@@ -42,6 +42,8 @@ import { FormsModule } from "@angular/forms";
 
 import { MyTournamentsComponent } from "./components/my-tournaments/my-tournaments.component";
 import { TournamentMatchesComponent } from './components/tournament-matches/tournament-matches.component';
+import { MyMatchesComponent } from './components/my-matches/my-matches.component';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { TournamentMatchesComponent } from './components/tournament-matches/tour
     StartPageComponent,
     MyTournamentsComponent,
     TournamentMatchesComponent,
+    MyMatchesComponent,
+
   ],
   imports: [
     HttpClientModule,

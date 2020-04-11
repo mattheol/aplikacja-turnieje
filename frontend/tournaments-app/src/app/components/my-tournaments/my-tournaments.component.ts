@@ -3,7 +3,7 @@ import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
 import { TournamentDTO } from "src/app/models/tournament";
 import { Router } from "@angular/router";
-import { TokenStorageService } from "src/app/services/auth/token-storage.service";
+
 
 @Component({
   selector: "app-my-tournaments",
@@ -14,18 +14,16 @@ export class MyTournamentsComponent implements OnInit {
   private tournaments: TournamentDTO[];
   constructor(
     private userService: UserService,
-    private router: Router,
-    private tokenStorageService: TokenStorageService
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.getUser();
+    this.getUserTournaments();
   }
 
-  getUser() {
-    let login = this.tokenStorageService.getUser();
+  getUserTournaments() {
     this.userService
-      .getUserTournaments(login)
+      .getUserTournaments()
       .subscribe((tournaments) => (this.tournaments = tournaments));
   }
 
