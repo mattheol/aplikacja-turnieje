@@ -19,14 +19,22 @@ public class JwtTokenUtil implements Serializable {
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
     @Value("${jwt.secret}")
-    private String secret;
+    private  String secret;
+
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
+
+    public String getLoginFromHeader(String authorizationHeader){
+        String jwtToken = authorizationHeader.substring(7);
+        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(jwtToken).getBody();
+        return claims.getSubject();
+    }
     //retrieve expiration date from jwt token
     public Date getExpirationDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getExpiration);
+//        return getClaimFromToken(token, Claims::getExpiration);
+        return getClaimFromToken(token, claims ->  claims.getExpiration());
     }
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);

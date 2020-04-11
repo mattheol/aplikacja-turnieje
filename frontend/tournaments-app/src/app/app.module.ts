@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
-import { TestowyComponent } from "./components/testowy/testowy.component";
 import { HttpClientModule } from "@angular/common/http";
 import { TournamentsListComponent } from "./components/tournaments-list/tournaments-list.component";
 import { MenuComponent } from "./components/menu/menu.component";
@@ -43,11 +42,12 @@ import { FormsModule } from "@angular/forms";
 
 import { MyTournamentsComponent } from "./components/my-tournaments/my-tournaments.component";
 import { TournamentMatchesComponent } from './components/tournament-matches/tournament-matches.component';
+import { MyMatchesComponent } from './components/my-matches/my-matches.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestowyComponent,
     TournamentsListComponent,
     MenuComponent,
     TournamentComponent,
@@ -58,6 +58,8 @@ import { TournamentMatchesComponent } from './components/tournament-matches/tour
     StartPageComponent,
     MyTournamentsComponent,
     TournamentMatchesComponent,
+    MyMatchesComponent,
+
   ],
   imports: [
     HttpClientModule,

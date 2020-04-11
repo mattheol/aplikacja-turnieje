@@ -38,7 +38,6 @@ export class TournamentService {
     teamName: string
   ): Observable<void> {
     const params = new HttpParams()
-      .set("login", login)
       .set("idTour", idTour.toString())
       .set("teamName", teamName);
 

@@ -1,0 +1,29 @@
+.itemWrapper {
+    width: 80%;
+    margin: 5px;
+    position: relative;
+    color: white;
+  }
+  
+  .tourItem {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.623);
+  }
+  
+  .btnToTournament {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 120px;
+    outline: none;
+    background-color: #009688;
+    color: white;
+  }
+  
+  .tourType {
+    display: inline;
+    margin-left: 10px;
+    color: rgba(255, 255, 255, 0.795);
+  }
+      

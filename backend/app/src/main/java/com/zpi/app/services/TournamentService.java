@@ -1,12 +1,11 @@
 package com.zpi.app.services;
 
-import com.zpi.app.entities.Match;
-import com.zpi.app.entities.ParticipantTournament;
-import com.zpi.app.entities.Tournament;
+import com.zpi.app.entities.*;
 
 import com.zpi.app.repositories.ParticipantTournamentRepository;
 import com.zpi.app.repositories.TournamentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +14,12 @@ import java.util.Optional;
 public class TournamentService {
     private final TournamentRepository tournamentRepository;
     private final ParticipantTournamentRepository participantTournamentRepository;
+    private final UserService userService;
 
-    public TournamentService(TournamentRepository tournamentRepository, ParticipantTournamentRepository participantTournamentRepository) {
+    public TournamentService(TournamentRepository tournamentRepository,  UserService userService, ParticipantTournamentRepository participantTournamentRepository) {
         this.tournamentRepository = tournamentRepository;
         this.participantTournamentRepository = participantTournamentRepository;
+        this.userService = userService;
     }
 
     public List<Tournament> getAllTournaments(){
@@ -34,6 +35,19 @@ public class TournamentService {
 
     public Tournament addTournament(Tournament tournament) {
         return tournamentRepository.save(tournament);
+    }
+
+    public void enrollUserToTournament( String login, Integer idTour, String teamName){
+        User user= userService.findByLogin(login);
+        ParticipantTournamentID participantTournamentID = new ParticipantTournamentID();
+        participantTournamentID.setParticipantId(user.getId());
+        participantTournamentID.setTournamentId(idTour);
+        ParticipantTournament participantTournament = new ParticipantTournament();
+        participantTournament.setParticipantTournamentID(participantTournamentID);
+        participantTournament.setParticipant(user);
+        participantTournament.setTournament(getTournament(idTour));
+        participantTournament.setTeamName(teamName);
+        saveUserToTournament(participantTournament);
     }
 
     public void saveUserToTournament(ParticipantTournament participantTournament){

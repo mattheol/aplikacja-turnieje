@@ -2,6 +2,7 @@ package com.zpi.app.controllers;
 
 import com.zpi.app.dtos.UserTournament;
 import com.zpi.app.entities.*;
+import com.zpi.app.security.JwtTokenUtil;
 import com.zpi.app.services.TournamentService;
 import com.zpi.app.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -10,28 +11,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class TournamentController {
     private final TournamentService tournamentService;
-    private final UserService userService;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    public TournamentController(TournamentService tournamentService, UserService userService) {
+    public TournamentController(TournamentService tournamentService, JwtTokenUtil jwtTokenUtil) {
         this.tournamentService = tournamentService;
-        this.userService = userService;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
-
 
     @GetMapping("/tournaments")
     public List<UserTournament> getAllTournaments(){
         List<Tournament> tournaments = tournamentService.getAllTournaments();
-        List<UserTournament> list = new ArrayList<>();
-        for(Tournament tour : tournaments){
-            list.add(new UserTournament(tour));
-        }
-        return list;
-
+        return tournaments.stream()
+                .map(UserTournament::new)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/tournaments/{id}")
@@ -54,19 +52,9 @@ public class TournamentController {
 
 
     @PostMapping("/enroll")
-    public ResponseEntity<?> enrollUserToTournament(@RequestParam("login") String login, @RequestParam("idTour") Integer idTour,
+    public ResponseEntity<?> enrollUserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestParam("idTour") Integer idTour,
                                                     @RequestParam("teamName") String teamName){
-        User user= this.userService.findByLogin(login);
-
-        ParticipantTournamentID participantTournamentID = new ParticipantTournamentID();
-        participantTournamentID.setParticipantId(user.getId());
-        participantTournamentID.setTournamentId(idTour);
-        ParticipantTournament participantTournament = new ParticipantTournament();
-        participantTournament.setParticipantTournamentID(participantTournamentID);
-        participantTournament.setParticipant(user);
-        participantTournament.setTournament(tournamentService.getTournament(idTour));
-        participantTournament.setTeamName(teamName);
-        this.tournamentService.saveUserToTournament(participantTournament);
+        tournamentService.enrollUserToTournament(jwtTokenUtil.getLoginFromHeader(authorizationHeader), idTour, teamName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

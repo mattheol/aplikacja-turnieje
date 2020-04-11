@@ -4,9 +4,8 @@ package com.zpi.app.controllers;
 import com.zpi.app.dtos.JwtRequest;
 import com.zpi.app.dtos.JwtResponse;
 
+import com.zpi.app.dtos.MatchDto;
 import com.zpi.app.dtos.UserTournament;
-import com.zpi.app.entities.ParticipantTournament;
-import com.zpi.app.entities.Tournament;
 
 import com.zpi.app.entities.User;
 import com.zpi.app.exceptions.MyAuthenticationException;
@@ -46,27 +45,32 @@ public class UserController {
     @PostMapping("/registration")
     public ResponseEntity<?> register(@RequestBody
                                       @Valid User user) throws UserAlreadyExistsException {
-
         userDetailsService.registerNewUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody
-                                           JwtRequest authenticationRequest) throws MyAuthenticationException {
+    public ResponseEntity<?> login(@RequestBody JwtRequest authenticationRequest) throws MyAuthenticationException {
 
         userDetailsService.authenticate(authenticationRequest.getLogin(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getLogin());
         final String token = jwtTokenUtil.generateToken(userDetails);
         return new ResponseEntity<>(new JwtResponse(token,authenticationRequest.getLogin()), HttpStatus.OK);
-
     }
 
-    @GetMapping("/users/{login}/tournaments")
-    public List<UserTournament> getAllUserTournaments(@PathVariable String login){
-        return userService.getAllUserTournaments(login);
+    @GetMapping("/my-tournaments")
+    public List<UserTournament> geUserAllTournaments(@RequestHeader("Authorization") String authorizationHeader){
+        return userService.getUserAllTournaments(jwtTokenUtil.getLoginFromHeader(authorizationHeader));
+    }
+
+    @GetMapping("/my-matches")
+    public List<MatchDto> getUserAllMatches(@RequestHeader("Authorization") String authorizationHeader){
+        return userService.getUserAllMatches(jwtTokenUtil.getLoginFromHeader(authorizationHeader));
+    }
+    @GetMapping("/my-matches-test")
+    public List<MatchDto> getUserAllMaftches(){
+        return userService.getUserAllMatches("user123");
     }
 
 }
