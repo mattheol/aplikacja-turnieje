@@ -1,5 +1,10 @@
 <div *ngIf="tournament" style="min-height: 100%;">
   <div class="tournamentStyle">
+    <div class="deadlineContainer">
+      <p>
+        koniec zapisów: {{ tournament.enrollmentEnd | date: "medium":"+0200" }}
+      </p>
+    </div>
     <div *ngIf="!isUserEnrolled" class="enrollContainer">
       <div *ngIf="isForTeams" style="display: inline;">
         <mat-form-field class="teamInput">

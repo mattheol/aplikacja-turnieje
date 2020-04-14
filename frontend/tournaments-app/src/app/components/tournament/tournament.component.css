@@ -18,6 +18,11 @@
   right: 10px;
   top: 0;
 }
+.deadlineContainer {
+  position: absolute;
+  right: 20px;
+  top: 50px;
+}
 
 .placeholder {
   color: rgb(233, 227, 227);
