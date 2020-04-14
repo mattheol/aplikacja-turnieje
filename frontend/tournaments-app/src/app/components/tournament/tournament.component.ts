@@ -41,9 +41,10 @@ export class TournamentComponent implements OnInit {
         (item) => item.participant.login === this.userLogin.toString()
       ).length !== 0
     ) {
+
       this.isUserEnrolled = true;
     } else {
-      this.isForTeams = this.tournament.isForTeams;
+    
 
       this.isUserEnrolled = false;
     }
@@ -53,6 +54,7 @@ export class TournamentComponent implements OnInit {
     this.tournamentService.getTournament(this.id).subscribe((tournament) => {
       this.tournament = tournament;
       this.checkIfUserIsAlreadyEnrolled();
+      this.isForTeams = this.tournament.isForTeams;
     });
   }
 

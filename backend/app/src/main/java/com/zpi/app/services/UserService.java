@@ -6,6 +6,7 @@ import com.zpi.app.entities.Match;
 import com.zpi.app.entities.ParticipantTournament;
 import com.zpi.app.entities.Tournament;
 import com.zpi.app.entities.User;
+import com.zpi.app.exceptions.ElementNotExistException;
 import com.zpi.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,7 +67,8 @@ public class UserService {
     }
 
     public User findByLogin(String login) {
-        return userRepository.findByLogin(login).get();
+        return userRepository.findByLogin(login)
+                .orElseThrow(()->new ElementNotExistException("Użytkownik o takim loginie nie istnieje"));
     }
 
 }

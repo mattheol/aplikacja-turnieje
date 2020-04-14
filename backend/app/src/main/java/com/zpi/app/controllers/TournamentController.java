@@ -1,5 +1,6 @@
 package com.zpi.app.controllers;
 
+import com.zpi.app.dtos.MatchDto;
 import com.zpi.app.dtos.UserTournament;
 import com.zpi.app.entities.*;
 import com.zpi.app.security.JwtTokenUtil;
@@ -39,9 +40,10 @@ public class TournamentController {
 
 
     @GetMapping("tournaments/{id}/matches")
-    public ResponseEntity<?> getMatchesByTournamentId(@PathVariable Integer id){
-        Tournament tournament = tournamentService.getTournament(id);
-        return new ResponseEntity<>(tournament.getMatches(),HttpStatus.OK);
+    public List<MatchDto> getMatchesByTournamentId(@PathVariable Integer id){
+//        Tournament tournament = tournamentService.getTournament(id);
+//        return new ResponseEntity<>(tournament.getMatches(),HttpStatus.OK);
+        return tournamentService.getTournamentAllMatches(id);
     }
 
     @PostMapping("/tournaments")

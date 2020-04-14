@@ -1,10 +1,14 @@
 <div *ngIf="this.roundMatches.length === this.maxRound">
+  
   <mat-tab-group dynamicHeight>
+    
     <mat-tab *ngFor="let round of rounds; let i = index" [label]="round">
       <div style="height: auto !important;">
         <div *ngFor="let match of roundMatches[i]">
           <div class="match">
+            
             <div class="leftParticipant">
+                
               {{
                 forTeams ? match.teamName : match.matchParticipants[0].firstName
               }}
@@ -13,10 +17,11 @@
 
             <div class="rightParticipant">
               {{
-                forTeams ? match.teamName : match.matchParticipants[1].firstName
+                forTeams ? match.opponentTeamName : match.matchParticipants[1].firstName
               }}
               {{ forTeams ? "" : match.matchParticipants[1].lastName }}
             </div>
+          
           </div>
         </div>
       </div>

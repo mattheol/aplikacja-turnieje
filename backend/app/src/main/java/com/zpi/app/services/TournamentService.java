@@ -1,14 +1,19 @@
 package com.zpi.app.services;
 
+import com.zpi.app.dtos.MatchDto;
 import com.zpi.app.entities.*;
 
+import com.zpi.app.exceptions.ElementNotExistException;
 import com.zpi.app.repositories.ParticipantTournamentRepository;
 import com.zpi.app.repositories.TournamentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class TournamentService {
@@ -23,14 +28,47 @@ public class TournamentService {
     }
 
     public List<Tournament> getAllTournaments(){
-        List<Tournament> tournaments= tournamentRepository.findAll();
-        return tournaments;
+        return tournamentRepository.findAll();
     }
 
 
     public Tournament getTournament(Integer id){
-        Optional<Tournament> tournamentOpt = tournamentRepository.findById(id);
-        return tournamentOpt.get();
+        return tournamentRepository.findById(id)
+                .orElseThrow(()->new ElementNotExistException("Turniej o takim id nie istnieje"));
+
+    }
+
+    public List<MatchDto> getTournamentAllMatches(Integer id){
+        Tournament tournament = getTournament(id);
+        List<Match> tournamentMatches = tournament.getMatches();
+        if (!tournament.getIsForTeams()) {
+            return tournamentMatches.stream()
+                    .map(m -> new MatchDto(m, null, null))
+                    .collect(Collectors.toList());
+        }else {
+            List<List<User>> matchesParticipants = tournamentMatches.stream()
+                    .map(Match::getMatchParticipants)
+                    .collect(Collectors.toList());
+            List<MatchDto> matchDtos = new ArrayList<>();
+            for (int i = 0; i < matchesParticipants.size(); i++) {
+                List<User> matchParticipants = matchesParticipants.get(i);
+                String[] teamNames = {null, null};
+                for (int j = 0; j < matchParticipants.size(); j++) {
+                    User matchParticipant = matchParticipants.get(j);
+                    String teamName = tournament.getParticipants().stream()
+                            .filter(p -> p.getParticipant().equals(matchParticipant))
+                            .map(ParticipantTournament::getTeamName)
+//                            .map(Optional::ofNullable)
+                            .findFirst()
+//                            .flatMap(Function.identity())
+                            .orElse(null);
+                    teamNames[j] = teamName;
+                }
+                matchDtos.add(new MatchDto(tournamentMatches.get(i), teamNames[0], teamNames[1]));
+            }
+            return matchDtos;
+        }
+
     }
 
     public Tournament addTournament(String login, Tournament tournament) {

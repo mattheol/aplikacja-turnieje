@@ -30,12 +30,12 @@ INSERT INTO matches (id,comment,winner_id,score,stage,start_time,tournament_id)
               (3,'',null,null,1 ,'2020-04-07 9:30' ,1),
               (4,'',null,null,1 ,'2020-04-07 9:30' ,1),
               (5,'',null,null,2,'2020-04-07 10:30',1),
-              (6,'',null,null,2,'2020-04-08 10:30',2),
+              (6,'',null,null,1,'2020-04-08 10:30',2),
               (7,'',null,null,2,'2020-04-08 12:30',2),
               (8,'',null,null,2,'2020-04-09 12:30',2);
 
 INSERT INTO matches_participants VALUES (1,1),(1,2), (2,3), (2,4), (3,5), (3,6), (4,7), (4, 8),(5,1),
-                                        (5,9),(6,9),(7,9),(8,9),(8,2);
+                                        (5,9),(6,9),(6,1),(7,9),(7,3),(8,9),(8,2);
 
 INSERT INTO invitations (id,invitation_message, invitation_time,organizer_id,participant_id,tournament_id)
        VALUES (1,'Zapraszam cię na turniej.',null,1,2,1 );
@@ -54,5 +54,6 @@ VALUES (1,1,null),
        (1,9,null),
        (2,1,"Borsuki"),
        (2,2,"Wilki"),
+       (2,3,"Kojoty"),
        (2,9,"Krowy");
 
