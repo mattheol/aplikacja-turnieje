@@ -55,4 +55,16 @@ public class TournamentService {
         participantTournamentRepository.save(participantTournament);
     }
 
+    public void disenrollUserFromTournament( String login, Integer idTour, String teamName){
+        User user= userService.findByLogin(login);
+        ParticipantTournamentID participantTournamentID = new ParticipantTournamentID();
+        participantTournamentID.setParticipantId(user.getId());
+        participantTournamentID.setTournamentId(idTour);
+        removeUserFromTournament(participantTournamentRepository.getOne(participantTournamentID));
+    }
+
+    public void removeUserFromTournament(ParticipantTournament participantTournament){
+        participantTournamentRepository.delete(participantTournament);
+    }
+
 }

@@ -52,4 +52,18 @@ export class TournamentService {
       }
     );
   }
+
+  disenrollUserFromTournament(
+    login: string,
+    idTour: number,
+    teamName: string
+  ): Observable<void> {
+    const params = new HttpParams()
+      .set("idTour", idTour.toString())
+      .set("teamName", teamName);
+
+    return this.http.delete<void>(`${environment.basicUrl}/disenroll`, {
+      params,
+    });
+  }
 }

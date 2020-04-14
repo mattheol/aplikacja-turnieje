@@ -23,6 +23,16 @@
         Dołącz
       </button>
     </div>
+    <div *ngIf="isUserEnrolled" class="enrollContainer">
+      <button
+        (click)="disenrollUser()"
+        class="enrollBtn"
+        mat-raised-button
+        color="primary"
+      >
+        Wypisz
+      </button>
+    </div>
     <h5>{{ tournament.name }}</h5>
     <p>{{ tournament.description }}</p>
 

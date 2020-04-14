@@ -58,4 +58,11 @@ public class TournamentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/disenroll")
+    public ResponseEntity<?> disenrollUserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestParam("idTour") Integer idTour,
+                                                    @RequestParam("teamName") String teamName){
+        tournamentService.disenrollUserFromTournament(jwtTokenUtil.getLoginFromHeader(authorizationHeader), idTour, teamName);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
