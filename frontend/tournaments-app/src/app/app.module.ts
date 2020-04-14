@@ -1,3 +1,4 @@
+import { TournamentAcceptationComponent } from './components/tournament-acceptation/tournament-acceptation.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, LOCALE_ID } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
@@ -25,6 +26,7 @@ import {
   MatNativeDateModule,
   MAT_DATE_LOCALE,
   MatButtonModule,
+  MatDialogModule,
 } from "@angular/material";
 
 import { registerLocaleData } from "@angular/common";
@@ -48,6 +50,7 @@ import { MyTournamentsComponent } from "./components/my-tournaments/my-tournamen
 import { TournamentMatchesComponent } from "./components/tournament-matches/tournament-matches.component";
 import { MyMatchesComponent } from "./components/my-matches/my-matches.component";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +65,9 @@ import { MyMatchesComponent } from "./components/my-matches/my-matches.component
     MyTournamentsComponent,
     TournamentMatchesComponent,
     MyMatchesComponent,
+    TournamentAcceptationComponent
   ],
+  entryComponents: [TournamentAcceptationComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -75,6 +80,7 @@ import { MyMatchesComponent } from "./components/my-matches/my-matches.component
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
     MatCardModule,
     MatInputModule,
     MatButtonModule,
