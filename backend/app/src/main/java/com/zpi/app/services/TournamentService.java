@@ -33,7 +33,8 @@ public class TournamentService {
         return tournamentOpt.get();
     }
 
-    public Tournament addTournament(Tournament tournament) {
+    public Tournament addTournament(String login, Tournament tournament) {
+        tournament.getOrganizers().add(userService.findByLogin(login));
         return tournamentRepository.save(tournament);
     }
 
@@ -52,6 +53,18 @@ public class TournamentService {
 
     public void saveUserToTournament(ParticipantTournament participantTournament){
         participantTournamentRepository.save(participantTournament);
+    }
+
+    public void disenrollUserFromTournament( String login, Integer idTour, String teamName){
+        User user= userService.findByLogin(login);
+        ParticipantTournamentID participantTournamentID = new ParticipantTournamentID();
+        participantTournamentID.setParticipantId(user.getId());
+        participantTournamentID.setTournamentId(idTour);
+        removeUserFromTournament(participantTournamentRepository.getOne(participantTournamentID));
+    }
+
+    public void removeUserFromTournament(ParticipantTournament participantTournament){
+        participantTournamentRepository.delete(participantTournament);
     }
 
 }

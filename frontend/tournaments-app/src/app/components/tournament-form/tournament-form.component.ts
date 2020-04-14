@@ -9,6 +9,7 @@ import { TournamentService } from "src/app/services/tournament.service";
 import { Tournament } from "src/app/models/tournament";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
+import { TokenStorageService } from "src/app/services/auth/token-storage.service";
 
 @Component({
   selector: "tournament-form",
@@ -25,6 +26,7 @@ export class TournamentFormComponent implements OnInit {
     private fb: FormBuilder,
     private tournamentService: TournamentService,
     private toastr: ToastrService,
+    private tokenStorageService: TokenStorageService,
     private router: Router
   ) {}
 
@@ -47,9 +49,10 @@ export class TournamentFormComponent implements OnInit {
   submit(form: FormGroupDirective) {
     this.tournamentService
       .postTournament(
+        this.tokenStorageService.getUser(),
         new Tournament(
           -1,
-          null,
+          [],
           null,
           null,
           this.nameInput.value,

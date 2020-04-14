@@ -24,7 +24,10 @@ export class TournamentService {
   getTournament(id: Number): Observable<Tournament> {
     return this.http.get<Tournament>(this.url + `/${id}`, httpOptions);
   }
-  postTournament(tournament: Tournament): Observable<Tournament> {
+  postTournament(
+    login: string,
+    tournament: Tournament
+  ): Observable<Tournament> {
     return this.http.post<Tournament>(this.url, tournament);
   }
 
@@ -48,5 +51,19 @@ export class TournamentService {
         params,
       }
     );
+  }
+
+  disenrollUserFromTournament(
+    login: string,
+    idTour: number,
+    teamName: string
+  ): Observable<void> {
+    const params = new HttpParams()
+      .set("idTour", idTour.toString())
+      .set("teamName", teamName);
+
+    return this.http.delete<void>(`${environment.basicUrl}/disenroll`, {
+      params,
+    });
   }
 }

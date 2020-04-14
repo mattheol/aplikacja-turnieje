@@ -45,8 +45,8 @@ public class TournamentController {
     }
 
     @PostMapping("/tournaments")
-    public ResponseEntity<?> addTournament(@RequestBody Tournament tournament) {
-        Tournament tournament1 = tournamentService.addTournament(tournament);
+    public ResponseEntity<?> addTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Tournament tournament) {
+        Tournament tournament1 = tournamentService.addTournament(jwtTokenUtil.getLoginFromHeader(authorizationHeader), tournament);
         return new ResponseEntity<>(tournament1, HttpStatus.OK);
     }
 
@@ -55,6 +55,13 @@ public class TournamentController {
     public ResponseEntity<?> enrollUserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestParam("idTour") Integer idTour,
                                                     @RequestParam("teamName") String teamName){
         tournamentService.enrollUserToTournament(jwtTokenUtil.getLoginFromHeader(authorizationHeader), idTour, teamName);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/disenroll")
+    public ResponseEntity<?> disenrollUserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestParam("idTour") Integer idTour,
+                                                    @RequestParam("teamName") String teamName){
+        tournamentService.disenrollUserFromTournament(jwtTokenUtil.getLoginFromHeader(authorizationHeader), idTour, teamName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

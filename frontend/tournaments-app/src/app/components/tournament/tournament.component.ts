@@ -79,4 +79,19 @@ export class TournamentComponent implements OnInit {
         (err) => {}
       );
   }
+
+  disenrollUser() {
+    console.log(this.teamName);
+    this.tournamentService
+      .disenrollUserFromTournament(this.userLogin, this.id, this.teamName)
+      .subscribe(
+        (res) => {
+          this.toastr.success("Wypisałeś się z turnieju", "", {
+            positionClass: "toast-top-center",
+          });
+          this.getTournament();
+        },
+        (err) => {}
+      );
+  }
 }
