@@ -5,13 +5,17 @@
         <div *ngFor="let match of roundMatches[i]">
           <div class="match">
             <div class="leftParticipant">
-              {{ match.matchParticipants[0].firstName }}
-              {{ match.matchParticipants[0].lastName }}
+              {{
+                forTeams ? match.teamName : match.matchParticipants[0].firstName
+              }}
+              {{ forTeams ? "" : match.matchParticipants[0].lastName }}
             </div>
 
             <div class="rightParticipant">
-              {{ match.matchParticipants[1].firstName }}
-              {{ match.matchParticipants[1].lastName }}
+              {{
+                forTeams ? match.teamName : match.matchParticipants[1].firstName
+              }}
+              {{ forTeams ? "" : match.matchParticipants[1].lastName }}
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { TournamentService } from "src/app/services/tournament.service";
 import { Match } from "src/app/models/match";
 import { ActivatedRoute } from "@angular/router";
@@ -9,6 +9,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./tournament-matches.component.css"],
 })
 export class TournamentMatchesComponent implements OnInit {
+  @Input() forTeams: boolean;
   matches: Match[];
   tourId: Number;
   maxRound: Number;
@@ -20,6 +21,7 @@ export class TournamentMatchesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.forTeams);
     this.roundMatches = [];
     this.tourId = this.activatedRoute.snapshot.params["id"];
     this.getMatches();
