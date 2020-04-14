@@ -33,7 +33,8 @@ public class TournamentService {
         return tournamentOpt.get();
     }
 
-    public Tournament addTournament(Tournament tournament) {
+    public Tournament addTournament(String login, Tournament tournament) {
+        tournament.getOrganizers().add(userService.findByLogin(login));
         return tournamentRepository.save(tournament);
     }
 

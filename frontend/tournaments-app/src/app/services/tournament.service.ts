@@ -24,7 +24,10 @@ export class TournamentService {
   getTournament(id: Number): Observable<Tournament> {
     return this.http.get<Tournament>(this.url + `/${id}`, httpOptions);
   }
-  postTournament(tournament: Tournament): Observable<Tournament> {
+  postTournament(
+    login: string,
+    tournament: Tournament
+  ): Observable<Tournament> {
     return this.http.post<Tournament>(this.url, tournament);
   }
 
