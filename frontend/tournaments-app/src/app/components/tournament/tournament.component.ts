@@ -67,6 +67,10 @@ export class TournamentComponent implements OnInit {
     })
   }
 
+  checkDate(){
+      return new Date(this.tournament.enrollmentEnd)> new Date();
+  }
+
   enrollUser() {
     console.log(this.teamName);
     this.tournamentService

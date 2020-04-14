@@ -1,32 +1,44 @@
 <div *ngIf="tournament" style="min-height: 100%;">
   <div class="tournamentStyle">
     <div class="deadlineContainer">
-      <p>
-        koniec zapisów: {{ tournament.enrollmentEnd | date: "medium":"+0200" }}
-      </p>
+      <div *ngIf="checkDate()">
+        <p>
+          koniec zapisów: {{ tournament.enrollmentEnd | date: "medium":"+0200" }}
+        </p>
+      </div>
+      <div *ngIf="!checkDate()">
+        <p>
+          Zapisy dobiegły końca dnia: {{ tournament.enrollmentEnd | date: "medium":"+0200" }}
+        </p>
+      </div>
     </div>
     <div *ngIf="!isUserEnrolled" class="enrollContainer">
-      <div *ngIf="isForTeams" style="display: inline;">
-        <mat-form-field class="teamInput">
-          <input
-            matInput
-            [(ngModel)]="teamName"
-            name="teamName"
-            color="accent"
-            required
-            autocomplete="off"
-          />
-          <mat-placeholder class="placeholder">Nazwa drużyny</mat-placeholder>
-        </mat-form-field>
+      <div *ngIf="checkDate()">
+        <div *ngIf="isForTeams" style="display: inline;">
+          <mat-form-field class="teamInput">
+            <input
+              matInput
+              [(ngModel)]="teamName"
+              name="teamName"
+              color="accent"
+              required
+              autocomplete="off"
+            />
+            <mat-placeholder class="placeholder">Nazwa drużyny</mat-placeholder>
+          </mat-form-field>
+        </div>
       </div>
-      <button
+      <div *ngIf="checkDate()">
+        <button
         (click)="openDialog()"
         class="enrollBtn"
         mat-raised-button
         color="primary"
+        hidden-
       >
         Dołącz
       </button>
+      </div>
     </div>
     <div *ngIf="isUserEnrolled" class="enrollContainer">
       <button
