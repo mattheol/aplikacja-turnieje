@@ -44,4 +44,10 @@ export class MyMatchesComponent implements OnInit {
     return opponent.login;
   }
 
+  getOpponentName(match : Match){
+    let participants = match.matchParticipants;
+    let opponent = participants.find(u=>u.login!=this.getLogin());
+    return opponent.firstName + " " + opponent.lastName;
+  }
+
 }

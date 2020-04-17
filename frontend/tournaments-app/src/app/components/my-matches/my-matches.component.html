@@ -4,11 +4,18 @@
 >
   <div *ngFor="let match of matches" class="itemWrapper">
     <mat-card class="tourItem">
-
-      <h5 *ngIf="match.teamName">{{ match.teamName }} vs {{ match.opponentTeamName ? match.opponentTeamName : 'przeciwny zespół' }} ({{ match.tournament.name }})</h5> 
-      <h5 *ngIf="!match.teamName">Ja vs {{ getOpponentLogin(match) ? getOpponentLogin(match) : 'przeciwnik' }} ({{ match.tournament.name }})</h5> 
+      <h5 *ngIf="match.teamName">
+        {{ match.teamName }} vs
+        {{ match.opponentTeamName ? match.opponentTeamName : "?" }}
+        ({{ match.tournament.name }})
+      </h5>
+      <h5 *ngIf="!match.teamName">
+        Ja vs
+        {{ getOpponentName(match) ? getOpponentName(match) : "?" }}
+        ({{ match.tournament.name }})
+      </h5>
       <mat-card-subtitle class="tourType">
-            <h5>{{  match.startTime | date:'dd/MM/yyyy hh:mm'  }} </h5> 
+        <h5>{{ match.startTime | date: "dd/MM/yyyy hh:mm" }}</h5>
       </mat-card-subtitle>
       <!-- <button
         (click)="redirectToTournament(tournament.id)"

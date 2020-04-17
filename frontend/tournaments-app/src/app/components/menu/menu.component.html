@@ -1,8 +1,65 @@
 <div class="menuContainer">
   <ul class="nav">
-    <li *ngIf="isLoggedIn()" class="navItem"><a routerLink="/turnieje">Przeglądaj turnieje</a></li>
-    <li *ngIf="isLoggedIn()" class="navItem"><a routerLink="/moje-turnieje">Moje turnieje</a></li>
-    <li *ngIf="isLoggedIn()" class="navItem"><a routerLink="/moje-mecze">Moje Mecze</a></li>
+    <li
+      class="buttonRoute"
+      *ngIf="isLoggedIn()"
+      routerLink="/turnieje"
+      routerLinkActive="activeRoute"
+      [ngStyle]="{
+        'background-image': 'url(../../../assets/1.png)',
+        'background-position': '50%',
+        'background-repeat': 'no-repeat'
+      }"
+    >
+      <p class="buttonRouteText">Przeglądaj turnieje</p>
+    </li>
+    <li
+      *ngIf="isLoggedIn()"
+      class="buttonRoute"
+      routerLinkActive="activeRoute"
+      routerLink="/moje-turnieje"
+      [ngStyle]="{
+        'background-image': 'url(../../../assets/2.png)',
+        'background-repeat': 'no-repeat',
+        'background-position': '50%',
+        'background-repeat': 'no-repeat'
+      }"
+    >
+      <p class="buttonRouteText">Moje turnieje</p>
+    </li>
+
+    <li
+      *ngIf="isLoggedIn()"
+      class="buttonRoute"
+      routerLink="/moje-mecze"
+      routerLinkActive="activeRoute"
+      [ngStyle]="{
+        'background-image': 'url(../../../assets/3.png)',
+        'background-position': '50%',
+        'background-repeat': 'no-repeat'
+      }"
+    >
+      <p class="buttonRouteText">
+        Moje Mecze
+      </p>
+    </li>
+
+    <li
+      *ngIf="isLoggedIn()"
+      class="buttonRoute"
+      routerLink="/stworz-turniej"
+      routerLinkActive="activeRoute"
+      style="width: 191px; border-radius: 30px; margin-left: auto;"
+      [ngStyle]="{
+        'background-image': 'url(../../../assets/4.png)',
+        'background-position': '50%',
+        'background-repeat': 'no-repeat'
+      }"
+    >
+      <p class="buttonRouteText">
+        Stwórz turniej
+      </p>
+    </li>
   </ul>
   <div class="contentContainer">
     <ng-content></ng-content>

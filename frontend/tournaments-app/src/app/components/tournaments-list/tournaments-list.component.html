@@ -12,16 +12,19 @@
       <h4 class="tourHeader" style="text-align: center;">
         {{ tournament.name }}
       </h4>
-      <p
-        class="tourContent"
+      <div
         [ngStyle]="{
           'background-image': 'url(../../../assets/_8181818181818.png)',
           'background-repeat': 'no-repeat',
-          'background-size': '100% 100%'
+          'background-position': '50%',
+          'background-size': 'contain'
         }"
+        style="flex: 1;"
       >
-        {{ tournament.description }}
-      </p>
+        <p class="tourContent">
+          {{ tournament.description }}
+        </p>
+      </div>
     </div>
   </div>
 </ul>

@@ -13,15 +13,10 @@
   text-transform: uppercase;
 }
 
-.enrollContainer {
-  position: absolute;
-  right: 10px;
-  top: 0;
-}
-.deadlineContainer {
+.enrollmentContainer {
   position: absolute;
   right: 20px;
-  top: 50px;
+  top: 5px;
 }
 
 .placeholder {
