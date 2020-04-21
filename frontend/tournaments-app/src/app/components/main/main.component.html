@@ -16,18 +16,16 @@
 >
   Zarejestruj się
 </button>
-<button *ngIf="isLoggedIn()" mat-raised-button color="primary" class="loginBtn">
+
+<button *ngIf="isLoggedIn()" mat-raised-button color="primary" class="registerBtn" [matMenuTriggerFor]="menu">
   {{ tokenService.getUser() }}
 </button>
-<button
-  (click)="logout()"
-  *ngIf="isLoggedIn()"
-  mat-raised-button
-  color="primary"
-  class="registerBtn"
->
-  Wyloguj się
-</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openDialog()">Ustawienia konta</button>
+  <button mat-menu-item (click)="changePassword()">Zmień hasło</button>
+  <button mat-menu-item (click)="logout()">Wyloguj</button>
+</mat-menu>
+
 <app-register-form
   (onHide)="changeHide($event)"
   *ngIf="isActive"

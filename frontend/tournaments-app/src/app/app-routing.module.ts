@@ -1,3 +1,4 @@
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { TournamentFormComponent } from "./components/tournament-form/tournament-form.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: "turnieje/:id", component: TournamentComponent },
   { path: "moje-turnieje", component: MyTournamentsComponent },
   { path: "moje-mecze", component: MyMatchesComponent },
-  { path: "stworz-turniej", component: TournamentFormComponent },
+  { path: "stworz-turniej", component: TournamentFormComponent }
 ];
 
 @NgModule({

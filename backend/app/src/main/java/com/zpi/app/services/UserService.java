@@ -71,4 +71,12 @@ public class UserService {
                 .orElseThrow(()->new ElementNotExistException("Użytkownik o takim loginie nie istnieje"));
     }
 
+    public User update(User user) {
+        User usr = findByLogin(user.getLogin());
+        usr.setFirstName(user.getFirstName());
+        usr.setLastName(user.getLastName());
+        usr.setEmail(user.getEmail());
+        usr.setGender(user.getGender());
+        return user;
+    }
 }
