@@ -9,7 +9,29 @@
 }
 
 .leftParticipant {
+  width: 35%;
 }
 
 .rightParticipant {
+  text-align: right;
+  width: 35%;
+}
+
+.score {
+}
+
+.editResult {
+  display: flex;
+  margin: auto auto auto 0;
+}
+
+.editResultImage:hover {
+  cursor: pointer;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  margin-bottom: -1.25em;
+}
+::ng-deep .mat-form-field {
+  width: 100px;
 }

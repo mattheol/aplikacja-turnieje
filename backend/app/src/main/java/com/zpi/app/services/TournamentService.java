@@ -4,27 +4,27 @@ import com.zpi.app.dtos.MatchDto;
 import com.zpi.app.entities.*;
 
 import com.zpi.app.exceptions.ElementNotExistException;
+import com.zpi.app.repositories.MatchRepository;
 import com.zpi.app.repositories.ParticipantTournamentRepository;
 import com.zpi.app.repositories.TournamentRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
 public class TournamentService {
     private final TournamentRepository tournamentRepository;
     private final ParticipantTournamentRepository participantTournamentRepository;
+    private final MatchRepository matchRepository;
     private final UserService userService;
 
-    public TournamentService(TournamentRepository tournamentRepository,  UserService userService, ParticipantTournamentRepository participantTournamentRepository) {
+    public TournamentService(TournamentRepository tournamentRepository, UserService userService, ParticipantTournamentRepository participantTournamentRepository, MatchRepository matchRepository, MatchRepository matchRepository1) {
         this.tournamentRepository = tournamentRepository;
         this.participantTournamentRepository = participantTournamentRepository;
         this.userService = userService;
+        this.matchRepository = matchRepository1;
     }
 
     public List<Tournament> getAllTournaments(){
@@ -103,6 +103,11 @@ public class TournamentService {
 
     public void removeUserFromTournament(ParticipantTournament participantTournament){
         participantTournamentRepository.delete(participantTournament);
+    }
+
+    public void updateMatchScore(Match match, Integer idTour){
+        match.setTournament(getTournament(idTour));
+        matchRepository.save(match);
     }
 
 }

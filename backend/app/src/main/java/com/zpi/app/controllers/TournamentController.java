@@ -46,6 +46,13 @@ public class TournamentController {
         return tournamentService.getTournamentAllMatches(id);
     }
 
+//    @GetMapping("tournaments/{id}/organizers")
+//    public List<MatchDto> getMatchesByTournamentId(@PathVariable Integer id){
+////        Tournament tournament = tournamentService.getTournament(id);
+////        return new ResponseEntity<>(tournament.getMatches(),HttpStatus.OK);
+//        return tournamentService.getTournamentAllMatches(id);
+//    }
+
     @PostMapping("/tournaments")
     public ResponseEntity<?> addTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Tournament tournament) {
         Tournament tournament1 = tournamentService.addTournament(jwtTokenUtil.getLoginFromHeader(authorizationHeader), tournament);
@@ -67,4 +74,9 @@ public class TournamentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping("/matches")
+    public ResponseEntity<?> updateMatchScore(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Match match,  @RequestParam("idTour") Integer idTour) {
+        tournamentService.updateMatchScore(match, idTour);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
