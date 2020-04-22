@@ -42,6 +42,17 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/user")
+    public User getUser(String login){
+        return userService.findByLogin(login);
+    }
+
+    @PutMapping("/user")
+    public ResponseEntity<Void> updateUser(@RequestBody User user){
+        userService.update(user);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/registration")
     public ResponseEntity<?> register(@RequestBody
                                       @Valid User user) throws UserAlreadyExistsException {

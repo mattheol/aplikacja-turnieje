@@ -1,6 +1,9 @@
+import { UserSettingsComponent } from './../user-settings/user-settings.component';
 import { Component, OnInit } from "@angular/core";
 import { TokenStorageService } from 'src/app/services/auth/token-storage.service';
 import {Router} from "@angular/router"
+import { MatDialog } from '@angular/material';
+import { UserPasswordComponent } from '../user-password/user-password.component';
 
 @Component({
   selector: "app-main",
@@ -11,7 +14,10 @@ export class MainComponent implements OnInit {
   isActive: boolean;
   isLoginActive: boolean;
 
-  constructor(public tokenService:TokenStorageService,private router: Router) {}
+  constructor(
+    public tokenService:TokenStorageService,
+    private router: Router,
+    public dialog: MatDialog) {}
 
   ngOnInit() {
     this.isActive = false;
@@ -42,4 +48,22 @@ export class MainComponent implements OnInit {
   changeHideLogin(val: boolean) {
     this.isLoginActive = !val;
   }
+
+  openDialog(){
+    let dialogRef = this.dialog.open(UserSettingsComponent);
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result === "true"){
+      }
+    })
+  }
+
+  changePassword(){
+    let dialogRef = this.dialog.open(UserPasswordComponent);
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result === "true"){
+          
+      }
+    })
+  }
+  
 }
