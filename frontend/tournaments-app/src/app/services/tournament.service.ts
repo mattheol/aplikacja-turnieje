@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Match } from "../models/match";
+import { User } from "../models/user";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" }),
@@ -34,6 +35,13 @@ export class TournamentService {
 
   getTournamentMatches(id: Number): Observable<Match[]> {
     return this.http.get<Match[]>(`${this.url}/${id}/matches`, httpOptions);
+  }
+
+  updateMatchScore(match: Match, idTour: number): Observable<void> {
+    const params = new HttpParams().set("idTour", idTour.toString());
+    return this.http.put<void>(`${environment.basicUrl}/matches`, match, {
+      params,
+    });
   }
 
   enrollUserToTournament(

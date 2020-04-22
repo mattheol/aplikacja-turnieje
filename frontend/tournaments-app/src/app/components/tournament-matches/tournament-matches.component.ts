@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from "@angular/core";
 import { TournamentService } from "src/app/services/tournament.service";
 import { Match } from "src/app/models/match";
 import { ActivatedRoute } from "@angular/router";
+import { Tournament } from "src/app/models/tournament";
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "app-tournament-matches",
@@ -10,11 +12,15 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class TournamentMatchesComponent implements OnInit {
   @Input() forTeams: boolean;
+  @Input() tournament: Tournament;
   matches: Match[];
   tourId: Number;
   maxRound: Number;
   rounds: string[];
   roundMatches: Match[][];
+  isOrganizer: boolean;
+  isResultActive: boolean;
+  matchResult: Match;
   constructor(
     private tournamentService: TournamentService,
     private activatedRoute: ActivatedRoute
@@ -25,6 +31,8 @@ export class TournamentMatchesComponent implements OnInit {
     this.roundMatches = [];
     this.tourId = this.activatedRoute.snapshot.params["id"];
     this.getMatches();
+    this.isOrganizer = this.checkIfOrganizer();
+    this.isResultActive = false;
   }
 
   getMatches() {
@@ -58,5 +66,25 @@ export class TournamentMatchesComponent implements OnInit {
   getMatchesFromRound(round: Number): Match[] {
     //console.log(round);
     return this.matches.filter((match) => match.stage === round.toString());
+  }
+
+  getLogin() {
+    return JSON.parse(sessionStorage.getItem("login"));
+  }
+
+  checkIfOrganizer() {
+    let organizers = this.tournament.organizers;
+    let organizer = organizers.find((u) => u.login === this.getLogin());
+    if (organizer === undefined) return false;
+    return true;
+  }
+
+  showResultForm(match: Match) {
+    this.matchResult = match;
+    this.isResultActive = true;
+  }
+
+  changeHideResult(val: boolean) {
+    this.isResultActive = !val;
   }
 }

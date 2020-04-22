@@ -4,8 +4,8 @@ import { ActivatedRoute } from "@angular/router";
 import { TournamentService } from "src/app/services/tournament.service";
 import { TokenStorageService } from "src/app/services/auth/token-storage.service";
 import { ToastrService } from "ngx-toastr";
-import { MatDialog } from '@angular/material';
-import { TournamentAcceptationComponent } from '../tournament-acceptation/tournament-acceptation.component';
+import { MatDialog } from "@angular/material";
+import { TournamentAcceptationComponent } from "../tournament-acceptation/tournament-acceptation.component";
 
 @Component({
   selector: "app-tournament",
@@ -41,11 +41,8 @@ export class TournamentComponent implements OnInit {
         (item) => item.participant.login === this.userLogin.toString()
       ).length !== 0
     ) {
-
       this.isUserEnrolled = true;
     } else {
-    
-
       this.isUserEnrolled = false;
     }
   }
@@ -58,17 +55,17 @@ export class TournamentComponent implements OnInit {
     });
   }
 
-  openDialog(){
+  openDialog() {
     let dialogRef = this.dialog.open(TournamentAcceptationComponent);
-    dialogRef.afterClosed().subscribe(result =>{
-      if(result === "true"){
-          this.enrollUser();
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === "true") {
+        this.enrollUser();
       }
-    })
+    });
   }
 
-  checkDate(){
-      return new Date(this.tournament.enrollmentEnd)> new Date();
+  checkDate() {
+    return new Date(this.tournament.enrollmentEnd) > new Date();
   }
 
   enrollUser() {

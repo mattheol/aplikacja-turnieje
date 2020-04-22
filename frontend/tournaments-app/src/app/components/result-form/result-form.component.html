@@ -1,0 +1,47 @@
+<div class="modalContainer">
+  <div class="regModal">
+    <span class="close" (click)="setHideResult()"></span>
+    <legend>Podaj wynik meczu</legend>
+    <form
+      class="regForm"
+      #regForm="ngForm"
+      [formGroup]="myForm"
+      (ngSubmit)="submit(form)"
+    >
+      <div class="formBody">
+        <mat-form-field style="margin-bottom: 30px;">
+          <input matInput placeholder="wynik" formControlName="result" />
+        </mat-form-field>
+
+        <mat-radio-group formControlName="winner">
+          <mat-radio-button
+            value="{{ this.match.matchParticipants[0].id }}"
+            style="margin-right: 10px;"
+            >{{
+              forTeams ? match.teamName : match.matchParticipants[0].firstName
+            }}
+            {{ forTeams ? "" : match.matchParticipants[0].lastName }}
+          </mat-radio-button>
+          <mat-radio-button value="{{ this.match.matchParticipants[1].id }}"
+            >{{
+              forTeams
+                ? match.opponentTeamName
+                : match.matchParticipants[1].firstName
+            }}
+            {{ forTeams ? "" : match.matchParticipants[1].lastName }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <button
+        mat-raised-button
+        [disabled]="myForm.invalid"
+        color="primary"
+        type="submit"
+        style="margin-top: 10px; text-transform: uppercase;"
+      >
+        Zapisz
+      </button>
+    </form>
+  </div>
+</div>

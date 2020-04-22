@@ -1,27 +1,65 @@
+<app-result-form
+  (onHideResult)="changeHideResult($event)"
+  *ngIf="isResultActive"
+  [match]="matchResult"
+  [forTeams]="forTeams"
+></app-result-form>
 <div *ngIf="this.roundMatches.length === this.maxRound">
-  
   <mat-tab-group dynamicHeight>
-    
     <mat-tab *ngFor="let round of rounds; let i = index" [label]="round">
       <div style="height: auto !important;">
         <div *ngFor="let match of roundMatches[i]">
-          <div class="match">
-            
-            <div class="leftParticipant">
-                
-              {{
-                forTeams ? match.teamName : match.matchParticipants[0].firstName
-              }}
-              {{ forTeams ? "" : match.matchParticipants[0].lastName }}
-            </div>
+          <div style="display: flex;">
+            <div class="match">
+              <div
+                class="leftParticipant"
+                [style.color]="
+                  match.winnerId != null
+                    ? match.matchParticipants[0].id == match.winnerId
+                      ? 'green'
+                      : 'red'
+                    : 'white'
+                "
+              >
+                {{
+                  forTeams
+                    ? match.teamName
+                    : match.matchParticipants[0].firstName
+                }}
+                {{ forTeams ? "" : match.matchParticipants[0].lastName }}
+              </div>
 
-            <div class="rightParticipant">
-              {{
-                forTeams ? match.opponentTeamName : match.matchParticipants[1].firstName
-              }}
-              {{ forTeams ? "" : match.matchParticipants[1].lastName }}
+              <div class="score">
+                {{ match.score }}
+              </div>
+              <div
+                class="rightParticipant"
+                [style.color]="
+                  match.winnerId != null
+                    ? match.matchParticipants[1].id == match.winnerId
+                      ? 'green'
+                      : 'red'
+                    : 'white'
+                "
+              >
+                {{
+                  forTeams
+                    ? match.opponentTeamName
+                    : match.matchParticipants[1].firstName
+                }}
+                {{ forTeams ? "" : match.matchParticipants[1].lastName }}
+              </div>
             </div>
-          
+            <div *ngIf="isOrganizer" class="editResult">
+              <img
+                class="editResultImage"
+                src="../../../assets/edit-solid.svg"
+                style="height: 1.5em;"
+                (click)="showResultForm(match)"
+                alt="edytuj wyniki"
+                title="edytuj wyniki"
+              />
+            </div>
           </div>
         </div>
       </div>
