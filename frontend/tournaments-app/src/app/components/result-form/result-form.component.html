@@ -9,10 +9,10 @@
       (ngSubmit)="submit(form)"
     >
       <div class="formBody">
-        <mat-form-field style="margin-bottom: 30px;">
+        <mat-form-field style="margin-bottom: 10px;">
           <input matInput placeholder="wynik" formControlName="result" />
         </mat-form-field>
-
+        <h6>Kto wygrał?</h6>
         <mat-radio-group formControlName="winner">
           <mat-radio-button
             value="{{ this.match.matchParticipants[0].id }}"
