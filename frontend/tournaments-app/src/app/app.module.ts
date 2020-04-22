@@ -22,6 +22,7 @@ import {
   MatInputModule,
   MatIconModule,
   MatRadioModule,
+  MatMenuModule,
   MatDatepickerModule,
   MatNativeDateModule,
   MAT_DATE_LOCALE,
@@ -50,6 +51,8 @@ import { FormsModule } from "@angular/forms";
 import { MyTournamentsComponent } from "./components/my-tournaments/my-tournaments.component";
 import { TournamentMatchesComponent } from "./components/tournament-matches/tournament-matches.component";
 import { MyMatchesComponent } from "./components/my-matches/my-matches.component";
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { UserPasswordComponent } from './components/user-password/user-password.component';
 
 @NgModule({
   declarations: [
@@ -66,14 +69,17 @@ import { MyMatchesComponent } from "./components/my-matches/my-matches.component
     TournamentMatchesComponent,
     MyMatchesComponent,
     TournamentAcceptationComponent,
+    UserSettingsComponent,
+    UserPasswordComponent,
   ],
-  entryComponents: [TournamentAcceptationComponent],
+  entryComponents: [TournamentAcceptationComponent, UserSettingsComponent, UserPasswordComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     MatTabsModule,
+    MatMenuModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
