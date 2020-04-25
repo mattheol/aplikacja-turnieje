@@ -1,3 +1,6 @@
+<button (onClick)="goToNextRound()">
+  Do kolejnej rundy
+</button>
 <app-result-form
   (onHideResult)="changeHideResult($event)"
   *ngIf="isResultActive"
@@ -10,17 +13,15 @@
       <div style="height: auto !important;">
         <div *ngFor="let match of roundMatches[i]">
           <div style="display: flex;">
-            <div class="match">
-              <div
-                class="leftParticipant"
-                [style.color]="
-                  match.winnerId != null
-                    ? match.matchParticipants[0].id == match.winnerId
-                      ? 'green'
-                      : 'red'
-                    : 'white'
-                "
-              >
+            <div
+              class="match"
+              [ngStyle]="{
+                'background-image': setBackgroundImg(match),
+                'background-repeat': 'no-repeat',
+                'background-size': '100% 100%'
+              }"
+            >
+              <div class="leftParticipant">
                 {{
                   forTeams
                     ? match.teamName
@@ -30,24 +31,19 @@
               </div>
 
               <div class="score">
-                {{ match.score }}
+                <b>{{ match.score }}</b>
               </div>
-              <div
-                class="rightParticipant"
-                [style.color]="
-                  match.winnerId != null
-                    ? match.matchParticipants[1].id == match.winnerId
-                      ? 'green'
-                      : 'red'
-                    : 'white'
-                "
-              >
+              <div class="rightParticipant">
                 {{
                   forTeams
                     ? match.opponentTeamName
                     : match.matchParticipants[1].firstName
                 }}
                 {{ forTeams ? "" : match.matchParticipants[1].lastName }}
+              </div>
+              <div class="dateContainer">
+                {{ match.startTime | date: "dd/MM/yyyy" }}
+                {{ match.startTime | date: "hh:mm" }}
               </div>
             </div>
             <div *ngIf="isOrganizer" class="editResult">

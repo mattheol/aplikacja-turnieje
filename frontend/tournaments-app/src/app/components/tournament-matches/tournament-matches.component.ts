@@ -15,7 +15,7 @@ export class TournamentMatchesComponent implements OnInit {
   @Input() tournament: Tournament;
   matches: Match[];
   tourId: Number;
-  maxRound: Number;
+  maxRound: number;
   rounds: string[];
   roundMatches: Match[][];
   isOrganizer: boolean;
@@ -79,9 +79,23 @@ export class TournamentMatchesComponent implements OnInit {
     return true;
   }
 
+  setBackgroundImg(match: Match) {
+    if (!match.winnerId) {
+      return "url(../../../assets/match.png)";
+    } else if (match.matchParticipants[0].id == match.winnerId) {
+      return "url(../../../assets/match-left.png)";
+    } else {
+      return "url(../../../assets/match-right.png)";
+    }
+  }
+
   showResultForm(match: Match) {
     this.matchResult = match;
     this.isResultActive = true;
+  }
+
+  goToNextRound() {
+    console.log(this.roundMatches[this.maxRound - 1]);
   }
 
   changeHideResult(val: boolean) {
