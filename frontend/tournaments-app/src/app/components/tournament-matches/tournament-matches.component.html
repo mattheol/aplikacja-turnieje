@@ -1,64 +1,80 @@
-<button (onClick)="goToNextRound()">
-  Do kolejnej rundy
-</button>
-<app-result-form
-  (onHideResult)="changeHideResult($event)"
-  *ngIf="isResultActive"
-  [match]="matchResult"
-  [forTeams]="forTeams"
-></app-result-form>
-<div *ngIf="this.roundMatches.length === this.maxRound">
-  <mat-tab-group dynamicHeight>
-    <mat-tab *ngFor="let round of rounds; let i = index" [label]="round">
-      <div style="height: auto !important;">
-        <div *ngFor="let match of roundMatches[i]">
-          <div style="display: flex;">
-            <div
-              class="match"
-              [ngStyle]="{
-                'background-image': setBackgroundImg(match),
-                'background-repeat': 'no-repeat',
-                'background-size': '100% 100%'
-              }"
-            >
-              <div class="leftParticipant">
-                {{
-                  forTeams
-                    ? match.teamName
-                    : match.matchParticipants[0].firstName
-                }}
-                {{ forTeams ? "" : match.matchParticipants[0].lastName }}
-              </div>
+<div class="flexContainer">
+  <h5 style="display: inline;">Mecze</h5>
+  <app-next-round
+    *ngIf="isNextRoundActive"
+    (onHideNextRound)="changeHideNextRound($event)"
+    [matches]="matchesForNextRound"
+  ></app-next-round>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="goToNextRound()"
+    style="margin-left: 500px;"
+  >
+    Kolejny etap
+    <span class="material-icons">
+      arrow_forward_ios
+    </span>
+  </button>
+  <app-result-form
+    (onHideResult)="changeHideResult($event)"
+    *ngIf="isResultActive"
+    [match]="matchResult"
+    [forTeams]="forTeams"
+  ></app-result-form>
+  <div *ngIf="this.roundMatches.length === this.maxRound">
+    <mat-tab-group dynamicHeight>
+      <mat-tab *ngFor="let round of rounds; let i = index" [label]="round">
+        <div style="height: auto !important;">
+          <div *ngFor="let match of roundMatches[i]">
+            <div style="display: flex;">
+              <div
+                class="match"
+                [ngStyle]="{
+                  'background-image': setBackgroundImg(match),
+                  'background-repeat': 'no-repeat',
+                  'background-size': '100% 100%'
+                }"
+              >
+                <div class="leftParticipant">
+                  {{
+                    forTeams
+                      ? match.teamName
+                      : match.matchParticipants[0].firstName
+                  }}
+                  {{ forTeams ? "" : match.matchParticipants[0].lastName }}
+                </div>
 
-              <div class="score">
-                <b>{{ match.score }}</b>
+                <div class="score">
+                  <b>{{ match.score }}</b>
+                </div>
+                <div class="rightParticipant">
+                  {{
+                    forTeams
+                      ? match.opponentTeamName
+                      : match.matchParticipants[1].firstName
+                  }}
+                  {{ forTeams ? "" : match.matchParticipants[1].lastName }}
+                </div>
+                <div class="dateContainer">
+                  {{ match.startTime | date: "dd/MM/yyyy" }}
+                  {{ match.startTime | date: "hh:mm" }}
+                </div>
               </div>
-              <div class="rightParticipant">
-                {{
-                  forTeams
-                    ? match.opponentTeamName
-                    : match.matchParticipants[1].firstName
-                }}
-                {{ forTeams ? "" : match.matchParticipants[1].lastName }}
+              <div *ngIf="isOrganizer" class="editResult">
+                <img
+                  class="editResultImage"
+                  src="../../../assets/edit-solid.svg"
+                  style="height: 1.5em;"
+                  (click)="showResultForm(match)"
+                  alt="edytuj wyniki"
+                  title="edytuj wyniki"
+                />
               </div>
-              <div class="dateContainer">
-                {{ match.startTime | date: "dd/MM/yyyy" }}
-                {{ match.startTime | date: "hh:mm" }}
-              </div>
-            </div>
-            <div *ngIf="isOrganizer" class="editResult">
-              <img
-                class="editResultImage"
-                src="../../../assets/edit-solid.svg"
-                style="height: 1.5em;"
-                (click)="showResultForm(match)"
-                alt="edytuj wyniki"
-                title="edytuj wyniki"
-              />
             </div>
           </div>
         </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>

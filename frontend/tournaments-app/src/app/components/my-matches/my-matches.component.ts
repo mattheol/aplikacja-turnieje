@@ -31,6 +31,16 @@ export class MyMatchesComponent implements OnInit {
     );
   }
 
+  setBackgroundImg(match: Match) {
+    if (!match.winnerId) {
+      return "url(../../../assets/match.png)";
+    } else if (match.matchParticipants[0].id == match.winnerId) {
+      return "url(../../../assets/match-left.png)";
+    } else {
+      return "url(../../../assets/match-right.png)";
+    }
+  }
+
   // redirectToTournament(id: Number) {
   //   this.router.navigate(["/turnieje", id]);
   // }
@@ -49,5 +59,9 @@ export class MyMatchesComponent implements OnInit {
     let participants = match.matchParticipants;
     let opponent = participants.find((u) => u.login != this.getLogin());
     return opponent.firstName + " " + opponent.lastName;
+  }
+
+  getOpponentTeamName(match: Match) {
+    console.log(match.matchParticipants);
   }
 }

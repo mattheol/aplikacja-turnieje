@@ -3,20 +3,37 @@
   style="display: flex; align-items: center; flex-direction: column;"
 >
   <div *ngFor="let match of matches" class="itemWrapper">
-    <mat-card class="tourItem">
-      <h5 *ngIf="match.teamName">
-        {{ match.teamName }} vs
-        {{ match.opponentTeamName ? match.opponentTeamName : "?" }}
-        ({{ match.tournament.name }})
-      </h5>
-      <h5 *ngIf="!match.teamName">
-        Ja vs
-        {{ getOpponentName(match) ? getOpponentName(match) : "?" }}
-        ({{ match.tournament.name }})
-      </h5>
-      <mat-card-subtitle class="tourType">
-        <h5>{{ match.startTime | date: "dd/MM/yyyy hh:mm" }}</h5>
-      </mat-card-subtitle>
+    <div
+      class="match"
+      [ngStyle]="{
+        'background-image': setBackgroundImg(match),
+        'background-repeat': 'no-repeat',
+        'background-size': '100% 100%'
+      }"
+    >
+      <div class="leftParticipant">
+        <div *ngIf="match.teamName">
+          {{ match.teamName }}
+        </div>
+        <div *ngIf="!match.teamName">
+          Ja
+        </div>
+      </div>
+      <div class="score">
+        <b>{{ match.score }}</b>
+      </div>
+      <div class="rightParticipant">
+        <div *ngIf="match.teamName">
+          {{ match.opponentTeamName }}
+        </div>
+        <div *ngIf="!match.teamName">
+          {{ getOpponentName(match) }}
+        </div>
+      </div>
+      <div class="dateContainer">
+        {{ match.startTime | date: "dd/MM/yyyy" }}
+        {{ match.startTime | date: "hh:mm" }}
+      </div>
       <!-- <button
         (click)="redirectToTournament(tournament.id)"
         mat-flat-button
@@ -26,6 +43,6 @@
           arrow_forward_ios
         </span>
       </button> -->
-    </mat-card>
+    </div>
   </div>
 </div>

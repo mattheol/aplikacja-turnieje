@@ -3,7 +3,7 @@ import { TournamentService } from "src/app/services/tournament.service";
 import { Match } from "src/app/models/match";
 import { ActivatedRoute } from "@angular/router";
 import { Tournament } from "src/app/models/tournament";
-import { NgForm } from "@angular/forms";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-tournament-matches",
@@ -21,13 +21,16 @@ export class TournamentMatchesComponent implements OnInit {
   isOrganizer: boolean;
   isResultActive: boolean;
   matchResult: Match;
+  isNextRoundActive: boolean = false;
+  matchesForNextRound: Match[];
+
   constructor(
     private tournamentService: TournamentService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
-    console.log(this.forTeams);
     this.roundMatches = [];
     this.tourId = this.activatedRoute.snapshot.params["id"];
     this.getMatches();
@@ -95,7 +98,24 @@ export class TournamentMatchesComponent implements OnInit {
   }
 
   goToNextRound() {
-    console.log(this.roundMatches[this.maxRound - 1]);
+    let length = this.roundMatches[this.maxRound - 1].length;
+    if (
+      length !==
+      this.roundMatches[this.maxRound - 1].filter((m) => m.winnerId !== null)
+        .length
+    ) {
+      this.toastr.error("Wpisz wynik wszystkim meczom", "", {
+        positionClass: "toast-top-center",
+      });
+    } else {
+      console.log("organizuje mecze...");
+      this.matchesForNextRound = this.roundMatches[this.maxRound - 1];
+      this.isNextRoundActive = true;
+    }
+  }
+
+  changeHideNextRound(val: boolean) {
+    this.isNextRoundActive = !val;
   }
 
   changeHideResult(val: boolean) {
