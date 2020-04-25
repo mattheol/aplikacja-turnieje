@@ -44,6 +44,17 @@ export class TournamentService {
     });
   }
 
+  saveNextRoundMatches(matches: Match[], idTour: number): Observable<void> {
+    const params = new HttpParams().set("idTour", idTour.toString());
+    return this.http.post<void>(
+      `${environment.basicUrl}/matches/newRound`,
+      matches,
+      {
+        params,
+      }
+    );
+  }
+
   enrollUserToTournament(
     login: string,
     idTour: number,

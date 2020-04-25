@@ -110,4 +110,8 @@ public class TournamentService {
         matchRepository.save(match);
     }
 
+    public Match saveMatch(Match match, Integer idTour){
+        match.setTournament(getTournament(idTour));
+        return matchRepository.save(match);
+    }
 }

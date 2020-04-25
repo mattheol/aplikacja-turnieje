@@ -1,6 +1,33 @@
 <div class="modalContainer">
   <div class="regModal">
     <span class="close" (click)="setHideResult()"></span>
-    Przejdź do następnego etapu rozgrywek
+    <h5>Przejdź do następnego etapu rozgrywek</h5>
+    <div *ngFor="let match of newMatches">
+      <div>
+        {{
+          match[0].teamWon
+            ? match[0].teamWon
+            : match[0].participant.firstName +
+              " " +
+              match[0].participant.lastName
+        }}
+        vs
+        {{
+          match[1].teamWon
+            ? match[1].teamWon
+            : match[1].participant.firstName +
+              " " +
+              match[1].participant.lastName
+        }}
+      </div>
+    </div>
+    <button
+      (click)="saveMatches()"
+      mat-raised-button
+      color="primary"
+      style="margin-top: 20px;"
+    >
+      Zapisz
+    </button>
   </div>
 </div>

@@ -108,7 +108,6 @@ export class TournamentMatchesComponent implements OnInit {
         positionClass: "toast-top-center",
       });
     } else {
-      console.log("organizuje mecze...");
       this.matchesForNextRound = this.roundMatches[this.maxRound - 1];
       this.isNextRoundActive = true;
     }
@@ -116,6 +115,7 @@ export class TournamentMatchesComponent implements OnInit {
 
   changeHideNextRound(val: boolean) {
     this.isNextRoundActive = !val;
+    this.ngOnInit();
   }
 
   changeHideResult(val: boolean) {

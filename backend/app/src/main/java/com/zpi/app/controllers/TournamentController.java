@@ -79,4 +79,12 @@ public class TournamentController {
         tournamentService.updateMatchScore(match, idTour);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/matches/newRound")
+    public ResponseEntity<?> saveNewRoundMatches(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Match[] matches,  @RequestParam("idTour") Integer idTour) {
+        for(Match match : matches){
+            tournamentService.saveMatch(match,idTour);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
