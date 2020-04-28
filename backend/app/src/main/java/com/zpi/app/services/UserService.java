@@ -77,6 +77,7 @@ public class UserService {
         usr.setLastName(user.getLastName());
         usr.setEmail(user.getEmail());
         usr.setGender(user.getGender());
+        usr.setBirthday(user.getBirthday());
         userRepository.save(usr);
         return user;
     }

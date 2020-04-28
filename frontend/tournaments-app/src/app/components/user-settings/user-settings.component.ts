@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormGroupDirective, FormControl } from '@angular/forms';
 import { TokenStorageService } from 'src/app/services/auth/token-storage.service';
 import { stringify } from 'querystring';
 import { User } from 'src/app/models/user';
@@ -18,9 +18,8 @@ export class UserSettingsComponent implements OnInit {
  
 
 
-
+  birthdate = new Date((new Date().getTime() - 3888000000));
   myForm: FormGroup;
-
 
   constructor(private fb: FormBuilder, private us: UserService, public tokenService:TokenStorageService,
     private toastr: ToastrService,public dialogRef: MatDialogRef<UserSettingsComponent>) {this.setfirstnameInput() }
@@ -31,7 +30,9 @@ export class UserSettingsComponent implements OnInit {
       password: ["", [Validators.required, Validators.minLength(6)]],
       firstname: ["", [Validators.required, Validators.minLength(2)]],
       lastname: ["", [Validators.required, Validators.minLength(2)]],
-      gender: ""})
+      gender: "",
+      birthday: ""
+    })
 
   }
   setfirstnameInput(){
@@ -40,8 +41,13 @@ export class UserSettingsComponent implements OnInit {
         email: [u.email, [Validators.required, Validators.email]],
         firstname: [u.firstName, [Validators.required, Validators.minLength(2)]],
         lastname: [u.lastName, [Validators.required, Validators.minLength(2)]],
-        gender: u.gender
-    });
+        gender: u.gender,
+        birthday: new FormControl(new Date(u.birthday))
+      })
+   
+    // this.birthdayDate = u.birthday
+ 
+   // console.log(this.u.birthday)
     console.log(u.gender)
     });
 }
@@ -59,6 +65,9 @@ export class UserSettingsComponent implements OnInit {
   get genderInput() {
     return this.myForm.get("gender");
   }
+  get birthdayInput() {
+    return this.myForm.get("birthday");
+  }
 
   submit(form: FormGroupDirective) {
     // this.userService
@@ -74,7 +83,7 @@ export class UserSettingsComponent implements OnInit {
           this.firstnameInput.value,
           this.lastnameInput.value,
           this.emailInput.value,
-          null,
+          new Date(this.birthdayInput.value),
           this.genderInput.value
         )
       )

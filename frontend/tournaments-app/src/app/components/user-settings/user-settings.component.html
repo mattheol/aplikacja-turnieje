@@ -64,6 +64,14 @@
         <mat-radio-button value="F">Kobieta</mat-radio-button>
       </mat-radio-group>
 
+      <mat-form-field style="margin-top: 10px;">
+        <mat-label>Data urodzenia: MM/DD/YYYY</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthday" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker [startAt]="birthday" #picker></mat-datepicker>
+      </mat-form-field>
+      
+
       <mat-dialog-actions>
         <button
           mat-raised-button
