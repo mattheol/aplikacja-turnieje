@@ -56,16 +56,27 @@ export class TournamentComponent implements OnInit {
   }
 
   openDialog() {
-    let dialogRef = this.dialog.open(TournamentAcceptationComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === "true") {
-        this.enrollUser();
-      }
-    });
+    if (this.teamName != undefined && this.teamName.length > 0) {
+      let dialogRef = this.dialog.open(TournamentAcceptationComponent);
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === "true") {
+          this.enrollUser();
+        }
+      });
+    } else
+      this.toastr.warning("Nazwa drużyny jest wymagana", "", {
+        positionClass: "toast-top-center",
+      });
   }
 
   checkDate() {
     return new Date(this.tournament.enrollmentEnd) > new Date();
+  }
+
+  checkIfFull() {
+    return (
+      this.tournament.participants.length === this.tournament.numberOfPlayers
+    );
   }
 
   enrollUser() {

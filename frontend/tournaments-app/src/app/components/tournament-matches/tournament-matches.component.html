@@ -6,7 +6,10 @@
     [matches]="matchesForNextRound"
   ></app-next-round>
   <button
-    *ngIf="this.roundMatches[maxRound - 1].length > 1"
+    *ngIf="
+      this.roundMatches.length != 0 &&
+      this.roundMatches[maxRound - 1].length > 1
+    "
     mat-flat-button
     color="primary"
     (click)="goToNextRound()"

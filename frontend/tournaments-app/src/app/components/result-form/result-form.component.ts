@@ -33,7 +33,7 @@ export class ResultFormComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.fb.group({
-      result: [""],
+      result: [this.match.score],
       winner: [, []],
     });
     this.match.matchParticipants[0].id;
