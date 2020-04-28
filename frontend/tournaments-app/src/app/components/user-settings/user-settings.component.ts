@@ -6,6 +6,7 @@ import { TokenStorageService } from 'src/app/services/auth/token-storage.service
 import { stringify } from 'querystring';
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-user-settings',
@@ -24,7 +25,7 @@ export class UserSettingsComponent implements OnInit {
 
   hide = true;
   constructor(private fb: FormBuilder, private us: UserService, public tokenService:TokenStorageService,
-    private toastr: ToastrService) {this.setfirstnameInput() }
+    private toastr: ToastrService,public dialogRef: MatDialogRef<UserSettingsComponent>) {this.setfirstnameInput() }
 
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -36,7 +37,7 @@ export class UserSettingsComponent implements OnInit {
 
   }
   setfirstnameInput(){
-    this.us.getUser(this.tokenService.getUser()).subscribe(u =>{
+    this.us.getUserData().subscribe(u =>{
       this.myForm = this.fb.group({
         email: [u.email, [Validators.required, Validators.email]],
         firstname: [u.firstName, [Validators.required, Validators.minLength(2)]],
@@ -82,7 +83,9 @@ export class UserSettingsComponent implements OnInit {
       .subscribe(
         res => {
           this.toastr.success("Zmieniono poprawnie","", { positionClass:'toast-top-center'})
-          this.setHide();
+          this.dialogRef.close();
+          // this.setHide();
+      
         },
         err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
       );

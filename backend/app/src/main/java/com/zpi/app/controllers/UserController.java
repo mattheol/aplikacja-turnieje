@@ -47,10 +47,19 @@ public class UserController {
         return userService.findByLogin(login);
     }
 
-    @PutMapping("/user")
-    public ResponseEntity<Void> updateUser(@RequestBody User user){
-        userService.update(user);
+    @PutMapping("/my-data")
+    public ResponseEntity<Void> updateUser(@RequestHeader("Authorization") String authorizationHeader,@RequestBody User user){
+        String login = jwtTokenUtil.getLoginFromHeader(authorizationHeader);
+        userService.update(user,login);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/my-data")
+    public User getUserData(@RequestHeader("Authorization") String authorizationHeader){
+
+        String login = jwtTokenUtil.getLoginFromHeader(authorizationHeader);
+        return userService.findByLogin(login);
+
     }
 
     @PostMapping("/registration")
