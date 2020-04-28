@@ -56,7 +56,7 @@ export class TournamentComponent implements OnInit {
   }
 
   openDialog() {
-    if (this.teamName != undefined && this.teamName.length > 0) {
+    if (!this.isForTeams || this.teamName != undefined && this.teamName.length > 0) {
       let dialogRef = this.dialog.open(TournamentAcceptationComponent);
       dialogRef.afterClosed().subscribe((result) => {
         if (result === "true") {

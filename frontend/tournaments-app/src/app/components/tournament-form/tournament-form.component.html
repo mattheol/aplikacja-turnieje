@@ -50,12 +50,18 @@
 
     <mat-form-field style="width: 80%;">
       <mat-label>Liczba zawodników</mat-label>
-      <input
-        type="number"
-        matInput
-        required
-        formControlName="numberOfPlayers"
-      />
+      <mat-select
+      matSelect
+      required
+      formControlName="numberOfPlayers">
+        <mat-option [value]="2">2</mat-option>
+        <mat-option [value]="4">4</mat-option>
+        <mat-option [value]="8">8</mat-option>
+        <mat-option [value]="16">16</mat-option>
+        <mat-option [value]="32">32</mat-option>
+        <mat-option [value]="64">64</mat-option>
+        <mat-option [value]="128">128</mat-option>
+      </mat-select>
       <mat-error
         *ngIf="
           numberOfPlayersInput.errors?.required && numberOfPlayersInput.touched
@@ -107,9 +113,8 @@
     <mat-form-field>
       <mat-label>Wybierz typ turnieju</mat-label>
       <mat-select required formControlName="type">
-        <mat-option value="0">Typ 1</mat-option>
-        <mat-option value="1">Typ 2</mat-option>
-        <mat-option value="2">Typ 3</mat-option>
+        <mat-option value="0">Typ drabinkowy</mat-option>
+        <mat-option value="1">Typ z drabinkami winner/looser</mat-option>
       </mat-select>
     </mat-form-field>
     <br />
