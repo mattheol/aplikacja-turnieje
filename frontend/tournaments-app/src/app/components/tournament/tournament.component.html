@@ -1,7 +1,10 @@
 <div *ngIf="tournament" style="min-height: 100%;">
   <div class="tournamentStyle">
     <div class="enrollmentContainer">
-      <div *ngIf="!isUserEnrolled && checkDate()" class="enrollContainer">
+      <div
+        *ngIf="!isUserEnrolled && checkDate() && !checkIfFull()"
+        class="enrollContainer"
+      >
         <div *ngIf="isForTeams">
           <mat-form-field class="teamInput" style="margin-bottom: -1.25em;">
             <input
@@ -52,7 +55,7 @@
           Wypisz
         </button>
       </div>
-      <div *ngIf="checkDate()">
+      <div *ngIf="checkDate() && !checkIfFull()">
         <p style="color: lawngreen;">
           koniec zapisów:
           {{ tournament.enrollmentEnd | date: "medium":"+0200" }}
@@ -62,6 +65,11 @@
         <p style="color: orange;">
           Zapisy dobiegły końca dnia:
           {{ tournament.enrollmentEnd | date: "medium":"+0200" }}
+        </p>
+      </div>
+      <div *ngIf="checkIfFull() && checkDate() && !isUserEnrolled">
+        <p style="color: orange;">
+          Brak wolnych miejsc
         </p>
       </div>
     </div>

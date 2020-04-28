@@ -35,7 +35,7 @@
 
       <button
         mat-raised-button
-        [disabled]="myForm.invalid"
+        [disabled]="!isValidForm()"
         color="primary"
         type="submit"
         style="margin-top: 10px; text-transform: uppercase;"
