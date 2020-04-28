@@ -15,15 +15,13 @@ import { MatDialogRef } from '@angular/material';
 })
 export class UserSettingsComponent implements OnInit {
 
-  @Output() onHide = new EventEmitter<boolean>();
+ 
 
-  setHide() {
-    this.onHide.emit(true);
-  }
+
 
   myForm: FormGroup;
 
-  hide = true;
+
   constructor(private fb: FormBuilder, private us: UserService, public tokenService:TokenStorageService,
     private toastr: ToastrService,public dialogRef: MatDialogRef<UserSettingsComponent>) {this.setfirstnameInput() }
 
@@ -84,7 +82,7 @@ export class UserSettingsComponent implements OnInit {
         res => {
           this.toastr.success("Zmieniono poprawnie","", { positionClass:'toast-top-center'})
           this.dialogRef.close();
-          // this.setHide();
+        
       
         },
         err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
