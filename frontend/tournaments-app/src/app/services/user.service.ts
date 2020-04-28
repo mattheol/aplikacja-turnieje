@@ -47,4 +47,10 @@ export class UserService {
   updateUser(user: User): Observable<User>{
     return this.http.put<User>(`${environment.basicUrl}/my-data`,user);
   }
+
+  updatePassword(oldPassword: string, newPassword: string): Observable<User> {
+    console.log("service")
+    return this.http.put<User>(`${environment.basicUrl}/my-password`,{oldPassword, newPassword});
+  }
+
 }

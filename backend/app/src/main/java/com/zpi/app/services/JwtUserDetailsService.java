@@ -50,14 +50,29 @@ public class JwtUserDetailsService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-
-    public void authenticate(String username, String password) throws MyAuthenticationException {
+    public void changePassword(String login, String oldPassword, String newPassword) throws MyAuthenticationException{
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new MyAuthenticationException("Użytkownik nieczynny", e);
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, oldPassword));
+            User user = userRepository.findByLogin(login).get();
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
         } catch (BadCredentialsException e) {
-            throw new MyAuthenticationException("Niepoprawne dane logowania", e);
+            throw new MyAuthenticationException("Niepoprawne obecne hasło");
+        }catch (Exception ex){
+            throw new MyAuthenticationException("Coś poszło nie tak");
+        }
+
+
+    }
+
+
+    public void authenticate(String login, String password) throws MyAuthenticationException {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
+        } catch (DisabledException e) {
+            throw new MyAuthenticationException("Użytkownik nieczynny");
+        } catch (BadCredentialsException e) {
+            throw new MyAuthenticationException("Niepoprawne dane logowania");
         }
     }
 

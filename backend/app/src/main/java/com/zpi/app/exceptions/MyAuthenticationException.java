@@ -3,7 +3,7 @@ package com.zpi.app.exceptions;
 
 
 public class MyAuthenticationException extends Exception {
-    public MyAuthenticationException(String message, Throwable cause) {
-        super(message, cause);
+    public MyAuthenticationException(String message) {
+        super(message);
     }
 }

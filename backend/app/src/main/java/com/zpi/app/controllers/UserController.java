@@ -1,11 +1,7 @@
 package com.zpi.app.controllers;
 
 
-import com.zpi.app.dtos.JwtRequest;
-import com.zpi.app.dtos.JwtResponse;
-
-import com.zpi.app.dtos.MatchDto;
-import com.zpi.app.dtos.UserTournament;
+import com.zpi.app.dtos.*;
 
 import com.zpi.app.entities.User;
 import com.zpi.app.exceptions.MyAuthenticationException;
@@ -52,6 +48,13 @@ public class UserController {
         String login = jwtTokenUtil.getLoginFromHeader(authorizationHeader);
         userService.update(user,login);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/my-password")
+    public void updatePassword(@RequestHeader("Authorization") String authorizationHeader,@RequestBody PasswordChangeDto passwordChangeDto)throws MyAuthenticationException{
+        String login = jwtTokenUtil.getLoginFromHeader(authorizationHeader);
+        userDetailsService.changePassword(login,passwordChangeDto.getOldPassword(),passwordChangeDto.getNewPassword());
+
     }
 
     @GetMapping("/my-data")
