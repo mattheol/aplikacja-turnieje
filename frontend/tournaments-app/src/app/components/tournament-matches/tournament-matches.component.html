@@ -8,7 +8,8 @@
   <button
     *ngIf="
       this.roundMatches.length != 0 &&
-      this.roundMatches[maxRound - 1].length > 1
+      this.roundMatches[maxRound - 1].length > 1 &&
+      isOrganizer
     "
     mat-flat-button
     color="primary"
