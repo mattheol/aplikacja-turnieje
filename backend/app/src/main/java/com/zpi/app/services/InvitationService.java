@@ -34,4 +34,12 @@ public class InvitationService {
             tournamentService.enrollUserToTournament(login, invitation.getTournament().getId(), null);
         }
     }
+
+    public void invite(Invitation invitation, String invitedUserLogin, String organizerLogin){
+        User invitedUser = userService.findByLogin(invitedUserLogin);
+        User organizer = userService.findByLogin(organizerLogin);
+        invitation.setOrganizer(organizer);
+        invitation.setParticipant(invitedUser);
+        invitationRepository.save(invitation);
+    }
 }

@@ -57,6 +57,7 @@ import { UserPasswordComponent } from './components/user-password/user-password.
 import { NextRoundComponent } from './components/next-round/next-round.component';
 import { MyInvitationsComponent } from './components/my-invitations/my-invitations.component';
 import { InvitationDetailComponent } from './components/invitation-detail/invitation-detail.component';
+import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
 
 
 @NgModule({
@@ -80,8 +81,15 @@ import { InvitationDetailComponent } from './components/invitation-detail/invita
     NextRoundComponent,
     MyInvitationsComponent,
     InvitationDetailComponent,
+    InviteDialogComponent,
   ],
-  entryComponents: [TournamentAcceptationComponent, UserSettingsComponent, UserPasswordComponent,InvitationDetailComponent],
+  entryComponents: [
+    TournamentAcceptationComponent,
+    UserSettingsComponent,
+    UserPasswordComponent,
+    InvitationDetailComponent,
+    InviteDialogComponent
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,

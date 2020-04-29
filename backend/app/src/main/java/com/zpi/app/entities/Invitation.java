@@ -82,4 +82,17 @@ public class Invitation {
     public void setConfirmType(InvitationConfirmType confirmType) {
         this.confirmType = confirmType;
     }
+
+    @Override
+    public String toString() {
+        return "Invitation{" +
+                "id=" + id +
+                ", organizer=" + organizer +
+                ", participant=" + participant +
+                ", tournament=" + tournament +
+                ", invitationTime=" + invitationTime +
+                ", invitationMessage='" + invitationMessage + '\'' +
+                ", confirmType=" + confirmType +
+                '}';
+    }
 }

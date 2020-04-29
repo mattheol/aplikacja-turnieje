@@ -41,6 +41,16 @@
             Dołącz
           </button>
         </div>
+        <div *ngIf="checkIfOrganizer()" >
+            <button
+            (click)="openInvitationDialog()"
+            class="enrollBtn"
+            mat-raised-button
+            color="primary"
+          >
+            Zaproś do turnieju
+          </button>
+          </div>
       </div>
       <div
         *ngIf="isUserEnrolled && checkDate()"
@@ -72,6 +82,7 @@
           Brak wolnych miejsc
         </p>
       </div>
+  
     </div>
     <h5>{{ tournament.name }}</h5>
     <p>{{ tournament.description }}</p>

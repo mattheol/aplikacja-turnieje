@@ -56,6 +56,10 @@ export class UserService {
     return this.http.put<any>(`${environment.basicUrl}/my-invitations/${id}`,invitation);
   }
 
+  invite(login:string, invitation: Invitation): Observable<Invitation> {
+    return this.http.post<Invitation>(`${this.url}/${login}/invitation`,invitation);
+  }
+
   updatePassword(oldPassword: string, newPassword: string): Observable<User> {
     console.log("service")
     return this.http.put<User>(`${environment.basicUrl}/my-password`,{oldPassword, newPassword});
