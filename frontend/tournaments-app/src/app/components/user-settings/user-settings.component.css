@@ -19,7 +19,7 @@ mat-form-field {
 }
 
 .formBody {
-  height: 320px;
+  height: 400px;
   overflow-y: auto;
   padding: 0px 10px;
   background-color: none;

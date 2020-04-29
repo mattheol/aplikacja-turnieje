@@ -29,6 +29,10 @@ export class UserService {
     // .pipe(tap((_) => console.log("fetched users")));
   }
 
+  getUserData(): Observable<User> {
+    return this.http.get<User>(`${environment.basicUrl}/my-data`);
+  }
+
   getUserTournaments(): Observable<TournamentDTO[]> {
     return this.http.get<TournamentDTO[]>(`${environment.basicUrl}/my-tournaments`);
   }
@@ -41,6 +45,12 @@ export class UserService {
     return this.http.post<User>(this.url, user);
   }
   updateUser(user: User): Observable<User>{
-    return this.http.put<User>(this.url,user);
+    return this.http.put<User>(`${environment.basicUrl}/my-data`,user);
   }
+
+  updatePassword(oldPassword: string, newPassword: string): Observable<User> {
+    console.log("service")
+    return this.http.put<User>(`${environment.basicUrl}/my-password`,{oldPassword, newPassword});
+  }
+
 }
