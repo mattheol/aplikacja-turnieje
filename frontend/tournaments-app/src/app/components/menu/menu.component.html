@@ -47,6 +47,22 @@
     <li
       *ngIf="isLoggedIn()"
       class="buttonRoute"
+      routerLink="/moje-zaproszenia"
+      routerLinkActive="activeRoute"
+      [ngStyle]="{
+        'background-image': 'url(../../../assets/3.png)',
+        'background-position': '50%',
+        'background-repeat': 'no-repeat'
+      }"
+    >
+      <p class="buttonRouteText">
+        Zaproszenia
+      </p>
+    </li>
+
+    <li
+      *ngIf="isLoggedIn()"
+      class="buttonRoute"
       routerLink="/stworz-turniej"
       routerLinkActive="activeRoute"
       style="width: 191px; border-radius: 30px; margin-left: auto;"

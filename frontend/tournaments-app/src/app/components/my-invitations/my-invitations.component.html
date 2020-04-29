@@ -1,0 +1,23 @@
+<div
+  *ngIf="invitations"
+  style="display: flex; align-items: center; flex-direction: column;"
+>
+  <div *ngFor="let invitation of invitations" class="itemWrapper">
+    <mat-card class="tourItem">
+      <h5 style="display: inline;">Zaproszenie do turnieju: {{ invitation.tournament.name }}</h5>
+      <br>
+
+    <mat-card-subtitle class="tourType">
+        
+    
+      </mat-card-subtitle>
+      <button
+      (click)="openDialog(invitation)"
+        mat-flat-button
+        class="btnToTournament"
+      >
+        Pokaż szczegóły
+      </button>
+    </mat-card>
+  </div>
+</div>
