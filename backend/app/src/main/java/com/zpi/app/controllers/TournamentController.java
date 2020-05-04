@@ -87,4 +87,15 @@ public class TournamentController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/matches/firstRound")
+    public ResponseEntity<?> saveFirstRoundMatches(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Match[] matches,  @RequestParam("idTour") Integer idTour) {
+        Tournament t = tournamentService.getTournament(idTour);
+        t.setActive(true);
+        tournamentService.updateTournament(t);
+        for(Match match : matches){
+            tournamentService.saveMatch(match,idTour);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

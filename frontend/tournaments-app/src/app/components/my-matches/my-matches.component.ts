@@ -57,8 +57,12 @@ export class MyMatchesComponent implements OnInit {
 
   getOpponentName(match: Match) {
     let participants = match.matchParticipants;
-    let opponent = participants.find((u) => u.login != this.getLogin());
-    return opponent.firstName + " " + opponent.lastName;
+    if (participants.length === 1) {
+      return "?";
+    } else {
+      let opponent = participants.find((u) => u.login != this.getLogin());
+      return opponent.firstName + " " + opponent.lastName;
+    }
   }
 
   getOpponentTeamName(match: Match) {

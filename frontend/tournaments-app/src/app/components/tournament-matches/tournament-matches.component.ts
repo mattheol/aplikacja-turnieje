@@ -42,7 +42,7 @@ export class TournamentMatchesComponent implements OnInit {
     this.tournamentService
       .getTournamentMatches(this.tourId)
       .subscribe((res) => {
-        //console.log(res);
+        // console.log(res);
         this.matches = res;
         this.getMaxRound();
       });
@@ -120,5 +120,9 @@ export class TournamentMatchesComponent implements OnInit {
 
   changeHideResult(val: boolean) {
     this.isResultActive = !val;
+  }
+
+  isCorrectMatch(match: Match) {
+    return match.matchParticipants.length === 2;
   }
 }

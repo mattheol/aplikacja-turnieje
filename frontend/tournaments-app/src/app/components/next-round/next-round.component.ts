@@ -32,7 +32,6 @@ export class NextRoundComponent implements OnInit {
       let participant;
       if (this.matches[i].teamName) {
         //forTeams
-        console.log(this.matches[i]);
         if (winnerId == this.matches[i].matchParticipants[0].id) {
           teamWon = this.matches[i].teamName;
           participant = this.matches[i].matchParticipants[0];
@@ -76,7 +75,6 @@ export class NextRoundComponent implements OnInit {
           null
         )
     );
-    console.log(matches);
     this.tourService
       .saveNextRoundMatches(matches, this.tournamentId)
       .subscribe((res) => this.setHideResult());
