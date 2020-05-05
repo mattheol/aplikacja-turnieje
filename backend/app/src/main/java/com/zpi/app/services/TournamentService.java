@@ -76,6 +76,10 @@ public class TournamentService {
         return tournamentRepository.save(tournament);
     }
 
+    public Tournament updateTournament(Tournament tournament){
+        return tournamentRepository.save(tournament);
+    }
+
     public void enrollUserToTournament( String login, Integer idTour, String teamName){
         User user= userService.findByLogin(login);
         ParticipantTournamentID participantTournamentID = new ParticipantTournamentID();

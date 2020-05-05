@@ -1,10 +1,10 @@
-# drop table invitations;
-# drop table tournaments_organizers;
-# drop table matches_participants;
-# drop table tournaments_participants;
-# drop table users;
-# drop table matches;
-# drop table tournaments;
+drop table invitations;
+drop table tournaments_organizers;
+drop table matches_participants;
+drop table tournaments_participants;
+drop table users;
+drop table matches;
+drop table tournaments;
 
 INSERT INTO users (id, first_name,last_name,gender,birthday,email,login,password)
        VALUES (1,'Jan','Kowalski','M','2000-01-21','jk@wp.pl','black',null),
@@ -17,13 +17,13 @@ INSERT INTO users (id, first_name,last_name,gender,birthday,email,login,password
               (8,'Witold','Kędziora','M',null,null,'pink',null),
               (9,'Jan','Kędziora','M',null,'user@user','user123','$2a$10$MhgGojF79oksaGBt8BRoBuqOYDeiqcAzhL8zDPSTRvhhUnp4GFtuy');
 
-INSERT INTO tournaments (id,name,tournament_type,is_private,is_for_teams,number_of_players,random_bracket, enrollment_end,description)
-       VALUES (1,'Turniej 1','LEAGUE',false,false,8,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.'),
-              (2,'Turniej 2','MIXED',false,true,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.'),
-              (3,'Turniej 3','LEAGUE',false,false,10,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.'),
-              (4,'Turniej 4','MIXED',false,false,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.');
+INSERT INTO tournaments (id,name,tournament_type,is_private,is_for_teams,number_of_players,random_bracket, enrollment_end,description,is_active)
+       VALUES (1,'Turniej 1','LEAGUE',false,false,8,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.', true),
+              (2,'Turniej 2','MIXED',false,true,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',true),
+              (3,'Turniej 3','LEAGUE',false,false,10,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.',false),
+              (4,'Turniej 4','MIXED',false,false,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',false);
 
-# SELECT * FROM tournaments;
+
 INSERT INTO matches (id,comment,winner_id,score,stage,start_time,tournament_id)
        VALUES (1,'',null,null ,1 , '2020-05-04 17:00', 1),
               (2,'',null,null,1 ,'2020-05-05 20:00' ,1),
@@ -38,7 +38,7 @@ INSERT INTO invitations (id,invitation_message, invitation_time,organizer_id,par
        VALUES (1,'Zapraszam cię na turniej.',null,1,2,1 );
 
 INSERT INTO tournaments_organizers (tournament_id,organizer_id)
-       VALUES (1,9),(2,9);
+       VALUES (1,9),(2,9),(3,9),(4,9);
 
 INSERT INTO tournaments_participants (tournament_id,participant_id, team_name)
 VALUES (1,1,null),
@@ -52,5 +52,14 @@ VALUES (1,1,null),
        (2,1,"Borsuki"),
        (2,2,"Wilki"),
        (2,8,"Kojoty"),
-       (2,9,"Krowy");
+       (2,9,"Krowy"),
+       (4,1,null),
+       (4,2,null),
+       (4,3,null),
+       (4,4,null),
+       (4,9,null);
 
+/*DELETE FROM matches_participants WHERE match_id>=8;
+DELETE FROM matches WHERE tournament_id = 4;
+UPDATE Tournaments 
+SET is_active = false WHERE id=4;*/

@@ -56,16 +56,27 @@
                 {{
                   forTeams
                     ? match.opponentTeamName
-                    : match.matchParticipants[1].firstName
+                    : match.matchParticipants.length !== 1
+                    ? match.matchParticipants[1].firstName
+                    : "?"
                 }}
-                {{ forTeams ? "" : match.matchParticipants[1].lastName }}
+                {{
+                  forTeams
+                    ? ""
+                    : match.matchParticipants.length !== 1
+                    ? match.matchParticipants[1].lastName
+                    : ""
+                }}
               </div>
               <div class="dateContainer">
                 {{ match.startTime | date: "dd/MM/yyyy" }}
                 {{ match.startTime | date: "hh:mm" }}
               </div>
             </div>
-            <div *ngIf="isOrganizer" class="editResult">
+            <div
+              *ngIf="isOrganizer && isCorrectMatch(match)"
+              class="editResult"
+            >
               <img
                 class="editResultImage"
                 src="../../../assets/edit-solid.svg"
