@@ -22,6 +22,7 @@ export class TournamentMatchesComponent implements OnInit {
   isResultActive: boolean;
   matchResult: Match;
   isNextRoundActive: boolean = false;
+  isDateFormActive: boolean = false;
   matchesForNextRound: Match[];
 
   constructor(
@@ -42,7 +43,7 @@ export class TournamentMatchesComponent implements OnInit {
     this.tournamentService
       .getTournamentMatches(this.tourId)
       .subscribe((res) => {
-        //console.log(res);
+        // console.log(res);
         this.matches = res;
         this.getMaxRound();
       });
@@ -97,6 +98,11 @@ export class TournamentMatchesComponent implements OnInit {
     this.isResultActive = true;
   }
 
+  showMatchDateForm(match: Match) {
+    this.matchResult = match;
+    this.isDateFormActive = true;
+  }
+
   goToNextRound() {
     let length = this.roundMatches[this.maxRound - 1].length;
     if (
@@ -120,5 +126,13 @@ export class TournamentMatchesComponent implements OnInit {
 
   changeHideResult(val: boolean) {
     this.isResultActive = !val;
+  }
+
+  changeHideDateMatch(val: boolean) {
+    this.isDateFormActive = !val;
+  }
+
+  isCorrectMatch(match: Match) {
+    return match.matchParticipants.length === 2;
   }
 }

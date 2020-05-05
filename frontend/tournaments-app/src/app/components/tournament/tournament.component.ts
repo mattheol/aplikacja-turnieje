@@ -7,6 +7,8 @@ import { ToastrService } from "ngx-toastr";
 import { MatDialog } from "@angular/material";
 import { TournamentAcceptationComponent } from "../tournament-acceptation/tournament-acceptation.component";
 import { InviteDialogComponent } from '../invite-dialog/invite-dialog.component';
+import { Match } from "src/app/models/match";
+
 
 @Component({
   selector: "app-tournament",
@@ -20,6 +22,7 @@ export class TournamentComponent implements OnInit {
   teamName: string;
   isUserEnrolled: boolean;
   isForTeams: boolean;
+  isOrganizer: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,13 +56,15 @@ export class TournamentComponent implements OnInit {
       this.tournament = tournament;
       this.checkIfUserIsAlreadyEnrolled();
       this.isForTeams = this.tournament.isForTeams;
+      this.isOrganizer = this.checkIfOrganizer();
     });
   }
 
   openDialog() {
-
-    if (!this.isForTeams || this.teamName != undefined && this.teamName.length > 0) {
-
+    if (
+      !this.isForTeams ||
+      (this.teamName != undefined && this.teamName.length > 0)
+    ) {
       let dialogRef = this.dialog.open(TournamentAcceptationComponent);
       dialogRef.afterClosed().subscribe((result) => {
         if (result === "true") {
@@ -125,5 +130,85 @@ export class TournamentComponent implements OnInit {
         },
         (err) => {}
       );
+  }
+
+  generateBracket() {
+    if (this.tournament.participants.length >= 2) {
+      let copy = this.tournament.participants.slice();
+      let shuffledPlayers = this.shuffle(copy);
+      let matches = [];
+      let stop = false;
+      let j = 2;
+      let p = 1;
+      while (!stop) {
+        j = Math.pow(2, p);
+        if (j >= shuffledPlayers.length) {
+          stop = true;
+        }
+        p++;
+      }
+      let numberOFMatches = j / 2;
+      let matchNumber = 0;
+      do {
+        if (numberOFMatches - matchNumber < shuffledPlayers.length) {
+          let player1 = shuffledPlayers.shift();
+          let player2 = shuffledPlayers.shift();
+          matches.push(
+            new Match(
+              -1,
+              [player1.participant, player2.participant],
+              null,
+              null,
+              player1.teamName,
+              player2.teamName,
+              null,
+              null,
+              "1",
+              null
+            )
+          );
+        } else {
+          let player = shuffledPlayers.shift();
+          matches.push(
+            new Match(
+              -1,
+              [player.participant],
+              null,
+              player.participant.id,
+              player.teamName,
+              "?",
+              "1:0",
+              null,
+              "1",
+              null
+            )
+          );
+        }
+        matchNumber++;
+      } while (matchNumber !== numberOFMatches);
+      this.tournamentService
+        .saveFirstRoundMatches(matches, this.id)
+        .subscribe((res) => window.location.reload());
+    }
+  }
+
+  shuffle(a) {
+    let j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = a[i];
+      a[i] = a[j];
+      a[j] = x;
+    }
+    return a;
+  }
+
+  checkIfOrganizer() {
+    let organizers = this.tournament.organizers;
+    let organizer = organizers.find(
+      (u) => u.login === JSON.parse(sessionStorage.getItem("login"))
+    );
+    if (organizer === undefined) return false;
+    return true;
   }
 }

@@ -55,6 +55,17 @@ export class TournamentService {
     );
   }
 
+  saveFirstRoundMatches(matches: Match[], idTour: number): Observable<void> {
+    const params = new HttpParams().set("idTour", idTour.toString());
+    return this.http.post<void>(
+      `${environment.basicUrl}/matches/firstRound`,
+      matches,
+      {
+        params,
+      }
+    );
+  }
+
   enrollUserToTournament(
     login: string,
     idTour: number,

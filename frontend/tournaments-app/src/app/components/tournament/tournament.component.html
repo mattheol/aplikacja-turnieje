@@ -98,18 +98,29 @@
     <h5>{{ tournament.name }}</h5>
     <p>{{ tournament.description }}</p>
 
-    <h6>Uczestnicy:</h6>
+    <div class="participants-section">
+      <h6>Uczestnicy:</h6>
 
-    <div *ngFor="let participantT of tournament.participants">
-      {{
-        tournament.isForTeams
-          ? participantT.teamName
-          : participantT.participant.firstName +
-            " " +
-            participantT.participant.lastName
-      }}
+      <div *ngFor="let participantT of tournament.participants">
+        {{
+          tournament.isForTeams
+            ? participantT.teamName
+            : participantT.participant.firstName +
+              " " +
+              participantT.participant.lastName
+        }}
+      </div>
     </div>
-    <br />
+
+    <button
+      *ngIf="!tournament.active && !checkDate() && isOrganizer"
+      (click)="generateBracket()"
+      mat-raised-button
+      color="primary"
+      style="margin: 20px 0 10px 0;"
+    >
+      Generuj drabinkę
+    </button>
     <app-tournament-matches
       [forTeams]="isForTeams"
       [tournament]="tournament"

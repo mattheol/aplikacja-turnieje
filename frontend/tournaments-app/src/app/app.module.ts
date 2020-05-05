@@ -58,6 +58,8 @@ import { NextRoundComponent } from './components/next-round/next-round.component
 import { MyInvitationsComponent } from './components/my-invitations/my-invitations.component';
 import { InvitationDetailComponent } from './components/invitation-detail/invitation-detail.component';
 import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
+import { MatchDateFormComponent } from './components/match-date-form/match-date-form.component';
+
 
 
 @NgModule({
@@ -89,6 +91,7 @@ import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.
     UserPasswordComponent,
     InvitationDetailComponent,
     InviteDialogComponent
+    MatchDateFormComponent,
   ],
   imports: [
     HttpClientModule,

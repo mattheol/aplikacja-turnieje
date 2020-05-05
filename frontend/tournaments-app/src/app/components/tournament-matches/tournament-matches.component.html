@@ -27,6 +27,12 @@
     [match]="matchResult"
     [forTeams]="forTeams"
   ></app-result-form>
+  <app-match-date-form
+    (onHideDateMatch)="changeHideDateMatch($event)"
+    *ngIf="isDateFormActive"
+    [match]="matchResult"
+    [forTeams]="forTeams"
+  ></app-match-date-form>
   <mat-tab-group dynamicHeight>
     <mat-tab *ngFor="let round of rounds; let i = index" [label]="round">
       <div style="height: auto !important;">
@@ -56,23 +62,42 @@
                 {{
                   forTeams
                     ? match.opponentTeamName
-                    : match.matchParticipants[1].firstName
+                    : match.matchParticipants.length !== 1
+                    ? match.matchParticipants[1].firstName
+                    : "?"
                 }}
-                {{ forTeams ? "" : match.matchParticipants[1].lastName }}
+                {{
+                  forTeams
+                    ? ""
+                    : match.matchParticipants.length !== 1
+                    ? match.matchParticipants[1].lastName
+                    : ""
+                }}
               </div>
               <div class="dateContainer">
                 {{ match.startTime | date: "dd/MM/yyyy" }}
-                {{ match.startTime | date: "hh:mm" }}
+                {{ match.startTime | date: "HH:mm" }}
               </div>
             </div>
-            <div *ngIf="isOrganizer" class="editResult">
+            <div
+              *ngIf="isOrganizer && isCorrectMatch(match)"
+              class="editResult"
+            >
               <img
                 class="editResultImage"
                 src="../../../assets/edit-solid.svg"
-                style="height: 1.5em;"
+                style="height: 2em;"
                 (click)="showResultForm(match)"
                 alt="edytuj wyniki"
                 title="edytuj wyniki"
+              />
+              <img
+                class="editResultImage"
+                src="../../../assets/clock-regular.svg"
+                style="height: 2em; margin-left: 1em;"
+                (click)="showMatchDateForm(match)"
+                alt="edytuj date spotkania"
+                title="edytuj date spotkania"
               />
             </div>
           </div>
