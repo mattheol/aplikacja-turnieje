@@ -20,6 +20,7 @@ export class TournamentComponent implements OnInit {
   teamName: string;
   isUserEnrolled: boolean;
   isForTeams: boolean;
+  isOrganizer: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +54,7 @@ export class TournamentComponent implements OnInit {
       this.tournament = tournament;
       this.checkIfUserIsAlreadyEnrolled();
       this.isForTeams = this.tournament.isForTeams;
+      this.isOrganizer = this.checkIfOrganizer();
     });
   }
 
@@ -182,5 +184,14 @@ export class TournamentComponent implements OnInit {
       a[j] = x;
     }
     return a;
+  }
+
+  checkIfOrganizer() {
+    let organizers = this.tournament.organizers;
+    let organizer = organizers.find(
+      (u) => u.login === JSON.parse(sessionStorage.getItem("login"))
+    );
+    if (organizer === undefined) return false;
+    return true;
   }
 }

@@ -55,6 +55,7 @@ import { ResultFormComponent } from './components/result-form/result-form.compon
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { UserPasswordComponent } from './components/user-password/user-password.component';
 import { NextRoundComponent } from './components/next-round/next-round.component';
+import { MatchDateFormComponent } from './components/match-date-form/match-date-form.component';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { NextRoundComponent } from './components/next-round/next-round.component
     UserSettingsComponent,
     UserPasswordComponent,
     NextRoundComponent,
+    MatchDateFormComponent,
   ],
   entryComponents: [TournamentAcceptationComponent, UserSettingsComponent, UserPasswordComponent],
   imports: [
