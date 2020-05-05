@@ -5,8 +5,7 @@
   <div *ngFor="let invitation of invitations" class="itemWrapper">
     <mat-card class="tourItem">
       <h5 style="display: inline;">Zaproszenie do turnieju: {{ invitation.tournament.name }}</h5>
-      <br>
-
+    
     <mat-card-subtitle class="tourType">
         
     
@@ -15,8 +14,9 @@
       (click)="openDialog(invitation)"
         mat-flat-button
         class="btnToTournament"
+        style="font-size: 18px"
       >
-        Pokaż szczegóły
+        Szczegóły
       </button>
     </mat-card>
   </div>

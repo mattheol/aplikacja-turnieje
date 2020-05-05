@@ -4,6 +4,7 @@ import { Tournament } from 'src/app/models/tournament';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { Invitation } from 'src/app/models/invitation';
 
 @Component({
   selector: 'app-invite-dialog',
@@ -41,9 +42,9 @@ export class InviteDialogComponent implements OnInit {
         {
           tournament: this.tournament,
           invitationMessage: this.myForm.get("message").value,
-          invitationTime: Date.now(),
+          invitationTime: new Date(Date.now()),
           confirmType : 'NONE'
-        }
+        } as Invitation
       )
       .subscribe(
         res => {
