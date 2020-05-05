@@ -55,7 +55,11 @@ import { ResultFormComponent } from './components/result-form/result-form.compon
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { UserPasswordComponent } from './components/user-password/user-password.component';
 import { NextRoundComponent } from './components/next-round/next-round.component';
+import { MyInvitationsComponent } from './components/my-invitations/my-invitations.component';
+import { InvitationDetailComponent } from './components/invitation-detail/invitation-detail.component';
+import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
 import { MatchDateFormComponent } from './components/match-date-form/match-date-form.component';
+
 
 
 @NgModule({
@@ -77,9 +81,18 @@ import { MatchDateFormComponent } from './components/match-date-form/match-date-
     UserSettingsComponent,
     UserPasswordComponent,
     NextRoundComponent,
+    MyInvitationsComponent,
+    InvitationDetailComponent,
+    InviteDialogComponent,
+  ],
+  entryComponents: [
+    TournamentAcceptationComponent,
+    UserSettingsComponent,
+    UserPasswordComponent,
+    InvitationDetailComponent,
+    InviteDialogComponent
     MatchDateFormComponent,
   ],
-  entryComponents: [TournamentAcceptationComponent, UserSettingsComponent, UserPasswordComponent],
   imports: [
     HttpClientModule,
     BrowserModule,

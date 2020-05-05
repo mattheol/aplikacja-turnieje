@@ -1,0 +1,29 @@
+<!-- <div class="modalContainer"> -->
+<h2 style="text-align: center;" mat-dialog-title>Zaproszenie do turnieju: {{ invitation.tournament.name }}</h2>
+<p>od {{invitation.organizer.firstName}} {{invitation.organizer.lastName}}</p>
+<!-- <mat-dialog-content> -->
+
+<!-- <form #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit(form)"> -->
+<!-- Value: {{myForm.value | json}} -->
+<!-- <div> -->
+<b>{{ invitation.invitationMessage }}</b>
+<p>{{invitation.tournament.description}}</p>
+<mat-dialog-actions style="text-align: center;">
+  <button mat-raised-button color="primary" (click)="accept()" type="submit" style="margin-top: 10px; text-transform: uppercase;">
+    Akceptuj
+  </button>
+  <button mat-raised-button color="primary" (click)="reject()" type="submit" style="margin-top: 10px; text-transform: uppercase;">
+    Odrzuć
+  </button>
+  <button mat-raised-button mat-dialog-close mat-dialog-close="false" style="
+            margin-top: 10px;
+            text-transform: uppercase;
+            background-color: rgb(250, 220, 164);
+          ">
+    Anuluj
+  </button>
+</mat-dialog-actions>
+<!-- </div> -->
+<!-- </form> -->
+<!-- </mat-dialog-content> -->
+<!-- </div> -->
