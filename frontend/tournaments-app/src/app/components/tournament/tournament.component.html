@@ -91,7 +91,7 @@
     </div>
 
     <button
-      *ngIf="!tournament.active && !checkDate()"
+      *ngIf="!tournament.active && !checkDate() && isOrganizer"
       (click)="generateBracket()"
       mat-raised-button
       color="primary"
