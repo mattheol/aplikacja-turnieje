@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "../models/user";
 import { tap, map } from "rxjs/operators";
@@ -19,6 +19,11 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url);
     // .pipe(tap((_) => console.log("fetched users")));
+  }
+
+  getUsr(login): Observable<User>{
+    const params = new HttpParams().set("login", login);
+    return this.http.get<User>(`${environment.basicUrl}/user`,{params});
   }
 
   getUser(loginVal): Observable<User> {

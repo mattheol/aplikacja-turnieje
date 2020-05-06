@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from "@angular/core";
 import { Tournament } from "src/app/models/tournament";
 import { ActivatedRoute } from "@angular/router";
@@ -8,6 +10,8 @@ import { MatDialog } from "@angular/material";
 import { TournamentAcceptationComponent } from "../tournament-acceptation/tournament-acceptation.component";
 import { InviteDialogComponent } from '../invite-dialog/invite-dialog.component';
 import { Match } from "src/app/models/match";
+import { FormBuilder, Validators, FormGroup, FormGroupDirective } from '@angular/forms';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -22,14 +26,20 @@ export class TournamentComponent implements OnInit {
   teamName: string;
   isUserEnrolled: boolean;
   isForTeams: boolean;
+
+  myForm: FormGroup;
+  organiserLogin: string;
   isOrganizer: boolean;
+
 
   constructor(
     private route: ActivatedRoute,
     private tournamentService: TournamentService,
     private tokenStorageService: TokenStorageService,
     private toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -37,6 +47,10 @@ export class TournamentComponent implements OnInit {
     this.id = this.route.snapshot.params["id"];
     this.userLogin = this.tokenStorageService.getUser();
     this.getTournament();
+
+    this.myForm = this.fb.group({
+      login: ["", [Validators.required, Validators.minLength(5)]],
+    })
   }
 
   checkIfUserIsAlreadyEnrolled() {
@@ -203,6 +217,32 @@ export class TournamentComponent implements OnInit {
     return a;
   }
 
+
+  get loginInput() {
+    return this.myForm.get("login");
+  }
+
+
+  submit(form: FormGroupDirective) {
+    this.userService.getUsr(this.loginInput.value).subscribe(
+      res => {
+        this.tournamentService
+        .enrollOrganizerToTournament(res.login,this.tournament)
+        .subscribe(
+          res => {
+            this.toastr.success("Dodano organizatora turnieju","", { positionClass:'toast-top-center'})
+          },
+          err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+        )
+      },
+      err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+    );
+    console.log(this.organiserLogin)
+
+
+  }
+
+
   checkIfOrganizer() {
     let organizers = this.tournament.organizers;
     let organizer = organizers.find(
@@ -211,4 +251,5 @@ export class TournamentComponent implements OnInit {
     if (organizer === undefined) return false;
     return true;
   }
+
 }

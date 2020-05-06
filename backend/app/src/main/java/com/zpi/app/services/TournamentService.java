@@ -4,6 +4,7 @@ import com.zpi.app.dtos.MatchDto;
 import com.zpi.app.entities.*;
 
 import com.zpi.app.exceptions.ElementNotExistException;
+import com.zpi.app.exceptions.UserAlreadyExistsException;
 import com.zpi.app.repositories.MatchRepository;
 import com.zpi.app.repositories.ParticipantTournamentRepository;
 import com.zpi.app.repositories.TournamentRepository;
@@ -73,6 +74,19 @@ public class TournamentService {
 
     public Tournament addTournament(String login, Tournament tournament) {
         tournament.getOrganizers().add(userService.findByLogin(login));
+        return tournamentRepository.save(tournament);
+    }
+
+    public Tournament enrollOrganizerToTournament( String login, Tournament tournament){
+        List<User> organizers = tournament.getOrganizers();
+        for(User u: organizers){
+            if(u.getLogin().equals(login)) {
+                return null;
+            }
+        }
+        organizers.add(userService.findByLogin(login));
+        tournament.setOrganizers(organizers);
+        updateTournament(tournament);
         return tournamentRepository.save(tournament);
     }
 

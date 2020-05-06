@@ -93,7 +93,26 @@
           Brak wolnych miejsc
         </p>
       </div>
-  
+
+      <br>
+        <form class="regForm" #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit(form)"
+        style="width: 100%; display: flex; justify-content:center">
+          <mat-form-field>
+            <input matInput placeholder="login" formControlName="login" required />
+            <mat-error *ngIf="loginInput.errors?.required && loginInput.touched">
+              Login jest wymagany
+            </mat-error>
+            <mat-error *ngIf="loginInput.errors?.minlength && loginInput.touched">
+              Wybrany login jest za krótki
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button [disabled]="myForm.invalid" color="primary" type="submit"
+          style="margin-top:10px; text-transform: uppercase;">
+            Dodaj organizatora
+          </button>
+        </form>
+
     </div>
     <h5>{{ tournament.name }}</h5>
     <p>{{ tournament.description }}</p>

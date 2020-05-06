@@ -97,4 +97,17 @@ export class TournamentService {
       params,
     });
   }
+
+  enrollOrganizerToTournament(
+    login: string,
+    tournament: Tournament
+  ): Observable<void> {
+    const params = new HttpParams()
+      .set("userLogin", login)
+    return this.http.put<void>(`${environment.basicUrl}/organizer`,
+    tournament,
+    {
+      params,
+    });
+  }
 }
