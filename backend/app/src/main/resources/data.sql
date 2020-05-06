@@ -34,8 +34,9 @@ INSERT INTO matches (id,comment,winner_id,score,stage,start_time,tournament_id)
 
 INSERT INTO matches_participants VALUES (1,1),(1,2), (2,3), (2,4), (3,5), (3,6), (4,7), (4, 8),(6,9),(6,1),(7,8),(7,2);
 
-INSERT INTO invitations (id,invitation_message, invitation_time,organizer_id,participant_id,tournament_id)
-       VALUES (1,'Zapraszam cię na turniej.',null,1,2,1 );
+INSERT INTO invitations (id,invitation_message,confirm_type, invitation_time,organizer_id,participant_id,tournament_id)
+       VALUES (1,'Zapraszam cię na turniej.','NONE','2020-04-08 12:30',1,9,3 ),
+               (2,'Zapraszam cię do mojego turnieju.','NONE','2020-05-01 12:30',2,9,4 );
 
 INSERT INTO tournaments_organizers (tournament_id,organizer_id)
        VALUES (1,9),(2,9),(3,9),(4,9);

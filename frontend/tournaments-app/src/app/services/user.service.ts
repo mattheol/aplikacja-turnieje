@@ -6,6 +6,7 @@ import { User } from "../models/user";
 import { tap, map } from "rxjs/operators";
 import { TournamentDTO } from "../models/tournament";
 import { Match } from '../models/match';
+import { Invitation } from '../models/invitation';
 
 @Injectable({
   providedIn: "root",
@@ -51,6 +52,17 @@ export class UserService {
   }
   updateUser(user: User): Observable<User>{
     return this.http.put<User>(`${environment.basicUrl}/my-data`,user);
+  }
+
+  getInvitations():  Observable<Invitation[]>{
+    return this.http.get<Invitation[]>(`${environment.basicUrl}/my-invitations`);
+  }
+  updateInvitation(id:number, invitation: Invitation):  Observable<any>{
+    return this.http.put<any>(`${environment.basicUrl}/my-invitations/${id}`,invitation);
+  }
+
+  invite(login:string, invitation: Invitation): Observable<Invitation> {
+    return this.http.post<Invitation>(`${this.url}/${login}/invitation`,invitation);
   }
 
   updatePassword(oldPassword: string, newPassword: string): Observable<User> {

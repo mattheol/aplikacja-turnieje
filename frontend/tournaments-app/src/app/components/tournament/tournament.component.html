@@ -26,6 +26,15 @@
           >
             Dołącz
           </button>
+          
+          <button *ngIf="checkIfOrganizer()"
+          (click)="openInvitationDialog()"
+          class="enrollBtn mx-2"
+          mat-raised-button
+          color="primary"
+        >
+          Zaproś do turnieju
+        </button>
         </div>
         <div
           *ngIf="!isForTeams"
@@ -40,7 +49,19 @@
           >
             Dołącz
           </button>
+
+          <button *ngIf="checkIfOrganizer()"
+          (click)="openInvitationDialog()"
+          class="enrollBtn mx-2"
+          mat-raised-button
+          color="primary"
+        >
+          Zaproś do turnieju
+        </button>
         </div>
+        <!-- <div  > -->
+          
+          <!-- </div> -->
       </div>
       <div
         *ngIf="isUserEnrolled && checkDate()"
@@ -111,7 +132,7 @@
     </div>
 
     <button
-      *ngIf="!tournament.active && !checkDate()"
+      *ngIf="!tournament.active && !checkDate() && isOrganizer"
       (click)="generateBracket()"
       mat-raised-button
       color="primary"

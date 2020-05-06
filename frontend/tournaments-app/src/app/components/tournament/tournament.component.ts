@@ -8,9 +8,11 @@ import { TokenStorageService } from "src/app/services/auth/token-storage.service
 import { ToastrService } from "ngx-toastr";
 import { MatDialog } from "@angular/material";
 import { TournamentAcceptationComponent } from "../tournament-acceptation/tournament-acceptation.component";
+import { InviteDialogComponent } from '../invite-dialog/invite-dialog.component';
 import { Match } from "src/app/models/match";
 import { FormBuilder, Validators, FormGroup, FormGroupDirective } from '@angular/forms';
 import { User } from 'src/app/models/user';
+
 
 @Component({
   selector: "app-tournament",
@@ -24,8 +26,11 @@ export class TournamentComponent implements OnInit {
   teamName: string;
   isUserEnrolled: boolean;
   isForTeams: boolean;
+
   myForm: FormGroup;
   organiserLogin: string;
+  isOrganizer: boolean;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -65,6 +70,7 @@ export class TournamentComponent implements OnInit {
       this.tournament = tournament;
       this.checkIfUserIsAlreadyEnrolled();
       this.isForTeams = this.tournament.isForTeams;
+      this.isOrganizer = this.checkIfOrganizer();
     });
   }
 
@@ -83,6 +89,21 @@ export class TournamentComponent implements OnInit {
       this.toastr.warning("Nazwa drużyny jest wymagana", "", {
         positionClass: "toast-top-center",
       });
+  }
+
+  openInvitationDialog(){
+    let dialogRef = this.dialog.open(InviteDialogComponent, {data :{tournament: this.tournament}});
+  }
+
+  checkIfOrganizer() {
+    let organizers = this.tournament.organizers;
+    let organizer = organizers.find((u) => u.login === this.getLogin());
+    if (organizer === undefined) return false;
+    return true;
+  }
+
+  getLogin() {
+    return JSON.parse(sessionStorage.getItem("login"));
   }
 
   checkDate() {
@@ -196,6 +217,7 @@ export class TournamentComponent implements OnInit {
     return a;
   }
 
+
   get loginInput() {
     return this.myForm.get("login");
   }
@@ -218,6 +240,16 @@ export class TournamentComponent implements OnInit {
     console.log(this.organiserLogin)
 
 
+  }
+
+
+  checkIfOrganizer() {
+    let organizers = this.tournament.organizers;
+    let organizer = organizers.find(
+      (u) => u.login === JSON.parse(sessionStorage.getItem("login"))
+    );
+    if (organizer === undefined) return false;
+    return true;
   }
 
 }
