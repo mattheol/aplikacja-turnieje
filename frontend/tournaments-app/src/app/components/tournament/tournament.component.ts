@@ -202,18 +202,22 @@ export class TournamentComponent implements OnInit {
 
 
   submit(form: FormGroupDirective) {
-    // this.userService.getUsr(this.loginInput.value).subscribe(
-    //   res => {
-    //     this.organiserLogin = res.login
-    //     this.toastr.success("Dodano jako organizatora","", { positionClass:'toast-top-center'})
-    //   },
-    //   err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
-    // );
-    // console.log(this.organiserLogin)
-    this.getTournament()
-    this.tournamentService.enrollOrganiserToTournament("testtest" ,this.tournament)
-    console.log(this.id)
-    console.log(this.tournament)
+    this.userService.getUsr(this.loginInput.value).subscribe(
+      res => {
+        this.tournamentService
+        .enrollOrganizerToTournament(res.login,this.tournament)
+        .subscribe(
+          res => {
+            this.toastr.success("Dodano organizatora turnieju","", { positionClass:'toast-top-center'})
+          },
+          err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+        )
+      },
+      err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+    );
+    console.log(this.organiserLogin)
+
+
   }
 
 }

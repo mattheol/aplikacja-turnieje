@@ -3,6 +3,7 @@ package com.zpi.app.controllers;
 import com.zpi.app.dtos.MatchDto;
 import com.zpi.app.dtos.UserTournament;
 import com.zpi.app.entities.*;
+import com.zpi.app.exceptions.UserAlreadyExistsException;
 import com.zpi.app.security.JwtTokenUtil;
 import com.zpi.app.services.TournamentService;
 import com.zpi.app.services.UserService;
@@ -60,8 +61,9 @@ public class TournamentController {
     }
 
     @PutMapping("/organizer")
-    public ResponseEntity<?> enrollOrganiserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Tournament tournament, @RequestParam("userLogin") String userLogin ) {
-        tournamentService.enrollOrganizerToTournament(userLogin, tournament);
+    public ResponseEntity<?> enrollOrganiserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Tournament tournament, @RequestParam("userLogin") String userLogin ) throws UserAlreadyExistsException {
+        Tournament res = tournamentService.enrollOrganizerToTournament(userLogin, tournament);
+        if(res==null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
