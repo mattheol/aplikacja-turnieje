@@ -25,6 +25,7 @@ export class TournamentComponent implements OnInit {
   isUserEnrolled: boolean;
   isForTeams: boolean;
   myForm: FormGroup;
+  organiserLogin: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -201,15 +202,18 @@ export class TournamentComponent implements OnInit {
 
 
   submit(form: FormGroupDirective) {
-    var usr: User;
-    this.userService.getUsr(this.loginInput.value).subscribe(
-      res => {
-        this.tournamentService.enrollOrganiserToTournament(res.login,this.tournament)
-        this.toastr.success("Dodano jako organizatora","", { positionClass:'toast-top-center'})
-      },
-      err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
-    );
-      
+    // this.userService.getUsr(this.loginInput.value).subscribe(
+    //   res => {
+    //     this.organiserLogin = res.login
+    //     this.toastr.success("Dodano jako organizatora","", { positionClass:'toast-top-center'})
+    //   },
+    //   err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+    // );
+    // console.log(this.organiserLogin)
+    this.getTournament()
+    this.tournamentService.enrollOrganiserToTournament("testtest" ,this.tournament)
+    console.log(this.id)
+    console.log(this.tournament)
   }
 
 }

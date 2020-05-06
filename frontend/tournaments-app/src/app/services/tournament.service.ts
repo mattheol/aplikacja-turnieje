@@ -101,9 +101,14 @@ export class TournamentService {
   enrollOrganiserToTournament(
     login: string,
     tournament: Tournament
-  ): Observable<Tournament> {
+  ): Observable<void> {
     const params = new HttpParams()
+      .set("userLogin", login)
 
-    return this.http.post<Tournament>(`${environment.basicUrl}/organiser`, {params: login, tournament});
+    return this.http.put<void>(`${environment.basicUrl}/organizer`,
+    tournament,
+    {
+      params,
+    });
   }
 }

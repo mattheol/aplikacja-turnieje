@@ -59,9 +59,9 @@ public class TournamentController {
         return new ResponseEntity<>(tournament1, HttpStatus.OK);
     }
 
-    @PostMapping("/organiser")
-    public ResponseEntity<?> enrollOrganiserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Tournament tournament) {
-        tournamentService.enrollOrganiserToTournament(jwtTokenUtil.getLoginFromHeader(authorizationHeader), tournament);
+    @PutMapping("/organizer")
+    public ResponseEntity<?> enrollOrganiserToTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Tournament tournament, @RequestParam("userLogin") String userLogin ) {
+        tournamentService.enrollOrganizerToTournament(userLogin, tournament);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

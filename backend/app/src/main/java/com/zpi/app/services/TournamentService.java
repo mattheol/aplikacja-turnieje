@@ -76,12 +76,12 @@ public class TournamentService {
         return tournamentRepository.save(tournament);
     }
 
-    public boolean enrollOrganiserToTournament( String login, Tournament tournament){
-        for (User organizer : tournament.getOrganizers()) {
-            if(organizer.getLogin() == login) return false;
-        }
-        tournament.getOrganizers().add(userService.findByLogin(login));
-        return true;
+    public Tournament enrollOrganizerToTournament( String login, Tournament tournament){
+        List<User> organizers = tournament.getOrganizers();
+        organizers.add(userService.findByLogin(login));
+        tournament.setOrganizers(organizers);
+        updateTournament(tournament);
+        return tournamentRepository.save(tournament);
     }
 
     public Tournament updateTournament(Tournament tournament){
