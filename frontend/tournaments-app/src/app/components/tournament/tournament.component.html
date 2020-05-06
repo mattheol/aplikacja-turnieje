@@ -26,15 +26,6 @@
           >
             Dołącz
           </button>
-          
-          <button *ngIf="checkIfOrganizer()"
-          (click)="openInvitationDialog()"
-          class="enrollBtn mx-2"
-          mat-raised-button
-          color="primary"
-        >
-          Zaproś do turnieju
-        </button>
         </div>
         <div
           *ngIf="!isForTeams"
@@ -50,18 +41,16 @@
             Dołącz
           </button>
 
-          <button *ngIf="checkIfOrganizer()"
-          (click)="openInvitationDialog()"
-          class="enrollBtn mx-2"
-          mat-raised-button
-          color="primary"
-        >
-          Zaproś do turnieju
-        </button>
+          <button
+            *ngIf="checkIfOrganizer()"
+            (click)="openInvitationDialog()"
+            class="enrollBtn mx-2"
+            mat-raised-button
+            color="primary"
+          >
+            Zaproś do turnieju
+          </button>
         </div>
-        <!-- <div  > -->
-          
-          <!-- </div> -->
       </div>
       <div
         *ngIf="isUserEnrolled && checkDate()"
@@ -94,7 +83,7 @@
         </p>
       </div>
 
-      <br>
+      <!----- <br>
         <form class="regForm" #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit(form)"
         style="width: 100%; display: flex; justify-content:center">
           <mat-form-field>
@@ -112,7 +101,7 @@
             Dodaj organizatora
           </button>
         </form>
-
+    --->
     </div>
     <h5>{{ tournament.name }}</h5>
     <p>{{ tournament.description }}</p>
@@ -130,16 +119,23 @@
         }}
       </div>
     </div>
-
-    <button
+    <div
       *ngIf="!tournament.active && !checkDate() && isOrganizer"
-      (click)="generateBracket()"
-      mat-raised-button
-      color="primary"
-      style="margin: 20px 0 10px 0;"
+      class="generatorContainer"
     >
-      Generuj drabinkę
-    </button>
+      <p style="padding: 0; margin: 0;">
+        Turniej jest gotowy, aby wystartować
+      </p>
+      <button
+        (click)="generateBracket()"
+        mat-raised-button
+        color="primary"
+        style="margin-left: 10px;"
+      >
+        Generuj drabinkę
+      </button>
+    </div>
+
     <app-tournament-matches
       [forTeams]="isForTeams"
       [tournament]="tournament"

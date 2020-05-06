@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs';
-import { UserService } from './../../services/user.service';
+import { Observable } from "rxjs";
+import { UserService } from "./../../services/user.service";
 import { Component, OnInit } from "@angular/core";
 import { Tournament } from "src/app/models/tournament";
 import { ActivatedRoute } from "@angular/router";
@@ -8,11 +8,15 @@ import { TokenStorageService } from "src/app/services/auth/token-storage.service
 import { ToastrService } from "ngx-toastr";
 import { MatDialog } from "@angular/material";
 import { TournamentAcceptationComponent } from "../tournament-acceptation/tournament-acceptation.component";
-import { InviteDialogComponent } from '../invite-dialog/invite-dialog.component';
+import { InviteDialogComponent } from "../invite-dialog/invite-dialog.component";
 import { Match } from "src/app/models/match";
-import { FormBuilder, Validators, FormGroup, FormGroupDirective } from '@angular/forms';
-import { User } from 'src/app/models/user';
-
+import {
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormGroupDirective,
+} from "@angular/forms";
+import { User } from "src/app/models/user";
 
 @Component({
   selector: "app-tournament",
@@ -30,7 +34,6 @@ export class TournamentComponent implements OnInit {
   myForm: FormGroup;
   organiserLogin: string;
   isOrganizer: boolean;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +53,7 @@ export class TournamentComponent implements OnInit {
 
     this.myForm = this.fb.group({
       login: ["", [Validators.required, Validators.minLength(5)]],
-    })
+    });
   }
 
   checkIfUserIsAlreadyEnrolled() {
@@ -91,8 +94,10 @@ export class TournamentComponent implements OnInit {
       });
   }
 
-  openInvitationDialog(){
-    let dialogRef = this.dialog.open(InviteDialogComponent, {data :{tournament: this.tournament}});
+  openInvitationDialog() {
+    let dialogRef = this.dialog.open(InviteDialogComponent, {
+      data: { tournament: this.tournament },
+    });
   }
 
   checkIfOrganizer() {
@@ -217,39 +222,30 @@ export class TournamentComponent implements OnInit {
     return a;
   }
 
-
   get loginInput() {
     return this.myForm.get("login");
   }
 
-
   submit(form: FormGroupDirective) {
     this.userService.getUsr(this.loginInput.value).subscribe(
-      res => {
+      (res) => {
         this.tournamentService
-        .enrollOrganizerToTournament(res.login,this.tournament)
-        .subscribe(
-          res => {
-            this.toastr.success("Dodano organizatora turnieju","", { positionClass:'toast-top-center'})
-          },
-          err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
-        )
+          .enrollOrganizerToTournament(res.login, this.tournament)
+          .subscribe(
+            (res) => {
+              this.toastr.success("Dodano organizatora turnieju", "", {
+                positionClass: "toast-top-center",
+              });
+            },
+            (err) =>
+              this.toastr.error(err.error, "", {
+                positionClass: "toast-top-center",
+              })
+          );
       },
-      err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+      (err) =>
+        this.toastr.error(err.error, "", { positionClass: "toast-top-center" })
     );
-    console.log(this.organiserLogin)
-
-
+    console.log(this.organiserLogin);
   }
-
-
-  checkIfOrganizer() {
-    let organizers = this.tournament.organizers;
-    let organizer = organizers.find(
-      (u) => u.login === JSON.parse(sessionStorage.getItem("login"))
-    );
-    if (organizer === undefined) return false;
-    return true;
-  }
-
 }
