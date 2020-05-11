@@ -66,19 +66,19 @@
         </button>
       </div>
       <div *ngIf="checkDate() && !checkIfFull()">
-        <p style="color: lawngreen;">
+        <p style="color: forestgreen	;">
           koniec zapisów:
           {{ tournament.enrollmentEnd | date: "medium":"+0200" }}
         </p>
       </div>
       <div *ngIf="!checkDate()">
-        <p style="color: orange;">
+        <p style="color: darkorange;">
           Zapisy dobiegły końca dnia:
           {{ tournament.enrollmentEnd | date: "medium":"+0200" }}
         </p>
       </div>
       <div *ngIf="checkIfFull() && checkDate() && !isUserEnrolled">
-        <p style="color: orange;">
+        <p style="color: darkorange;">
           Brak wolnych miejsc
         </p>
       </div>

@@ -9,3 +9,12 @@
   top: 10px;
   right: 160px;
 }
+
+.mainContainer{
+  min-height: 100vh;
+}
+
+.accBtn{
+  
+  width: 100px;
+}

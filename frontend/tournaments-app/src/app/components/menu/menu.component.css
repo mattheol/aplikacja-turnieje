@@ -3,8 +3,15 @@
   max-width: 1200px;
   padding-bottom: 10px;
   min-height: 600px;
-  background-color: rgba(14, 13, 13, 0.596);
+  background-color: whitesmoke;
   overflow: hidden;
+  box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12)
 }
 
 .buttonRoute {
@@ -12,14 +19,13 @@
   width: 217px;
   height: 54px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0;
   cursor: pointer;
   background-clip: border-box;
   border: 2px solid #c0b26b;
   color: white;
   outline: none;
+  flex-direction: column;
 }
 
 .buttonRoute:hover,
@@ -36,9 +42,13 @@
     4px 0px 4px #000000, 1px 0 0 black, -1px 0 0 black, 0 1px 0 black,
     0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black,
     -1px 1px 0 black;
-  font-size: 22px;
+  font-size: 20px;
   padding: 0;
   margin: 0;
+  display: block;
+  line-height: 21px;
+  text-align: left;
+  font-weight: 400;
 }
 
 .nav {
@@ -46,6 +56,7 @@
   flex-direction: row;
   background-color: rgb(84, 80, 158);
   padding: 10px 10px;
+
 }
 
 .contentContainer {
