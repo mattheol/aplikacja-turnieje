@@ -40,6 +40,16 @@
           >
             Dołącz
           </button>
+
+          <button
+            *ngIf="checkIfOrganizer()"
+            (click)="openInvitationDialog()"
+            class="enrollBtn mx-2"
+            mat-raised-button
+            color="primary"
+          >
+            Zaproś do turnieju
+          </button>
         </div>
       </div>
       <div
@@ -96,6 +106,7 @@
 
 
 
+
     </div>
     <h5 class="tournamentInfo">{{ tournament.name }}</h5>
     <p class="tournamentInfo">{{ tournament.description }}</p>
@@ -113,16 +124,23 @@
         }}
       </div>
     </div>
-
-    <button
-      *ngIf="!tournament.active && !checkDate()"
-      (click)="generateBracket()"
-      mat-raised-button
-      color="primary"
-      style="margin: 20px 0 10px 0;"
+    <div
+      *ngIf="!tournament.active && !checkDate() && isOrganizer"
+      class="generatorContainer"
     >
-      Generuj drabinkę
-    </button>
+      <p style="padding: 0; margin: 0;">
+        Turniej jest gotowy, aby wystartować
+      </p>
+      <button
+        (click)="generateBracket()"
+        mat-raised-button
+        color="primary"
+        style="margin-left: 10px;"
+      >
+        Generuj drabinkę
+      </button>
+    </div>
+
     <app-tournament-matches
       [forTeams]="isForTeams"
       [tournament]="tournament"

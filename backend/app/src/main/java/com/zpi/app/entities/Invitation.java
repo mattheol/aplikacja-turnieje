@@ -24,6 +24,9 @@ public class Invitation {
 
     private String invitationMessage;
 
+    @Enumerated(EnumType.STRING)
+    private InvitationConfirmType confirmType;
+
     public Integer getId() {
         return id;
     }
@@ -70,5 +73,26 @@ public class Invitation {
 
     public void setInvitationMessage(String invitationMessage) {
         this.invitationMessage = invitationMessage;
+    }
+
+    public InvitationConfirmType getConfirmType() {
+        return confirmType;
+    }
+
+    public void setConfirmType(InvitationConfirmType confirmType) {
+        this.confirmType = confirmType;
+    }
+
+    @Override
+    public String toString() {
+        return "Invitation{" +
+                "id=" + id +
+                ", organizer=" + organizer +
+                ", participant=" + participant +
+                ", tournament=" + tournament +
+                ", invitationTime=" + invitationTime +
+                ", invitationMessage='" + invitationMessage + '\'' +
+                ", confirmType=" + confirmType +
+                '}';
     }
 }

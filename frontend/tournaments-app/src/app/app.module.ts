@@ -51,11 +51,14 @@ import { FormsModule } from "@angular/forms";
 import { MyTournamentsComponent } from "./components/my-tournaments/my-tournaments.component";
 import { TournamentMatchesComponent } from "./components/tournament-matches/tournament-matches.component";
 import { MyMatchesComponent } from "./components/my-matches/my-matches.component";
-import { ResultFormComponent } from './components/result-form/result-form.component';
-import { UserSettingsComponent } from './components/user-settings/user-settings.component';
-import { UserPasswordComponent } from './components/user-password/user-password.component';
-import { NextRoundComponent } from './components/next-round/next-round.component';
-
+import { ResultFormComponent } from "./components/result-form/result-form.component";
+import { UserSettingsComponent } from "./components/user-settings/user-settings.component";
+import { UserPasswordComponent } from "./components/user-password/user-password.component";
+import { NextRoundComponent } from "./components/next-round/next-round.component";
+import { MyInvitationsComponent } from "./components/my-invitations/my-invitations.component";
+import { InvitationDetailComponent } from "./components/invitation-detail/invitation-detail.component";
+import { InviteDialogComponent } from "./components/invite-dialog/invite-dialog.component";
+import { MatchDateFormComponent } from "./components/match-date-form/match-date-form.component";
 
 @NgModule({
   declarations: [
@@ -76,8 +79,19 @@ import { NextRoundComponent } from './components/next-round/next-round.component
     UserSettingsComponent,
     UserPasswordComponent,
     NextRoundComponent,
+    MyInvitationsComponent,
+    InvitationDetailComponent,
+    InviteDialogComponent,
+    MatchDateFormComponent,
   ],
-  entryComponents: [TournamentAcceptationComponent, UserSettingsComponent, UserPasswordComponent],
+  entryComponents: [
+    TournamentAcceptationComponent,
+    UserSettingsComponent,
+    UserPasswordComponent,
+    InvitationDetailComponent,
+    InviteDialogComponent,
+    MatchDateFormComponent,
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,
