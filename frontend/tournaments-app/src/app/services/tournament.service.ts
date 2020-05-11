@@ -110,4 +110,10 @@ export class TournamentService {
       params,
     });
   }
+
+  getTournamentOrganisers(id: Number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/${id}/organizers`, httpOptions);
+  }
 }
+
+

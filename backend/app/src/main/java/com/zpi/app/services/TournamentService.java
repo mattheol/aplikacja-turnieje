@@ -132,4 +132,10 @@ public class TournamentService {
         match.setTournament(getTournament(idTour));
         return matchRepository.save(match);
     }
+
+    public List<User> getTournamentAllOrganizers(Integer id) {
+        Tournament tournament = getTournament(id);
+        List<User> tournamentOrganizers = tournament.getOrganizers();
+        return  tournamentOrganizers;
+    }
 }
