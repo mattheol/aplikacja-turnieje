@@ -30,10 +30,10 @@ export class TournamentComponent implements OnInit {
   teamName: string;
   isUserEnrolled: boolean;
   isForTeams: boolean;
-
   myForm: FormGroup;
   organiserLogin: string;
   isOrganizer: boolean;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +50,7 @@ export class TournamentComponent implements OnInit {
     this.id = this.route.snapshot.params["id"];
     this.userLogin = this.tokenStorageService.getUser();
     this.getTournament();
+    this.isUserAnOrganiser();
 
     this.myForm = this.fb.group({
       login: ["", [Validators.required, Validators.minLength(5)]],
@@ -226,26 +227,43 @@ export class TournamentComponent implements OnInit {
     return this.myForm.get("login");
   }
 
+  isUserAnOrganiser(){
+    this.tournamentService
+        .getTournamentOrganisers(this.id).subscribe(
+          e=>{
+            e.forEach(u=>{if(u.login==this.userLogin){this.isOrganizer=true}})
+          }
+      )
+  }
+
   submit(form: FormGroupDirective) {
-    this.userService.getUsr(this.loginInput.value).subscribe(
-      (res) => {
-        this.tournamentService
-          .enrollOrganizerToTournament(res.login, this.tournament)
-          .subscribe(
-            (res) => {
-              this.toastr.success("Dodano organizatora turnieju", "", {
-                positionClass: "toast-top-center",
-              });
-            },
-            (err) =>
-              this.toastr.error(err.error, "", {
-                positionClass: "toast-top-center",
-              })
-          );
-      },
-      (err) =>
-        this.toastr.error(err.error, "", { positionClass: "toast-top-center" })
-    );
-    console.log(this.organiserLogin);
+        
+    let ableToAdd: Boolean = true;
+    this.tournamentService
+        .getTournamentOrganisers(this.id)
+        .subscribe(
+          e=>{e.forEach(u=>{if(u.login==this.loginInput.value){ableToAdd = false;}})
+          if(ableToAdd){
+            this.userService.getUsr(this.loginInput.value).subscribe(
+              res => {
+                this.tournamentService
+                .enrollOrganizerToTournament(res.login,this.tournament)
+                .subscribe(
+                  res => {
+                    this.toastr.success("Dodano organizatora turnieju","", { positionClass:'toast-top-center'})
+                  },
+                  err => this.toastr.error("Ten użytkownik już jest organizatorem","", { positionClass:'toast-top-center'})
+                )
+              },
+              err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+            );
+          }else{
+            this.toastr.error("Ten użytkownik już jest organizatorem","", { positionClass:'toast-top-center'})
+          }
+          
+         })
+        
+
+
   }
 }

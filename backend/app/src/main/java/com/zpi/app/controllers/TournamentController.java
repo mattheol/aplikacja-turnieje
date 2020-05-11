@@ -47,12 +47,10 @@ public class TournamentController {
         return tournamentService.getTournamentAllMatches(id);
     }
 
-//    @GetMapping("tournaments/{id}/organizers")
-//    public List<MatchDto> getMatchesByTournamentId(@PathVariable Integer id){
-////        Tournament tournament = tournamentService.getTournament(id);
-////        return new ResponseEntity<>(tournament.getMatches(),HttpStatus.OK);
-//        return tournamentService.getTournamentAllMatches(id);
-//    }
+    @GetMapping("tournaments/{id}/organizers")
+    public List<User> getOrganizersByTournamentId(@PathVariable Integer id){
+        return tournamentService.getTournamentAllOrganizers(id);
+    }
 
     @PostMapping("/tournaments")
     public ResponseEntity<?> addTournament(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Tournament tournament) {
