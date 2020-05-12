@@ -62,3 +62,22 @@ mat-form-field {
   background-color: rgba(0, 0, 0, 0.87);
   z-index: 9;
 }
+
+/* ngx-mat-datetime-content {
+  position: fixed;
+  top: 11em;
+  right: 28%;
+} */
+
+::ng-deep ngx-mat-datetime-content {
+  display: flex !important;
+  border-radius: 20px;
+}
+
+::ng-deep ngx-mat-timepicker {
+  padding-top: 61%;
+}
+
+::ng-deep .ngx-mat-timepicker form .table .tbody tr td.spacer {
+  padding-top: 15%;
+}
