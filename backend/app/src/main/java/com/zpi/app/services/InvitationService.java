@@ -28,16 +28,18 @@ public class InvitationService {
         return invitationRepository.findUnconfirmedInvitations(user);
     }
 //TODO zaproszenie do turnieju grupowego
-    public void confirmInvitation(Invitation invitation, String login){
+    public void confirmInvitation(Invitation invitation, String login,String teamName){
         invitationRepository.save(invitation);
         if(invitation.getConfirmType().equals(InvitationConfirmType.ACCEPTED)) {
-            tournamentService.enrollUserToTournament(login, invitation.getTournament().getId(), null);
+            tournamentService.enrollUserToTournament(login, invitation.getTournament().getId(), teamName);
         }
     }
 
     public void invite(Invitation invitation, String invitedUserLogin, String organizerLogin){
         User invitedUser = userService.findByLogin(invitedUserLogin);
         User organizer = userService.findByLogin(organizerLogin);
+
+
         invitation.setOrganizer(organizer);
         invitation.setParticipant(invitedUser);
         invitationRepository.save(invitation);

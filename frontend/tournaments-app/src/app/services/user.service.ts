@@ -57,8 +57,12 @@ export class UserService {
   getInvitations():  Observable<Invitation[]>{
     return this.http.get<Invitation[]>(`${environment.basicUrl}/my-invitations`);
   }
-  updateInvitation(id:number, invitation: Invitation):  Observable<any>{
-    return this.http.put<any>(`${environment.basicUrl}/my-invitations/${id}`,invitation);
+  updateInvitation(id:number, invitation: Invitation,teamName :string):  Observable<any>{
+    if(teamName)
+      return this.http.put<any>(`${environment.basicUrl}/my-invitations/${teamName}`,invitation);
+    else
+      return this.http.put<any>(`${environment.basicUrl}/my-invitations/null`,invitation);
+
   }
 
   invite(login:string, invitation: Invitation): Observable<Invitation> {
