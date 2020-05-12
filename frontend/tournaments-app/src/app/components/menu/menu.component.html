@@ -11,7 +11,7 @@
         'background-repeat': 'no-repeat'
       }"
     >
-      <p class="buttonRouteText">Przeglądaj turnieje</p>
+      <p class="buttonRouteText" style="padding-left: 53px;padding-right: 5px;">Przeglądaj Turnieje</p>
     </li>
     <li
       *ngIf="isLoggedIn()"
@@ -20,12 +20,13 @@
       routerLink="/moje-turnieje"
       [ngStyle]="{
         'background-image': 'url(../../../assets/2.png)',
-        'background-repeat': 'no-repeat',
         'background-position': '50%',
         'background-repeat': 'no-repeat'
       }"
     >
-      <p class="buttonRouteText">Moje turnieje</p>
+      <p class="buttonRouteText" style="padding-left: 60px;padding-right: 5px;">Moje </p>
+      <p class="buttonRouteText" style="padding-left: 60px;padding-right: 5px;">Turnieje</p>
+
     </li>
 
     <li
@@ -39,8 +40,11 @@
         'background-repeat': 'no-repeat'
       }"
     >
-      <p class="buttonRouteText">
-        Moje Mecze
+      <p class="buttonRouteText" style="padding-left: 70px;padding-right: 5px;">
+        Moje
+      </p>
+      <p class="buttonRouteText" style="padding-left: 70px;padding-right: 5px;">
+        Mecze
       </p>
     </li>
 
@@ -50,13 +54,13 @@
       routerLink="/moje-zaproszenia"
       routerLinkActive="activeRoute"
       [ngStyle]="{
-        'background-image': 'url(../../../assets/3.png)',
+        'background-image': 'url(../../../assets/5.png)',
         'background-position': '50%',
         'background-repeat': 'no-repeat'
       }"
     >
-      <p class="buttonRouteText">
-        Zaproszenia
+      <p class="buttonRouteText" style="padding-left: 75px;padding-right: 5px;padding-top:10px">
+          Zaproszenia
       </p>
     </li>
 
@@ -72,8 +76,11 @@
         'background-repeat': 'no-repeat'
       }"
     >
-      <p class="buttonRouteText">
-        Stwórz turniej
+      <p class="buttonRouteText" style="padding-left: 63px;padding-right: 5px;">
+        Stwórz 
+      </p>
+      <p class="buttonRouteText" style="padding-left: 63px;padding-right: 5px;">
+        Turniej
       </p>
     </li>
   </ul>

@@ -33,7 +33,7 @@
     [match]="matchResult"
     [forTeams]="forTeams"
   ></app-match-date-form>
-  <mat-tab-group dynamicHeight>
+  <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
     <mat-tab *ngFor="let round of rounds; let i = index" [label]="round">
       <div style="height: auto !important;">
         <div *ngFor="let match of roundMatches[i]">

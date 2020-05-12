@@ -24,6 +24,7 @@ export class TournamentMatchesComponent implements OnInit {
   isNextRoundActive: boolean = false;
   isDateFormActive: boolean = false;
   matchesForNextRound: Match[];
+  tabIndex:Number;
 
   constructor(
     private tournamentService: TournamentService,
@@ -65,6 +66,7 @@ export class TournamentMatchesComponent implements OnInit {
     for (let i = 1; i <= maxStage; i++) {
       this.roundMatches.push(this.getMatchesFromRound(i));
     }
+    this.tabIndex = this.maxRound - 1;
   }
 
   getMatchesFromRound(round: Number): Match[] {
