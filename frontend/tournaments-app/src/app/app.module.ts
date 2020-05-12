@@ -31,9 +31,9 @@ import {
   MatProgressSpinnerModule,
 } from "@angular/material";
 
-import { registerLocaleData } from "@angular/common";
-import localePl from "@angular/common/locales/pl";
-registerLocaleData(localePl);
+// import { registerLocaleData } from "@angular/common";
+// import localePl from "@angular/common/locales/pl";
+// registerLocaleData(localePl);
 
 import { TournamentFormComponent } from "./components/tournament-form/tournament-form.component";
 import { RouterModule } from "@angular/router";
@@ -120,8 +120,8 @@ import { MatchDateFormComponent } from "./components/match-date-form/match-date-
     ToastrModule.forRoot(),
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: "pl-pl" },
-    { provide: LOCALE_ID, useValue: "pl-pl" },
+    // { provide: MAT_DATE_LOCALE, useValue: "pl-pl" },
+    // { provide: LOCALE_ID, useValue: "pl-pl" },
     authInterceptorProviders,
   ],
   bootstrap: [AppComponent],
