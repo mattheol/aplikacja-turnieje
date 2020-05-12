@@ -140,11 +140,13 @@
         Generuj drabinkę
       </button>
     </div>
-
-    <app-tournament-matches
+    <div *ngIf="tournament.active">
+      <app-tournament-matches
       [forTeams]="isForTeams"
       [tournament]="tournament"
       style="width: 80%; min-height: 100px;"
-    ></app-tournament-matches>
+      ></app-tournament-matches>
+    </div>
+    
   </div>
 </div>

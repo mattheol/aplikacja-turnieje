@@ -39,8 +39,9 @@
 
 .regModal {
   text-align: center;
-  background-color: gray;
+  background-color: #FFFAFA	;
   padding: 20px 25px 20px 25px;
+  border: 1px solid black;
   border-radius: 2px;
 }
 
@@ -54,5 +55,6 @@
   display: flex;
   align-items: center;
   border-radius: 5px;
-  background-color: rgba(14, 13, 13, 0.596);
+  background-color: #FFFAFA	;
+
 }
