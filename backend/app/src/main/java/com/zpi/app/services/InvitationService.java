@@ -38,10 +38,20 @@ public class InvitationService {
     public void invite(Invitation invitation, String invitedUserLogin, String organizerLogin){
         User invitedUser = userService.findByLogin(invitedUserLogin);
         User organizer = userService.findByLogin(organizerLogin);
+        long invNr = invitationRepository.findAll()
+                .stream()
+                .filter(i->i.getParticipant().equals(invitedUser))
+                .filter(i-> i.getTournament().getId() == invitation.getTournament().getId())
+                .filter(i->i.getConfirmType()!=InvitationConfirmType.REJECTED)
+                .count();
 
-
+        if(invNr==0){
         invitation.setOrganizer(organizer);
         invitation.setParticipant(invitedUser);
         invitationRepository.save(invitation);
+        }
+        else {
+            throw new RuntimeException("Użytkownik nie odpowiedzial na poprzednie zaproszenie lub już je zaakceptował");
+        }
     }
 }

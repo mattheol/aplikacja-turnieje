@@ -27,7 +27,7 @@ export class MyInvitationsComponent implements OnInit {
       .subscribe(invitations => {
 
       this.invitations = invitations;
-      console.log(this.invitations);  
+     
     });
   }
 

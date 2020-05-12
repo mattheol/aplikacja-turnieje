@@ -19,7 +19,8 @@ import java.io.IOException;
 public class MyExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({UserAlreadyExistsException.class,
-                        UsernameNotFoundException.class})
+                        UsernameNotFoundException.class,
+                        RuntimeException.class})
     public ResponseEntity<?> handleUserAlreadyExists(Exception e){
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
