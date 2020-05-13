@@ -13,4 +13,6 @@ public interface InvitationRepository extends JpaRepository<Invitation,Integer> 
 
     @Query("SELECT i FROM Invitation i WHERE i.confirmType=com.zpi.app.entities.InvitationConfirmType.NONE AND i.participant=?1")
     List<Invitation> findUnconfirmedInvitations(User participant);
+
+    List<Invitation> findByParticipant(User participant);
 }

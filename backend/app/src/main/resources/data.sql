@@ -1,10 +1,10 @@
-drop table invitations;
-drop table tournaments_organizers;
-drop table matches_participants;
-drop table tournaments_participants;
-drop table users;
-drop table matches;
-drop table tournaments;
+# drop table invitations;
+# drop table tournaments_organizers;
+# drop table matches_participants;
+# drop table tournaments_participants;
+# drop table users;
+# drop table matches;
+# drop table tournaments;
 
 INSERT INTO users (id, first_name,last_name,gender,birthday,email,login,password)
        VALUES (1,'Jan','Kowalski','M','2000-01-21','jk@wp.pl','black',null),

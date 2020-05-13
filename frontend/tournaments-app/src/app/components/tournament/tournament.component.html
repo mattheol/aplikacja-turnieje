@@ -26,6 +26,15 @@
           >
             Dołącz
           </button>
+          <button
+            *ngIf="checkIfOrganizer()"
+            (click)="openInvitationDialog()"
+            class="enrollBtn mx-2"
+            mat-raised-button
+            color="primary"
+          >
+            Zaproś do turnieju
+          </button>
         </div>
         <div
           *ngIf="!isForTeams"

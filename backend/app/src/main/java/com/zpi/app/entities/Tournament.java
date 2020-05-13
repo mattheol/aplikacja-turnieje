@@ -150,4 +150,5 @@ public class Tournament {
     public void setIsForTeams(Boolean isForTeams) {
         this.isForTeams = isForTeams;
     }
+
 }

@@ -28,12 +28,12 @@ public class InvitationController {
         return invitationService.getUnconfirmedInvitations(login);
     }
 
-    @PutMapping("/my-invitations/{id}")
+    @PutMapping("/my-invitations/{teamName}")
     public List<Invitation> confirmInvitation(@RequestHeader("Authorization") String authorizationHeader,
-                                             @PathVariable Integer id,
+                                             @PathVariable String teamName,
                                              @RequestBody Invitation invitation){
         String login = jwtTokenUtil.getLoginFromHeader(authorizationHeader);
-        invitationService.confirmInvitation(invitation,jwtTokenUtil.getLoginFromHeader(authorizationHeader));
+        invitationService.confirmInvitation(invitation,jwtTokenUtil.getLoginFromHeader(authorizationHeader),teamName);
         return invitationService.getUnconfirmedInvitations(login);
     }
 
