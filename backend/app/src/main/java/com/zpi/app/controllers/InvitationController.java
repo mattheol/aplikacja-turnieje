@@ -33,6 +33,9 @@ public class InvitationController {
                                              @PathVariable String teamName,
                                              @RequestBody Invitation invitation){
         String login = jwtTokenUtil.getLoginFromHeader(authorizationHeader);
+        if(teamName.equals("null")){
+            teamName = null;
+        }
         invitationService.confirmInvitation(invitation,jwtTokenUtil.getLoginFromHeader(authorizationHeader),teamName);
         return invitationService.getUnconfirmedInvitations(login);
     }

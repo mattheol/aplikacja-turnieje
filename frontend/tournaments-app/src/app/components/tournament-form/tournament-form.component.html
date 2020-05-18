@@ -14,6 +14,7 @@
         placeholder="Np. Klasowe rozgrywki siatkówki mężczyzn - 6A"
         required
         formControlName="name"
+        autocomplete="off"
       />
       <mat-error *ngIf="nameInput.errors?.minlength && nameInput.touched">
         Nazwa za krótka! min. 5 znaków
@@ -35,6 +36,7 @@
         cdkAutosizeMaxRows="6"
         required
         formControlName="description"
+        autocomplete="off"
       ></textarea>
       <mat-error
         *ngIf="descriptionInput.errors?.minlength && descriptionInput.touched"
@@ -77,6 +79,7 @@
         [ngxMatDatetimePicker]="picker"
         required
         formControlName="enrollmentEnd"
+        autocomplete="off"
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <ngx-mat-datetime-picker

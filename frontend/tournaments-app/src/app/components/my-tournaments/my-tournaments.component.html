@@ -2,7 +2,7 @@
   *ngIf="tournaments"
   style="display: flex; align-items: center; flex-direction: column;"
 >
-  <div *ngFor="let tournament of tournaments" class="itemWrapper">
+  <div *ngFor="let tournament of currentTournaments" class="itemWrapper">
     <mat-card class="tourItem">
       <h5 style="display: inline;">{{ tournament.name }}</h5>
       <mat-card-subtitle class="tourType">
@@ -21,3 +21,13 @@
     </mat-card>
   </div>
 </div>
+
+<div *ngIf="pages.length>1" style="padding: 30px 0px 0px 70px"> 
+  <ul  class="ulw" *ngFor = 'let page of pages;index as i' >
+    <li class="liw" *ngIf='i==currentPage;else other'><button class='btnw activew' (click)='changePage(page)'>{{page}}</button></li>
+    <ng-template #other>
+        <li><button class='btnw' (click)='changePage(page)'>{{page}}</button></li>
+    </ng-template>
+  </ul>  
+</div>
+

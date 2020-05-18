@@ -2,7 +2,7 @@
   *ngIf="matches"
   style="display: flex; align-items: center; flex-direction: column;"
 >
-  <div *ngFor="let match of matches" class="itemWrapper">
+  <div *ngFor="let match of currentMatches" class="itemWrapper">
     <div
       class="match"
       [ngStyle]="{
@@ -16,18 +16,20 @@
           {{ match.teamName }}
         </div>
         <div *ngIf="!match.teamName">
-          Ja
+          {{ match.matchParticipants[0].login ===getLogin() ? "Ja" : getOpponentName(match) }}
         </div>
       </div>
-      <div class="score">
-        <b>{{ match.score }}</b>
+      <div class="score" *ngIf="match.winnerId">
+        <b class="score-left">{{ getScoreLeft(match) }}</b>
+        <b class="colon">:</b>
+        <b class="score-right">{{ getScoreRight(match) }}</b>
       </div>
       <div class="rightParticipant">
         <div *ngIf="match.teamName">
           {{ match.opponentTeamName }}
         </div>
         <div *ngIf="!match.teamName">
-          {{ getOpponentName(match) }}
+          {{ match.matchParticipants[1].login === getLogin() ? "Ja" : getOpponentName(match) }}
         </div>
       </div>
       <div class="dateContainer">
@@ -45,4 +47,13 @@
       </button> -->
     </div>
   </div>
+</div>
+
+<div *ngIf="pages.length>1" style="padding: 30px 0px 0px 150px"> 
+  <ul  class="ulw" *ngFor = 'let page of pages;index as i' >
+    <li class="liw" *ngIf='i==currentPage;else other'><button class='btnw activew' (click)='changePage(page)'>{{page}}</button></li>
+    <ng-template #other>
+        <li><button class='btnw' (click)='changePage(page)'>{{page}}</button></li>
+    </ng-template>
+  </ul>  
 </div>

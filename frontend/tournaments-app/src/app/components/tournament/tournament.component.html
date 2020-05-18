@@ -32,6 +32,7 @@
             class="enrollBtn mx-2"
             mat-raised-button
             color="primary"
+            style="background-color:#57bab7"
           >
             Zaproś do turnieju
           </button>
@@ -56,6 +57,7 @@
             class="enrollBtn mx-2"
             mat-raised-button
             color="primary"
+            style="background-color:#57bab7"
           >
             Zaproś do turnieju
           </button>
@@ -73,6 +75,16 @@
         >
           Wypisz
         </button>
+        <button
+        *ngIf="checkIfOrganizer()"
+        (click)="openInvitationDialog()"
+        class="enrollBtn mx-2"
+        mat-raised-button
+        color="primary"
+        style="background-color:#57bab7"
+      >
+        Zaproś do turnieju
+      </button>
       </div>
       <div *ngIf="checkDate() && !checkIfFull()">
         <p style="color: forestgreen	;">
@@ -94,10 +106,10 @@
 
       <div *ngIf="this.isOrganizer" class="regModal">
         <form class="regForm" #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit(form)">
-          <h4 style="color: black;">Dodawanie organizatora:</h4>
+          <h5 style="color: black;">Dodawanie organizatora:</h5>
           <div class="formBody">
             <mat-form-field>
-              <input matInput placeholder="login" formControlName="login" required />
+              <input matInput placeholder="login" formControlName="login" required autocomplete="off"/>
               <mat-error *ngIf="loginInput.errors?.required && loginInput.touched">
                 Login jest wymagany
               </mat-error>
@@ -117,21 +129,25 @@
 
 
     </div>
-    <h5 class="tournamentInfo">{{ tournament.name }}</h5>
-    <p class="tournamentInfo">{{ tournament.description }}</p>
+    <div style="max-width: 80%;">
+      <h3 class="tournamentInfo">{{ tournament.name }}</h3>
+      <p class="tournamentInfo">{{ tournament.description }}</p>
+    </div>
+   
 
     <div class="participants-section">
-      <h6>Uczestnicy:</h6>
+        <h5>Uczestnicy</h5>
+        <div *ngFor="let participantT of tournament.participants">
+          {{
+            tournament.isForTeams
+              ? participantT.teamName
+              : participantT.participant.firstName +
+                " " +
+                participantT.participant.lastName
+          }}
+        </div>   
 
-      <div *ngFor="let participantT of tournament.participants">
-        {{
-          tournament.isForTeams
-            ? participantT.teamName
-            : participantT.participant.firstName +
-              " " +
-              participantT.participant.lastName
-        }}
-      </div>
+      
     </div>
     <div
       *ngIf="!tournament.active && !checkDate() && isOrganizer"

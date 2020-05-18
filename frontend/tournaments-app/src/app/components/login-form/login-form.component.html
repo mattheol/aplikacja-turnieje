@@ -10,7 +10,7 @@
     >
       <div class="formBody">
         <mat-form-field>
-          <input matInput placeholder="login" formControlName="login" />
+          <input matInput placeholder="login" formControlName="login" autocomplete="off"/>
           <mat-error *ngIf="loginInput.errors?.required && loginInput.touched">
             Login jest wymagany
           </mat-error>
@@ -25,6 +25,7 @@
             placeholder="hasło"
             [type]="hide ? 'password' : 'text'"
             formControlName="password"
+            autocomplete="off"
           />
           <mat-icon style="cursor: pointer;" matSuffix (click)="hide = !hide">{{
             hide ? "visibility_off" : "visibility"

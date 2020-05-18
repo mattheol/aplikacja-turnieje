@@ -7,22 +7,54 @@
 }
 
 .score {
-  text-align: center;
+  display:block;
+}
+
+.colon{
+  text-align: left;
   position: absolute;
   top: 53%;
-  left: 49.75%;
+  left: 49.4%;
   transform: translate(-50%, -50%);
-  letter-spacing: 10px;
+  display:block;
+  width: 10px;
+}
+
+.score-left{
+  text-align: left;
+  position: absolute;
+  top: 53%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  display:block;
+  width: 10px;
+}
+
+.score-right{
+  text-align: left;
+  position: absolute;
+  top: 53%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  display:block;
+  width: 10px;
 }
 
 .editResult {
   display: flex;
+  flex-direction: column;
   margin: auto auto auto 0;
 }
 
-.editResultImage:hover {
-  cursor: pointer;
+.buttonEdit{
+  cursor:pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding-top:2px;
+  padding-bottom:2px;
 }
+
 
 .leftParticipant {
   display: flex;
