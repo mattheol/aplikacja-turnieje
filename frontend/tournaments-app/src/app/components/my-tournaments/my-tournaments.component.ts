@@ -13,42 +13,38 @@ const chunk = 5;
 })
 export class MyTournamentsComponent implements OnInit {
   private tournaments: TournamentDTO[];
-  pages : number[]=[];
-  currentPage :number;
-  pageTournaments:any=[];
+  pages: number[] = [];
+  currentPage: number;
+  pageTournaments: any = [];
   currentTournaments: TournamentDTO[];
 
-  constructor(
-    private userService: UserService,
-    private router: Router
-  ) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.getUserTournaments();
   }
 
   getUserTournaments() {
-    this.userService
-      .getUserTournaments()
-      .subscribe((tournaments) => {
-        this.currentTournaments = []
-        this.pageTournaments= []
-        this.pages =[]
-        this.tournaments = tournaments;
-        for (let i=0;i<this.tournaments.length; i+=chunk) {
-          this.pageTournaments.push(this.tournaments.slice(i,i+chunk))
-        }
-        for(let j=0;j<this.pageTournaments.length;j++){
-          this.pages.push(j+1)
-        }
-        this.currentTournaments=this.pageTournaments[0] ;   
-        this.currentPage = 0;
-      });
+    this.userService.getUserTournaments().subscribe((tournaments) => {
+      this.currentTournaments = [];
+      this.pageTournaments = [];
+      this.pages = [];
+      this.tournaments = tournaments;
+      for (let i = 0; i < this.tournaments.length; i += chunk) {
+        this.pageTournaments.push(this.tournaments.slice(i, i + chunk));
+      }
+      for (let j = 0; j < this.pageTournaments.length; j++) {
+        this.pages.push(j + 1);
+      }
+      this.currentTournaments = this.pageTournaments[0];
+      this.currentPage = 0;
+      console.log(tournaments);
+    });
   }
-  
-  changePage(page){
-    this.currentPage = page-1
-    this.currentTournaments=this.pageTournaments[page-1];    
+
+  changePage(page) {
+    this.currentPage = page - 1;
+    this.currentTournaments = this.pageTournaments[page - 1];
   }
 
   redirectToTournament(id: Number) {

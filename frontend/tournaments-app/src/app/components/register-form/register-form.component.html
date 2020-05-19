@@ -2,78 +2,172 @@
   <div class="regModal">
     <span class="close" (click)="setHide()"></span>
     <legend>Załóż konto</legend>
-    <form class="regForm" #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit(form)">
+    <form
+      class="regForm"
+      #regForm="ngForm"
+      [formGroup]="myForm"
+      (ngSubmit)="submit(form)"
+    >
       <!-- Value: {{myForm.value | json}} -->
       <div class="formBody">
         <mat-form-field>
-          <input matInput placeholder="email" formControlName="email" required autocomplete="off"/>
+          <input
+            matInput
+            placeholder="email"
+            formControlName="email"
+            required
+            autocomplete="off"
+          />
           <mat-error *ngIf="emailInput.errors?.required && emailInput.touched">
             Adres email jest wymagany
           </mat-error>
           <mat-error *ngIf="emailInput.errors?.email && emailInput.touched">
             Niepoprawny format adresu email
           </mat-error>
+          <mat-error *ngIf="emailInput.errors?.maxlength && emailInput.touched">
+            email za długi
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="login" formControlName="login" required autocomplete="off"/>
+          <input
+            matInput
+            placeholder="login"
+            formControlName="login"
+            required
+            autocomplete="off"
+          />
           <mat-error *ngIf="loginInput.errors?.required && loginInput.touched">
             Login jest wymagany
           </mat-error>
           <mat-error *ngIf="loginInput.errors?.minlength && loginInput.touched">
             Wybrany login jest za krótki
           </mat-error>
+          <mat-error *ngIf="loginInput.errors?.maxlength && loginInput.touched">
+            login za długi
+          </mat-error>
+          <mat-error *ngIf="loginInput.errors?.pattern && loginInput.touched">
+            użyto niedozwolonego znaku
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="hasło" [type]="hide ? 'password' : 'text'" formControlName="password" required autocomplete="off"/>
-          <mat-icon style="cursor:pointer" matSuffix (click)="hide = !hide">{{
+          <input
+            matInput
+            placeholder="hasło"
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+            required
+            autocomplete="off"
+          />
+          <mat-icon style="cursor: pointer;" matSuffix (click)="hide = !hide">{{
             hide ? "visibility_off" : "visibility"
           }}</mat-icon>
           <mat-hint align="end">min. 6 znaków</mat-hint>
-          <mat-error *ngIf="passwordInput.errors?.minlength && passwordInput.touched">
+          <mat-error
+            *ngIf="passwordInput.errors?.minlength && passwordInput.touched"
+          >
             Hasło za krótkie! min. 6 znaków
           </mat-error>
-          <mat-error *ngIf="passwordInput.errors?.required && passwordInput.touched">
+          <mat-error
+            *ngIf="passwordInput.errors?.required && passwordInput.touched"
+          >
             Hasło jest wymagane
+          </mat-error>
+          <mat-error
+            *ngIf="passwordInput.errors?.maxlength && passwordInput.touched"
+          >
+            hasło za długie
+          </mat-error>
+
+          <mat-error
+            *ngIf="passwordInput.errors?.pattern && passwordInput.touched"
+          >
+            użyto niedozwolonego znaku
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Imię" formControlName="firstname" required autocomplete="off"/>
-          <mat-error *ngIf="firstnameInput.errors?.required && firstnameInput.touched">
+          <input
+            matInput
+            placeholder="Imię"
+            formControlName="firstname"
+            required
+            autocomplete="off"
+          />
+          <mat-error
+            *ngIf="firstnameInput.errors?.required && firstnameInput.touched"
+          >
             Imię jest wymagane
           </mat-error>
-          <mat-error *ngIf="firstnameInput.errors?.minlength && firstnameInput.touched">
+          <mat-error
+            *ngIf="firstnameInput.errors?.minlength && firstnameInput.touched"
+          >
             min. 2 znaki
+          </mat-error>
+          <mat-error
+            *ngIf="firstnameInput.errors?.maxlength && firstnameInput.touched"
+          >
+            imie za długie
           </mat-error>
         </mat-form-field>
 
         <mat-form-field style="margin-bottom: 10px;">
-          <input matInput placeholder="Nazwisko" formControlName="lastname" required autocomplete="off"/>
-          <mat-error *ngIf="lastnameInput.errors?.required && lastnameInput.touched">
+          <input
+            matInput
+            placeholder="Nazwisko"
+            formControlName="lastname"
+            required
+            autocomplete="off"
+          />
+          <mat-error
+            *ngIf="lastnameInput.errors?.required && lastnameInput.touched"
+          >
             Nazwisko jest wymagane
           </mat-error>
-          <mat-error *ngIf="lastnameInput.errors?.minlength && lastnameInput.touched">
+          <mat-error
+            *ngIf="lastnameInput.errors?.minlength && lastnameInput.touched"
+          >
             min. 2 znaki
+          </mat-error>
+          <mat-error
+            *ngIf="lastnameInput.errors?.maxlength && lastnameInput.touched"
+          >
+            nazwisko za długie
           </mat-error>
         </mat-form-field>
 
         <mat-radio-group formControlName="gender">
-          <mat-radio-button value="M" style="margin-right: 10px;">Mężczyna</mat-radio-button>
+          <mat-radio-button value="M" style="margin-right: 10px;"
+            >Mężczyna</mat-radio-button
+          >
           <mat-radio-button value="F">Kobieta</mat-radio-button>
         </mat-radio-group>
 
         <mat-form-field style="margin-top: 10px;">
           <mat-label>Data urodzenia: MM/DD/YYYY</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthday" autocomplete="off"/>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [max]="maxDate"
+            [matDatepicker]="picker"
+            formControlName="birthday"
+            autocomplete="off"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
 
-      <button mat-raised-button [disabled]="myForm.invalid" color="primary" type="submit"
-        style="margin-top:10px; text-transform: uppercase;">
+      <button
+        mat-raised-button
+        [disabled]="myForm.invalid"
+        color="primary"
+        type="submit"
+        style="margin-top: 10px; text-transform: uppercase;"
+      >
         Zarejestruj
       </button>
     </form>

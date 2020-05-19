@@ -25,8 +25,9 @@ export class TournamentDTO {
     public id: Number,
     public name: String,
     public isForTeam: boolean,
-    public isActive:boolean,
+    public isActive: boolean,
     public teamName: String,
-    public description: String
+    public description: String,
+    public organizer: boolean
   ) {}
 }
