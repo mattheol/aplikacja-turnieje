@@ -10,8 +10,15 @@ public class UserTournament {
     private Boolean isForTeams;
     private String teamName;
     private String description;
+    private Boolean isActive;
 
+    public Boolean getActive() {
+        return isActive;
+    }
 
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 
     public UserTournament(ParticipantTournament pt){
         Tournament tour = pt.getTournament();
@@ -20,6 +27,7 @@ public class UserTournament {
         this.isForTeams = tour.getIsForTeams();
         this.teamName = pt.getTeamName();
         this.description = tour.getDescription();
+        this.isActive = tour.getActive();
     }
 
     public UserTournament(Tournament tournament){

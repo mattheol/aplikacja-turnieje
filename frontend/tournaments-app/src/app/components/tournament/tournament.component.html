@@ -136,7 +136,7 @@
    
 
     <div class="participants-section">
-        <h5>Uczestnicy</h5>
+        <h5>Uczestnicy ({{tournament.participants.length}}/{{tournament.numberOfPlayers}})</h5>
         <div *ngFor="let participantT of tournament.participants">
           {{
             tournament.isForTeams
