@@ -15,6 +15,7 @@
         required
         formControlName="name"
         autocomplete="off"
+        maxlength="30"
       />
       <mat-error *ngIf="nameInput.errors?.minlength && nameInput.touched">
         Nazwa za krótka! min. 5 znaków
@@ -37,6 +38,7 @@
         required
         formControlName="description"
         autocomplete="off"
+        maxlength="255"
       ></textarea>
       <mat-error
         *ngIf="descriptionInput.errors?.minlength && descriptionInput.touched"
