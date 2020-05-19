@@ -55,8 +55,10 @@
                 {{ forTeams ? "" : match.matchParticipants[0].lastName }}
               </div>
 
-              <div class="score">
-                <b>{{ match.score }}</b>
+              <div class="score" *ngIf="match.winnerId">
+                <b class="score-left">{{ getScoreLeft(match) }}</b>
+                <b class="colon">:</b>
+                <b class="score-right">{{ getScoreRight(match) }}</b>
               </div>
               <div class="rightParticipant">
                 {{
@@ -80,25 +82,28 @@
               </div>
             </div>
             <div
-              *ngIf="isOrganizer && isCorrectMatch(match)"
+              *ngIf="isOrganizer && isCorrectMatch(match) && maxRound.toString() === match.stage"
               class="editResult"
             >
-              <img
+              <button mat-flat-button  (click)="showResultForm(match)" class="buttonEdit" style="background-color:rgb(255, 199, 95)">
+                <img
                 class="editResultImage"
-                src="../../../assets/edit-solid.svg"
+                src="../../../assets/Untitled-2.png"
                 style="height: 2em;"
-                (click)="showResultForm(match)"
                 alt="edytuj wyniki"
                 title="edytuj wyniki"
-              />
-              <img
+              /> Zapisz wynik
+              </button>
+              <button mat-flat-button (click)="showMatchDateForm(match)" style="margin-top:5px;background-color: rgb(247, 240, 212);" class="buttonEdit">
+                <img
                 class="editResultImage"
-                src="../../../assets/clock-regular.svg"
-                style="height: 2em; margin-left: 1em;"
-                (click)="showMatchDateForm(match)"
+                src="../../../assets/Untitled-3.png"
+                style="height: 2em;margin-right: 3px;"
                 alt="edytuj date spotkania"
                 title="edytuj date spotkania"
               />
+              Zmień datę 
+              </button>
             </div>
           </div>
         </div>

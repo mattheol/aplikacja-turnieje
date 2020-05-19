@@ -50,6 +50,23 @@ export class TournamentMatchesComponent implements OnInit {
       });
   }
 
+  getScoreLeft(match: Match){
+    let s = match.score
+    if(s !== null ){
+      let k = s.split(":");
+      return k[0]
+    }
+  }
+
+  getScoreRight(match: Match){
+    let s = match.score
+    if(s !== null ){
+      let k = s.split(":");
+      return k[1]
+    }
+  }
+
+
   getMaxRound() {
     let maxStage = 0;
     if (this.matches.length) {

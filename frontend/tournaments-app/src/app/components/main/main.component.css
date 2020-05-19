@@ -18,3 +18,20 @@
   
   width: 100px;
 }
+
+.banner{
+  width: 700px;
+  
+}
+
+.bannerContainer{
+  position:absolute;
+  top:0;
+  left:400px;
+  animation: 2s fadeIn ease-in;
+}
+
+@keyframes fadeIn {
+  from{opacity: 0;}
+  to{opacity: 1;}
+}

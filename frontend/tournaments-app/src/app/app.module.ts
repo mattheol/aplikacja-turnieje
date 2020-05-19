@@ -26,6 +26,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MAT_DATE_LOCALE,
+  MatExpansionModule,
   MatButtonModule,
   MatDialogModule,
   MatProgressSpinnerModule,
@@ -117,6 +118,7 @@ import { MatchDateFormComponent } from "./components/match-date-form/match-date-
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    MatExpansionModule,
     ToastrModule.forRoot(),
   ],
   providers: [

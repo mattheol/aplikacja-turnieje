@@ -21,7 +21,15 @@ INSERT INTO tournaments (id,name,tournament_type,is_private,is_for_teams,number_
        VALUES (1,'Turniej 1','LEAGUE',false,false,8,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.', true),
               (2,'Turniej 2','MIXED',false,true,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',true),
               (3,'Turniej 3','LEAGUE',false,false,10,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.',false),
-              (4,'Turniej 4','MIXED',false,false,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',false);
+              (4,'Turniej 4','MIXED',false,false,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',false),
+              (5,'Turniej 5','LEAGUE',false,false,8,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.', true),
+              (6,'Turniej 6','MIXED',false,true,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',true),
+              (7,'Turniej 7','LEAGUE',false,false,10,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.',false),
+              (8,'Turniej 8','MIXED',false,false,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',false),
+              (9,'Turniej 9','LEAGUE',false,false,8,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.', true),
+              (10,'Turniej 10','MIXED',false,true,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',true),
+              (11,'Turniej 11','LEAGUE',false,false,10,false, '2020-03-29', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec metus eros, tempor et tempor vel, pharetra lacinia ex.',false),
+              (12,'Turniej 12','MIXED',false,false,16,true,'2020-04-01','Quisque fermentum tortor nec nibh mollis egestas nec non risus.',false);
 
 
 INSERT INTO matches (id,comment,winner_id,score,stage,start_time,tournament_id)

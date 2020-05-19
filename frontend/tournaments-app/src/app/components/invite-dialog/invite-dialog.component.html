@@ -10,6 +10,7 @@
           placeholder="Login użytkownika"
           formControlName="login"
           required
+          autocomplete="off"
         />
         <mat-error
           *ngIf="loginInput.errors?.required && loginInput.touched"
@@ -24,6 +25,7 @@
           placeholder="Treść zaproszenia"
           formControlName="message"
           required
+          autocomplete="off"
         />
         <mat-error
           *ngIf="messageInput.errors?.required && messageInput.touched"

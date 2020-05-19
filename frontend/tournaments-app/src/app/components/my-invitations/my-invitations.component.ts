@@ -31,6 +31,8 @@ export class MyInvitationsComponent implements OnInit {
     });
   }
 
+  
+
   openDialog(invitation : Invitation){
     let dialogRef = this.dialog.open(InvitationDetailComponent,{ height: '300px',
     width: '440px', data:{invitation} });

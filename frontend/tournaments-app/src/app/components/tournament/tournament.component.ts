@@ -79,6 +79,16 @@ export class TournamentComponent implements OnInit {
   }
 
   openDialog() {
+    if(this.isForTeams){
+      for(const participant of this.tournament.participants){
+        if(this.teamName.toLowerCase() === participant.teamName.toLowerCase()){
+          this.toastr.warning("Taki zespół już się zapisał do turnieju", "", {
+            positionClass: "toast-top-center",
+          });
+          return;
+        }
+      }
+    }
     if (
       !this.isForTeams ||
       (this.teamName != undefined && this.teamName.length > 0)
@@ -123,7 +133,6 @@ export class TournamentComponent implements OnInit {
   }
 
   enrollUser() {
-    console.log(this.teamName);
     this.tournamentService
       .enrollUserToTournament(this.userLogin, this.id, this.teamName)
       .subscribe(
@@ -138,7 +147,6 @@ export class TournamentComponent implements OnInit {
   }
 
   disenrollUser() {
-    console.log(this.teamName);
     this.tournamentService
       .disenrollUserFromTournament(this.userLogin, this.id, this.teamName)
       .subscribe(

@@ -1,9 +1,9 @@
 .menuContainer {
-  margin: 100px auto 50px auto;
+  margin: 200px auto 50px auto;
   max-width: 1200px;
   padding-bottom: 10px;
   min-height: 600px;
-  background-color: whitesmoke;
+  background-color: white;
   overflow: hidden;
   box-shadow:
   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
