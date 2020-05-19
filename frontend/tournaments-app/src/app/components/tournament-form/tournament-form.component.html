@@ -96,19 +96,6 @@
     </mat-form-field>
     <br />
 
-    <mat-radio-group
-      aria-label="Select an option"
-      required
-      formControlName="isPrivate"
-    >
-      <mat-radio-button style="margin: 15px;" value="true"
-        >Prywatny</mat-radio-button
-      >
-      <mat-radio-button style="margin: 15px;" value="false"
-        >Publiczny</mat-radio-button
-      >
-    </mat-radio-group>
-    <br />
 
     <mat-form-field>
       <mat-label>Wybierz typ turnieju</mat-label>
@@ -119,14 +106,6 @@
     </mat-form-field>
     <br />
 
-    <mat-checkbox
-      id="random"
-      formControlName="randomBracket"
-      style="padding-right: 15px;"
-      value="checked"
-      (click)="changeValueRandom(checked)"
-      >Losowowe spotkania</mat-checkbox
-    >
     <mat-checkbox
       id="teams"
       formControlName="isForTeams"
