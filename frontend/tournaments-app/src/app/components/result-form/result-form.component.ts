@@ -33,8 +33,8 @@ export class ResultFormComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.fb.group({
-      result: [this.match.score, [Validators.pattern("[0-9]+:[0-9]{1,}")]],
-      winner: [, []],
+      result: [this.match.score, [Validators.required,Validators.pattern("[0-9]+:[0-9]{1,}")]],
+      winner: [, [Validators.required]],
     });
     this.match.matchParticipants[0].id;
   }
@@ -67,10 +67,10 @@ export class ResultFormComponent implements OnInit {
   }
 
   isValidForm() {
-    return (
-      (this.resultInput.value != "" && this.winnerInput.value != null) ||
-      this.winnerInput.value != null ||
-      (this.resultInput.value === "" && this.winnerInput.value === null)
-    );
+    return this.resultInput.value != "" && this.resultInput.value != null && this.winnerInput.value != null;
+      //||
+      // this.winnerInput.value != null ||
+      // (this.resultInput.value === "" && this.winnerInput.value === null)
+  
   }
 }
