@@ -15,10 +15,30 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserService {
+
+    public static <T> Predicate<T> distinctByKey(
+            Function<? super T, ?> keyExtractor) {
+
+        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
+        return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+
+//    public static List<UserTournament> concatUserTournament(List<UserTournament> participants, List<UserTournament> organizers) {
+//        for (int i = 0; i < organizers.size(); i++) {
+//            if (participants.contains(p -> p.getId() == organizers.get(i).getId())) {
+//
+//            }
+//        }
+//    }
 
     private final UserRepository userRepository;
 
@@ -33,9 +53,18 @@ public class UserService {
     public List<UserTournament> getUserAllTournaments(String login) {
         User user = findByLogin(login);
         List<ParticipantTournament> pt = user.getParticipatedTournaments();
-        return pt.stream()
-                .map(UserTournament::new)
-                .collect(Collectors.toList());
+        List<Tournament> ot = user.getTournaments();
+        List<UserTournament> organized = ot.stream().map(UserTournament::new).collect(Collectors.toList());
+        List<UserTournament> participated = pt.stream().map(UserTournament::new).collect(Collectors.toList());
+        List<UserTournament> concat = Stream.concat(participated.stream(),organized.stream()).distinct().collect(Collectors.toList());
+        for (UserTournament c : concat) {
+            if(organized.contains(c)) {
+                c.setOrganizer(true);
+            }
+        }
+        return concat;
+//        return concat.stream().filter(distinctByKey(UserTournament::getId)).collect(Collectors.toList());
+//        return pt.stream().map(UserTournament::new).collect(Collectors.toList());
     }
 
     public List<MatchDto> getUserAllMatches(String login) {

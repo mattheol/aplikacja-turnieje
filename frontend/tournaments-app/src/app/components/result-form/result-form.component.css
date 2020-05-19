@@ -3,6 +3,10 @@ mat-form-field {
   width: 20em;
 }
 
+h6 {
+  padding-bottom: 12px;
+}
+
 .regModal {
   position: fixed;
   top: 50%;

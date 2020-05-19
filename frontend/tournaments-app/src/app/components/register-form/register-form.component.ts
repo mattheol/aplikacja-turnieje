@@ -3,47 +3,84 @@ import {
   OnInit,
   ViewChild,
   Output,
-  EventEmitter
+  EventEmitter,
 } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
   Validators,
-  FormGroupDirective
+  FormGroupDirective,
 } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
-import { ToastrService } from 'ngx-toastr';
-import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { ToastrService } from "ngx-toastr";
+import { AuthenticationService } from "src/app/services/auth/authentication.service";
 
 @Component({
   selector: "app-register-form",
   templateUrl: "./register-form.component.html",
-  styleUrls: ["./register-form.component.css"]
+  styleUrls: ["./register-form.component.css"],
 })
 export class RegisterFormComponent implements OnInit {
   @Output() onHide = new EventEmitter<boolean>();
 
+  maxDate = new Date("1/1/2015");
   setHide() {
     this.onHide.emit(true);
   }
 
   myForm: FormGroup;
-
   hide = true;
 
-  constructor(private authService: AuthenticationService,private fb: FormBuilder, private userService: UserService,
-    private toastr: ToastrService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private fb: FormBuilder,
+    private userService: UserService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.myForm = this.fb.group({
-      email: ["", [Validators.required, Validators.email]],
-      login: ["", [Validators.required, Validators.minLength(5)]],
-      password: ["", [Validators.required, Validators.minLength(6)]],
-      firstname: ["", [Validators.required, Validators.minLength(2)]],
-      lastname: ["", [Validators.required, Validators.minLength(2)]],
+      email: [
+        "",
+        [Validators.required, Validators.email, Validators.maxLength(50)],
+      ],
+      login: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.pattern("^[a-zA-Z0-9]*$"),
+          Validators.maxLength(30),
+        ],
+      ],
+      password: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern("[^\\s]+"),
+          Validators.maxLength(30),
+        ],
+      ],
+      firstname: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30),
+        ],
+      ],
+      lastname: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30),
+        ],
+      ],
       gender: "M",
-      birthday: ""
+      birthday: "",
     });
   }
 
@@ -53,7 +90,8 @@ export class RegisterFormComponent implements OnInit {
   submit(form: FormGroupDirective) {
     // this.userService
     //   .postUser(
-      this.authService.register(
+    this.authService
+      .register(
         new User(
           -1,
           null,
@@ -69,11 +107,16 @@ export class RegisterFormComponent implements OnInit {
         )
       )
       .subscribe(
-        res => {
-          this.toastr.success("Zarejestrowano poprawnie","", { positionClass:'toast-top-center'})
+        (res) => {
+          this.toastr.success("Zarejestrowano poprawnie", "", {
+            positionClass: "toast-top-center",
+          });
           this.setHide();
         },
-        err => this.toastr.error(err.error,"", { positionClass:'toast-top-center'})
+        (err) =>
+          this.toastr.error(err.error, "", {
+            positionClass: "toast-top-center",
+          })
       );
   }
 

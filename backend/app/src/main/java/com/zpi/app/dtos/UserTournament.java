@@ -3,6 +3,8 @@ package com.zpi.app.dtos;
 import com.zpi.app.entities.ParticipantTournament;
 import com.zpi.app.entities.Tournament;
 
+import java.util.Objects;
+
 
 public class UserTournament {
     private Integer id;
@@ -11,6 +13,7 @@ public class UserTournament {
     private String teamName;
     private String description;
     private Boolean isActive;
+    private Boolean isOrganizer = false;
 
     public Boolean getActive() {
         return isActive;
@@ -74,5 +77,27 @@ public class UserTournament {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    public Boolean getOrganizer() {
+        return isOrganizer;
+    }
+
+    public void setOrganizer(Boolean organizer) {
+        isOrganizer = organizer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserTournament that = (UserTournament) o;
+        return id.equals(that.id) &&
+                name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

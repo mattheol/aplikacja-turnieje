@@ -10,7 +10,15 @@
     >
       <div class="formBody">
         <mat-form-field style="margin-bottom: 10px;">
-          <input matInput placeholder="wynik" formControlName="result" autocomplete="off"/>
+          <input
+            matInput
+            placeholder="wynik"
+            formControlName="result"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="resultInput.errors?.pattern && resultInput.touched">
+            Niepoprawny format wyniku, wymagany format to Liczba:Liczba
+          </mat-error>
         </mat-form-field>
         <h6>Kto wygrał?</h6>
         <mat-radio-group formControlName="winner">
