@@ -38,7 +38,6 @@ export class MyTournamentsComponent implements OnInit {
       }
       this.currentTournaments = this.pageTournaments[0];
       this.currentPage = 0;
-      console.log(tournaments);
     });
   }
 

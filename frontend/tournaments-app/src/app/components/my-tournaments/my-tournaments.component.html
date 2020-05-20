@@ -7,7 +7,7 @@
       <h5 style="display: inline;">{{ tournament.name }}</h5>
       <mat-card-subtitle class="tourType">
         {{ tournament.forTeams ? "Zespołowy" : "Dla pojedynczych osób" }}
-        <b>{{ tournament.forTeams ? "(" + tournament.teamName + ")" : "" }}</b>
+        <b>{{ tournament.forTeams && tournament.teamName ? "(" + tournament.teamName + ")" : "" }}</b>
         <b>{{ tournament.organizer ? " (organizator)" : "" }}</b>
       </mat-card-subtitle>
       <button
