@@ -53,7 +53,7 @@ export class TournamentComponent implements OnInit {
     this.isUserAnOrganiser();
 
     this.myForm = this.fb.group({
-      login: ["", [Validators.required, Validators.minLength(5)]],
+      login: ["", Validators.compose([Validators.required, Validators.minLength(5)])],
     });
   }
 
@@ -244,7 +244,7 @@ export class TournamentComponent implements OnInit {
       )
   }
 
-  submit(form: FormGroupDirective) {
+  submit() {
         
     let ableToAdd: Boolean = true;
     this.tournamentService

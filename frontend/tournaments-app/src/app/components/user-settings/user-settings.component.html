@@ -1,6 +1,6 @@
 <h2 style="text-align: center;" mat-dialog-title>Zmiana danych użytkownika</h2>
 <mat-dialog-content>
-  <form #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit(form)">
+  <form #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit()">
     <!-- Value: {{myForm.value | json}} -->
     <div class="formBody">
       <mat-form-field>
@@ -73,7 +73,7 @@
         <mat-label>Data urodzenia: MM/DD/YYYY</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="birthday" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker [startAt]="birthday" #picker></mat-datepicker>
+        <mat-datepicker [startAt]="birthdate" #picker></mat-datepicker>
       </mat-form-field>
       
 

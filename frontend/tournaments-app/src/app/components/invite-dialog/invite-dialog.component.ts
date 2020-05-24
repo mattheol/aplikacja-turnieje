@@ -35,7 +35,7 @@ export class InviteDialogComponent implements OnInit {
     return this.myForm.get("message");
   }
 
-  submit(form: FormGroupDirective) {
+  submit() {
     // this.userService
     //   .postUser(
       this.userService.invite(this.myForm.get("login").value,

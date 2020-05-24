@@ -11,7 +11,7 @@ import { InvitationDetailComponent } from '../invitation-detail/invitation-detai
 })
 export class MyInvitationsComponent implements OnInit {
 
-  private invitations: Invitation[];
+  invitations: Invitation[];
   constructor(
     private userService: UserService,
     public dialog: MatDialog

@@ -105,7 +105,7 @@
       </div>
 
       <div *ngIf="this.isOrganizer" class="regModal">
-        <form class="regForm" #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit(form)">
+        <form class="regForm" #regForm="ngForm" [formGroup]="myForm" (ngSubmit)="submit()">
           <h5 style="color: black;">Dodawanie organizatora:</h5>
           <div class="formBody">
             <mat-form-field>

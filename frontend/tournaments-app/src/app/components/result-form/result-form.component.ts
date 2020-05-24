@@ -47,7 +47,7 @@ export class ResultFormComponent implements OnInit {
     return this.myForm.get("winner");
   }
 
-  submit(form: FormGroupDirective) {
+  submit() {
     this.match.score = this.resultInput.value;
     this.match.winnerId = this.winnerInput.value;
     this.tournamentService

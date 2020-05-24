@@ -49,7 +49,7 @@ export class UserPasswordComponent implements OnInit {
   }
 
   
-  submit(form: FormGroupDirective) {
+  submit() {
 
     // this.userService
     //   .postUser(

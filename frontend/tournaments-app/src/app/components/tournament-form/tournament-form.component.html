@@ -5,7 +5,7 @@
     class="regForm"
     #regForm="ngForm"
     [formGroup]="myForm"
-    (ngSubmit)="submit(form)"
+    (ngSubmit)="submit()"
   >
     <mat-form-field style="width: 80%;">
       <mat-label>Nazwa turnieju</mat-label>
@@ -111,8 +111,7 @@
     <mat-checkbox
       id="teams"
       formControlName="isForTeams"
-      value="checked"
-      (click)="changeValueTeams(checked)"
+      (click)="changeValueTeams()"
       >Rozgrywki drużynowe</mat-checkbox
     >
     <br /><br />

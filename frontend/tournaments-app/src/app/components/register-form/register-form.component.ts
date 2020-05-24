@@ -87,7 +87,7 @@ export class RegisterFormComponent implements OnInit {
   @ViewChild(FormGroupDirective, { static: false })
   formDirective: FormGroupDirective;
 
-  submit(form: FormGroupDirective) {
+  submit() {
     // this.userService
     //   .postUser(
     this.authService

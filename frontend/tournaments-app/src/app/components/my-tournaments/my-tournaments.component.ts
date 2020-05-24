@@ -12,7 +12,7 @@ const chunk = 5;
   styleUrls: ["./my-tournaments.component.css"],
 })
 export class MyTournamentsComponent implements OnInit {
-  private tournaments: TournamentDTO[];
+  tournaments: TournamentDTO[];
   pages: number[] = [];
   currentPage: number;
   pageTournaments: any = [];

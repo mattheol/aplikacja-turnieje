@@ -69,7 +69,7 @@ export class UserSettingsComponent implements OnInit {
     return this.myForm.get("birthday");
   }
 
-  submit(form: FormGroupDirective) {
+  submit() {
     // this.userService
     //   .postUser(
       this.us.updateUser(

@@ -53,7 +53,7 @@ export class LoginFormComponent implements OnInit {
     return this.myForm.get("password");
   }
 
-  submit(form: FormGroupDirective) {
+  submit() {
     this.authService
       .login(
        {

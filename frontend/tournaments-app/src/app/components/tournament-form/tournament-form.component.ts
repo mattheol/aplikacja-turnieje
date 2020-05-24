@@ -20,7 +20,6 @@ export class TournamentFormComponent implements OnInit {
   RandomBracketchecked: boolean = false;
   Teamschecked: boolean = false;
   minDate = new Date();
-
   myForm: FormGroup;
   constructor(
     private fb: FormBuilder,
@@ -46,7 +45,7 @@ export class TournamentFormComponent implements OnInit {
   @ViewChild(FormGroupDirective, { static: false })
   formDirective: FormGroupDirective;
 
-  submit(form: FormGroupDirective) {
+  submit() {
     this.tournamentService
       .postTournament(
         this.tokenStorageService.getUser(),
@@ -60,7 +59,7 @@ export class TournamentFormComponent implements OnInit {
           this.numberOfPlayersInput.value,
           this.descriptionInput.value,
           null,
-          this.isForTeamsInput,
+          this.Teamschecked,
           this.typeInput.value,
           null,
           new Date(this.enrollmentEndInput.value)
@@ -116,7 +115,7 @@ export class TournamentFormComponent implements OnInit {
     this.RandomBracketchecked = !value;
   }
 
-  changeValueTeams(value) {
-    this.Teamschecked = !value;
+  changeValueTeams() {
+    this.Teamschecked = !this.Teamschecked;
   }
 }
