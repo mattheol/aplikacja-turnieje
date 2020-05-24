@@ -36,7 +36,7 @@ export class TournamentFormComponent implements OnInit {
       numberOfPlayers: ["", [Validators.required]],
       enrollmentEnd: [[Validators.required]],
      // isPrivate: ["", [Validators.required]],
-      type: ["", [Validators.required]],
+      //type: ["", [Validators.required]],
       randomBracket: "",
       isForTeams: "",
     });
