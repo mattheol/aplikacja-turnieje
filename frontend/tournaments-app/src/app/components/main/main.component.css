@@ -15,20 +15,23 @@
 }
 
 .accBtn{
-  
   width: 100px;
 }
 
 .banner{
-  width: 700px;
-  
+  padding-left: 30px;
+  width: 400px;
 }
 
 .bannerContainer{
-  position:absolute;
-  top:0;
-  left:400px;
-  animation: 2s fadeIn ease-in;
+  max-width: 1200px;
+  margin: 40px auto -10px auto;
+  animation: 2s fadeIn ease-in;  
+}
+
+.logo{
+  padding-top: 40px;
+  width: 350px;
 }
 
 @keyframes fadeIn {
