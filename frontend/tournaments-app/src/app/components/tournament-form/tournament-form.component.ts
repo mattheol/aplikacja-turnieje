@@ -60,7 +60,7 @@ export class TournamentFormComponent implements OnInit {
           this.descriptionInput.value,
           null,
           this.Teamschecked,
-          this.typeInput.value,
+          "0",
           null,
           new Date(this.enrollmentEndInput.value)
         )
