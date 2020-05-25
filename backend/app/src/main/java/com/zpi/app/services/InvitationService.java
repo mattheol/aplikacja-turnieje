@@ -7,6 +7,9 @@ import com.zpi.app.repositories.InvitationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -27,7 +30,7 @@ public class InvitationService {
         User user = userService.findByLogin(login);
         return invitationRepository.findUnconfirmedInvitations(user);
     }
-//TODO zaproszenie do turnieju grupowego
+
     public void confirmInvitation(Invitation invitation, String login,String teamName){
         invitationRepository.save(invitation);
         if(invitation.getConfirmType().equals(InvitationConfirmType.ACCEPTED)) {
