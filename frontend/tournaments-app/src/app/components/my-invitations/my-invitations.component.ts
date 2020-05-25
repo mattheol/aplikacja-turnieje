@@ -34,6 +34,7 @@ export class MyInvitationsComponent implements OnInit {
   
 
   openDialog(invitation : Invitation){
+    window.scrollTo(0, 0);
     let dialogRef = this.dialog.open(InvitationDetailComponent,{ height: '300px',
     width: '440px', data:{invitation} });
     dialogRef.afterClosed().subscribe(() => this.getUserInvitations())

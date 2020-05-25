@@ -106,6 +106,7 @@ export class TournamentComponent implements OnInit {
   }
 
   openInvitationDialog() {
+    window.scrollTo(0, 0);
     let dialogRef = this.dialog.open(InviteDialogComponent, {
       data: { tournament: this.tournament },
     });

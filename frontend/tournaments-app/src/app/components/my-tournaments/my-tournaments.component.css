@@ -6,8 +6,9 @@
 }
 
 .tourItem {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.774);;
+  color: black;
+  background-color: #E6E6FA	;
+
 }
 
 .btnToTournament {
@@ -24,7 +25,7 @@
 .tourType {
   display: inline;
   margin-left: 10px;
-  color: rgba(255, 255, 255, 0.795);
+  color: black;
 }
 
 ul,li .btnw{

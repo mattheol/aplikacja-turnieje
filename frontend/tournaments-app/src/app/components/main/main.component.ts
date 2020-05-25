@@ -50,6 +50,7 @@ export class MainComponent implements OnInit {
   }
 
   openDialog(){
+    window.scrollTo(0, 0);
     let dialogRef = this.dialog.open(UserSettingsComponent);
     dialogRef.afterClosed().subscribe(result =>{
       if(result === "true"){
@@ -58,6 +59,7 @@ export class MainComponent implements OnInit {
   }
 
   changePassword(){
+    window.scrollTo(0, 0);
     let dialogRef = this.dialog.open(UserPasswordComponent);
     dialogRef.afterClosed().subscribe(result =>{
       if(result === "true"){
